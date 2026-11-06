@@ -113,7 +113,7 @@ class MP3P_Shortcodes {
 
         wp_enqueue_script( 'mp3p-component' );
         if ( in_array( $atts['variant'], [ 'vertical', 'horizontal', 'mini' ], true ) ) {
-            wp_enqueue_style( 'jetbrains-mono' ); // Variants Modern Player
+            wp_enqueue_style( 'mp3p-jetbrains-mono' ); // Variants Modern Player
         }
 
         // Ancho (por defecto 100% del contenedor) y ancho máximo

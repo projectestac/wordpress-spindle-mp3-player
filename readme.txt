@@ -4,7 +4,7 @@ Tags: audio, mp3, player, music, playlist
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,11 +27,7 @@ Spindle MP3 Player is an audio player for WordPress built as a Web Component wit
 
 = External services =
 
-This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.googleapis.com`) when a "Modern Player" style (Vertical, Horizontal or Mini) is used on a page. This request is only made on the front-end pages where such a player is displayed, and in the design-options preview inside the admin metabox. No personal data is sent beyond what any browser normally sends to a font CDN (IP address, user agent).
-
-* Service: Google Fonts
-* Privacy policy: https://policies.google.com/privacy
-* Terms of service: https://developers.google.com/fonts/faq
+This plugin doesn't connect to any external service. The **JetBrains Mono** typeface, used by the "Modern Player" styles (Vertical, Horizontal and Mini), is bundled with the plugin (`public/fonts/jetbrains-mono`, from the npm package `@fontsource-variable/jetbrains-mono` 5.3.0) and is licensed under the SIL Open Font License 1.1 (`public/fonts/jetbrains-mono/OFL.txt`).
 
 == Installation ==
 
@@ -40,6 +36,9 @@ This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.g
 3. Go to the "MP3 Player" menu to create your first album or import existing MP3 files
 
 == Changelog ==
+
+= 1.7.4 =
+* La tipografía JetBrains Mono (variantes Vertical, Horizontal y Mini) se sirve desde el propio plugin en lugar de Google Fonts: el plugin ya no se conecta a ningún servicio externo (@fontsource-variable/jetbrains-mono 5.3.0, subconjuntos latin y latin-ext, licencia SIL OFL 1.1)
 
 = 1.7.3 =
 * La búsqueda de canciones del editor de playlists la pueden usar todos los usuarios que pueden editar playlists (antes solo los administradores, aunque editores y autores también pueden crear playlists). Solo devuelve canciones publicadas

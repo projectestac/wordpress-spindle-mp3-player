@@ -9,10 +9,11 @@ class MP3P_Assets {
     }
 
     public static function frontend() {
-        // JetBrains Mono — usada en variants Modern Player
+        // JetBrains Mono — usada en variants Modern Player. Se sirve desde el propio plugin
+        // (public/fonts/jetbrains-mono), sin conectar con Google Fonts.
         wp_register_style(
-            'jetbrains-mono',
-            'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
+            'mp3p-jetbrains-mono',
+            MP3P_URL . 'public/css/jetbrains-mono.css',
             [],
             MP3P_VERSION
         );
