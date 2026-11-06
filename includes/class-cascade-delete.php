@@ -15,10 +15,6 @@ class MP3P_Cascade_Delete {
     public static function register() {
         add_action( 'before_delete_post', [ __CLASS__, 'on_delete_disco' ],   10, 1 );
         add_action( 'before_delete_post', [ __CLASS__, 'on_delete_cancion' ], 10, 1 );
-
-        // Evitar que WordPress extraiga la imagen incrustada del MP3
-        // al subirlo a la biblioteca de medios
-        add_filter( 'wp_read_audio_metadata',  [ __CLASS__, 'suppress_mp3_image' ], 10, 1 );
     }
 
     // ── Marcar un archivo como creado por el plugin ──────────────
@@ -31,7 +27,8 @@ class MP3P_Cascade_Delete {
     // ── Suprimir imagen incrustada del MP3 al subir ───────────────
     // WordPress extrae automáticamente la portada del ID3 y la sube
     // como attachment separado. Lo evitamos devolviendo los metadatos
-    // sin la imagen.
+    // sin la imagen. Solo se aplica a las subidas del importador (que
+    // guarda la portada él mismo), no a las del resto del sitio.
     public static function suppress_mp3_image( $metadata ) {
         if ( isset( $metadata['image'] ) ) {
             unset( $metadata['image'] );

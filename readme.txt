@@ -4,7 +4,7 @@ Tags: audio, mp3, player, music, playlist
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,30 @@ This plugin doesn't connect to any external service. The **JetBrains Mono** type
 2. Activate the plugin from the WordPress "Plugins" menu
 3. Go to the "MP3 Player" menu to create your first album or import existing MP3 files
 
+== Frequently Asked Questions ==
+
+= Does "Allow download" protect the audio files? =
+
+No. It only shows or hides the download button. The audio file is public: the player needs its URL to play it, so it can be downloaded from that URL anyway.
+
+= What is deleted when I uninstall the plugin? =
+
+Its settings and all the albums, tracks and playlists. The files in the media library (audio and covers) are kept, because they may be used in other posts or pages.
+
+= How do I get all the albums from the REST API? =
+
+`/wp-json/mp3p/v1/discos` returns up to 100 albums per request, ordered by title. Use the parameters `page` and `per_page` (maximum 100); the headers `X-WP-Total` and `X-WP-TotalPages` give the total number of albums and pages.
+
 == Changelog ==
+
+= 1.7.5 =
+* La imagen incrustada en los MP3 solo se omite en las subidas del importador; las subidas de audio del resto del sitio vuelven a conservarla (antes el filtro afectaba a todo el sitio)
+* En la ficha de la canción, aviso de que "Permitir descarga" solo muestra u oculta el botón: el archivo de audio es público
+* Nuevo uninstall.php: al borrar el plugin se eliminan sus opciones y los discos, canciones y playlists; los archivos de la biblioteca de medios se conservan
+* API: /discos admite paginación (parámetros page y per_page, máximo 100 por petición) y devuelve las cabeceras X-WP-Total y X-WP-TotalPages. Por defecto devuelve los 100 primeros discos
+* Los avisos de confirmación de borrado describen qué archivos se borran desde la versión 1.7.2
+* Nueva sección de preguntas frecuentes en el readme
+* Traducción al catalán: URL en masculino (el seu URL, aquest URL)
 
 = 1.7.4 =
 * La tipografía JetBrains Mono (variantes Vertical, Horizontal y Mini) se sirve desde el propio plugin en lugar de Google Fonts: el plugin ya no se conecta a ningún servicio externo (@fontsource-variable/jetbrains-mono 5.3.0, subconjuntos latin y latin-ext, licencia SIL OFL 1.1)

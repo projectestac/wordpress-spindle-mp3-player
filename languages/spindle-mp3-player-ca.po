@@ -12,22 +12,14 @@ msgstr ""
 "X-Domain: spindle-mp3-player\n"
 "X-Generator: manual-translation\n"
 
-msgid ""
-" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
-" canción)."
-msgstr ""
-" i el seu arxiu d'àudio de la biblioteca de mitjans (si no l'utilitza cap "
-"altra cançó)."
+msgid " y su archivo de audio, si lo creó el plugin y no se usa en ningún otro lugar."
+msgstr " i el seu arxiu d'àudio, si el va crear el plugin i no s'utilitza en cap altre lloc."
 
 msgid "%s — portada"
 msgstr "%s — portada"
 
-msgid ""
-", todas sus canciones y todos los archivos de audio y portada de la "
-"biblioteca de medios."
-msgstr ""
-", totes les seves cançons i tots els arxius d'àudio i portada de la "
-"biblioteca de mitjans."
+msgid ", todas sus canciones y los archivos de audio y portada que creó el plugin, si no se usan en ningún otro lugar."
+msgstr ", totes les seves cançons i els arxius d'àudio i portada que va crear el plugin, si no s'utilitzen en cap altre lloc."
 
 msgid "API REST"
 msgstr "API REST"
@@ -209,6 +201,9 @@ msgstr "Descàrrega activa"
 
 msgid "Descarga desactivada (candado)"
 msgstr "Descàrrega desactivada (cadenat)"
+
+msgid "Solo muestra u oculta el botón de descarga. El archivo de audio es público: el player lo necesita para reproducirlo y se puede descargar igualmente desde su URL."
+msgstr "Només mostra o amaga el botó de descàrrega. L'arxiu d'àudio és públic: el reproductor el necessita per reproduir-lo i es pot descarregar igualment des del seu URL."
 
 msgid "Descargable"
 msgstr "Descarregable"
@@ -607,8 +602,7 @@ msgid "URL base"
 msgstr "URL base"
 
 msgid "Usa esta URL en el atributo %s del Web Component para webs externas."
-msgstr ""
-"Utilitza aquesta URL a l'atribut %s del Web Component per a webs externes."
+msgstr "Utilitza aquest URL a l'atribut %s del Web Component per a webs externes."
 
 msgid "Usar este archivo"
 msgstr "Utilitzar aquest arxiu"

@@ -280,6 +280,7 @@ class MP3P_Meta_Boxes {
                     <span style="margin-left:10px;vertical-align:middle;font-size:13px">
                         <?php echo $descargable === '1' ? esc_html__( 'Descarga activa', 'spindle-mp3-player' ) : esc_html__( 'Descarga desactivada (candado)', 'spindle-mp3-player' ); ?>
                     </span>
+                    <p class="description"><?php esc_html_e( 'Solo muestra u oculta el botón de descarga. El archivo de audio es público: el player lo necesita para reproducirlo y se puede descargar igualmente desde su URL.', 'spindle-mp3-player' ); ?></p>
                 </td>
             </tr>
             <tr>

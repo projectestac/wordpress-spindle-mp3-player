@@ -754,7 +754,10 @@ class MP3P_Importer {
 
         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- media_handle_upload() valida el archivo (tipo, extensión) internamente.
         $_FILES['mp3_upload'] = $_FILES['mp3_file'];
+        // Sin extraer la imagen incrustada: el importador ya crea la portada del disco
+        add_filter( 'wp_read_audio_metadata', [ 'MP3P_Cascade_Delete', 'suppress_mp3_image' ], 10, 1 );
         $att_id = media_handle_upload( 'mp3_upload', $cancion_id );
+        remove_filter( 'wp_read_audio_metadata', [ 'MP3P_Cascade_Delete', 'suppress_mp3_image' ], 10 );
 
         if ( is_wp_error($att_id) ) {
             wp_send_json_error( __( 'Error al subir:', 'spindle-mp3-player' ) . ' ' . $att_id->get_error_message() );

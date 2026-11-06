@@ -12,9 +12,7 @@ msgstr ""
 "X-Generator: manual-extraction\n"
 
 #: includes/class-admin-pages.php:217
-msgid ""
-" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
-" canción)."
+msgid " y su archivo de audio, si lo creó el plugin y no se usa en ningún otro lugar."
 msgstr ""
 
 #: includes/class-importer.php:687
@@ -22,9 +20,7 @@ msgid "%s — portada"
 msgstr ""
 
 #: includes/class-admin-pages.php:215
-msgid ""
-", todas sus canciones y todos los archivos de audio y portada de la "
-"biblioteca de medios."
+msgid ", todas sus canciones y los archivos de audio y portada que creó el plugin, si no se usan en ningún otro lugar."
 msgstr ""
 
 #: includes/class-settings.php:86
@@ -271,6 +267,10 @@ msgstr ""
 
 #: includes/class-meta-boxes.php:272
 msgid "Descarga desactivada (candado)"
+msgstr ""
+
+#: includes/class-meta-boxes.php:283
+msgid "Solo muestra u oculta el botón de descarga. El archivo de audio es público: el player lo necesita para reproducirlo y se puede descargar igualmente desde su URL."
 msgstr ""
 
 #: includes/class-assets.php:81

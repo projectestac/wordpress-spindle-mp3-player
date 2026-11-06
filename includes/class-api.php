@@ -10,6 +10,10 @@ class MP3P_API {
             'methods'             => 'GET',
             'callback'            => [ __CLASS__, 'get_discos' ],
             'permission_callback' => '__return_true',
+            'args'                => [
+                'page'     => [ 'type' => 'integer', 'default' => 1,   'minimum' => 1, 'sanitize_callback' => 'absint' ],
+                'per_page' => [ 'type' => 'integer', 'default' => 100, 'minimum' => 1, 'maximum' => 100, 'sanitize_callback' => 'absint' ],
+            ],
         ] );
         register_rest_route( self::NS, '/disco/(?P<id>\d+)', [
             'methods'             => 'GET',
@@ -41,12 +45,19 @@ class MP3P_API {
         ] );
     }
 
+    // Lista paginada (por defecto, los 100 primeros por título). Las cabeceras X-WP-Total y X-WP-TotalPages
+    // indican el total, como en la API REST de WordPress.
     public static function get_discos( $request ) {
-        $discos = get_posts([
-            'post_type' => 'mp3p_disco', 'posts_per_page' => -1,
+        $per_page = min( 100, max( 1, (int) $request['per_page'] ) );
+        $page     = max( 1, (int) $request['page'] );
+        $query    = new WP_Query([
+            'post_type' => 'mp3p_disco', 'posts_per_page' => $per_page, 'paged' => $page,
             'orderby' => 'title', 'order' => 'ASC', 'post_status' => 'publish',
         ]);
-        return self::response( array_map( fn($d) => self::format_disco_summary($d), $discos ) );
+        $r = self::response( array_map( fn($d) => self::format_disco_summary($d), $query->posts ) );
+        $r->header( 'X-WP-Total',      (string) (int) $query->found_posts );
+        $r->header( 'X-WP-TotalPages', (string) (int) $query->max_num_pages );
+        return $r;
     }
 
     public static function get_disco( $request ) {

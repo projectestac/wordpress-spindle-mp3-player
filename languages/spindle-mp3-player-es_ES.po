@@ -12,22 +12,14 @@ msgstr ""
 "X-Domain: spindle-mp3-player\n"
 "X-Generator: manual-translation\n"
 
-msgid ""
-" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
-" canción)."
-msgstr ""
-" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
-" canción)."
+msgid " y su archivo de audio, si lo creó el plugin y no se usa en ningún otro lugar."
+msgstr " y su archivo de audio, si lo creó el plugin y no se usa en ningún otro lugar."
 
 msgid "%s — portada"
 msgstr "%s — portada"
 
-msgid ""
-", todas sus canciones y todos los archivos de audio y portada de la "
-"biblioteca de medios."
-msgstr ""
-", todas sus canciones y todos los archivos de audio y portada de la "
-"biblioteca de medios."
+msgid ", todas sus canciones y los archivos de audio y portada que creó el plugin, si no se usan en ningún otro lugar."
+msgstr ", todas sus canciones y los archivos de audio y portada que creó el plugin, si no se usan en ningún otro lugar."
 
 msgid "API REST"
 msgstr "API REST"
@@ -209,6 +201,9 @@ msgstr "Descarga activa"
 
 msgid "Descarga desactivada (candado)"
 msgstr "Descarga desactivada (candado)"
+
+msgid "Solo muestra u oculta el botón de descarga. El archivo de audio es público: el player lo necesita para reproducirlo y se puede descargar igualmente desde su URL."
+msgstr "Solo muestra u oculta el botón de descarga. El archivo de audio es público: el player lo necesita para reproducirlo y se puede descargar igualmente desde su URL."
 
 msgid "Descargable"
 msgstr "Descargable"
