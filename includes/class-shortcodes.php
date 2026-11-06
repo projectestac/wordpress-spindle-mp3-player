@@ -25,6 +25,25 @@ class MP3P_Shortcodes {
         return $fallback;
     }
 
+    // Direcciones de degradado que ofrece el editor de diseño
+    const GRADIENT_DIRECTIONS = [ '135deg', 'to right', 'to bottom', 'to bottom right' ];
+
+    /**
+     * Sanea el fondo del player: '', 'transparent', un color hexadecimal o
+     * linear-gradient(<dirección permitida>,<color>,<color>). Cualquier otro valor se descarta,
+     * para no inyectar CSS arbitrario (el Web Component lo vuelve a validar).
+     */
+    public static function css_bg( $value ) {
+        $value = strtolower( trim( (string) $value ) );
+        if ( $value === '' || $value === 'transparent' ) return $value;
+        if ( sanitize_hex_color( $value ) ) return $value;
+        if ( preg_match( '/^linear-gradient\(\s*([a-z0-9 ]+?)\s*,\s*(#[0-9a-f]{3,8})\s*,\s*(#[0-9a-f]{3,8})\s*\)$/', $value, $m )
+            && in_array( $m[1], self::GRADIENT_DIRECTIONS, true ) && sanitize_hex_color( $m[2] ) && sanitize_hex_color( $m[3] ) ) {
+            return 'linear-gradient(' . $m[1] . ',' . $m[2] . ',' . $m[3] . ')';
+        }
+        return '';
+    }
+
     // Opciones guardadas en el post (disco, canción o playlist), con fallback a los globales
     private static function player_defaults( $id ) {
         $id = intval( $id );
@@ -83,6 +102,14 @@ class MP3P_Shortcodes {
                 $atts[ $key ] = $val;
             }
         }
+
+        // Valores que llegan del shortcode (los escribe cualquier autor): solo formatos conocidos.
+        // La API es siempre la del propio sitio: no se permite apuntar el player a un servidor externo.
+        $atts['api']     = rest_url( 'mp3p/v1' );
+        $atts['accent']  = sanitize_hex_color( $atts['accent'] ) ?: MP3P_Settings::DEFAULT_ACCENT;
+        $atts['theme']   = MP3P_Settings::sanitize_theme( $atts['theme'] );
+        $atts['variant'] = MP3P_Settings::sanitize_variant( $atts['variant'] );
+        $atts['bg']      = self::css_bg( $atts['bg'] );
 
         wp_enqueue_script( 'mp3p-component' );
         if ( in_array( $atts['variant'], [ 'vertical', 'horizontal', 'mini' ], true ) ) {

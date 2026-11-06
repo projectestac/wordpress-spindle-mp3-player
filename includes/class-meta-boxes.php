@@ -393,7 +393,10 @@ class MP3P_Meta_Boxes {
         if ( isset($_POST['mp3p_bg_color']) )    update_post_meta( $post_id, '_mp3p_bg_color',    sanitize_hex_color( wp_unslash( $_POST['mp3p_bg_color'] ) ) );
         if ( isset($_POST['mp3p_bg_grad1']) )    update_post_meta( $post_id, '_mp3p_bg_grad1',    sanitize_hex_color( wp_unslash( $_POST['mp3p_bg_grad1'] ) ) );
         if ( isset($_POST['mp3p_bg_grad2']) )    update_post_meta( $post_id, '_mp3p_bg_grad2',    sanitize_hex_color( wp_unslash( $_POST['mp3p_bg_grad2'] ) ) );
-        if ( isset($_POST['mp3p_bg_grad_dir']) ) update_post_meta( $post_id, '_mp3p_bg_grad_dir', sanitize_text_field( wp_unslash( $_POST['mp3p_bg_grad_dir'] ) ) );
+        if ( isset($_POST['mp3p_bg_grad_dir']) ) {
+            $grad_dir = sanitize_text_field( wp_unslash( $_POST['mp3p_bg_grad_dir'] ) );
+            update_post_meta( $post_id, '_mp3p_bg_grad_dir', in_array( $grad_dir, MP3P_Shortcodes::GRADIENT_DIRECTIONS, true ) ? $grad_dir : '135deg' );
+        }
         // Elementos visibles (solo los que se muestran para este tipo de contenido)
         foreach ( self::show_keys_for( get_post_type( $post_id ) ) as $key ) {
             update_post_meta( $post_id, '_mp3p_show_' . $key, isset($_POST['mp3p_show'][$key]) ? '1' : '0' );

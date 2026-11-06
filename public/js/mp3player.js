@@ -31,6 +31,36 @@ function esc(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+/* Validación de los valores que llegan por atributos o por la API y que acaban en CSS o en URLs.
+   Solo se aceptan formatos conocidos; cualquier otra cosa se descarta, para no inyectar CSS ni HTML. */
+function safeColor(c, fallback) {
+  c = String(c == null ? '' : c).trim();
+  return /^#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(c) ? c : (fallback === undefined ? '' : fallback);
+}
+
+// Fondo: '', 'transparent', un color hexadecimal o linear-gradient(<ángulo|to dirección>, <color>, <color>)
+function safeBg(bg) {
+  bg = String(bg == null ? '' : bg).trim();
+  if (bg === '' || bg === 'transparent') return bg;
+  if (safeColor(bg)) return bg;
+  var m = bg.match(/^linear-gradient\(\s*(\d{1,3}deg|to (?:top|bottom|left|right)(?: (?:top|bottom|left|right))?)\s*,\s*([^,()]+?)\s*,\s*([^,()]+?)\s*\)$/i);
+  if (m && safeColor(m[2]) && safeColor(m[3])) return 'linear-gradient(' + m[1] + ',' + m[2] + ',' + m[3] + ')';
+  return '';
+}
+
+function safeRadius(r, fallback) {
+  var n = parseInt(r, 10);
+  return isNaN(n) ? fallback : String(Math.max(0, Math.min(n, 200)));
+}
+
+// URLs de portada y audio: solo http(s), relativas al protocolo o a la raíz del sitio (nunca javascript:, data:…)
+function safeUrl(u) {
+  u = String(u == null ? '' : u).trim();
+  return /^(?:https?:)?\/\//i.test(u) || /^\/(?!\/)/.test(u) ? u : '';
+}
+
+function escUrl(u) { return esc(safeUrl(u)); }
+
 /* Plegar / desplegar un panel animando su altura.
    Abierto = height:'' (auto), así crece si dentro se abre otro panel (p.ej. una letra). */
 function setCollapse(panel, open, animate) {
@@ -103,8 +133,9 @@ const I = {
 
 /* ── CSS ─────────────────────────────────────────────────────── */
 function buildCSS(accent, bg, radius) {
-  accent = accent || '#e8520a';
-  radius = (radius !== undefined && radius !== '') ? radius + 'px' : '4px';
+  accent = safeColor(accent, '#e8520a');
+  bg     = safeBg(bg);
+  radius = safeRadius(radius, '4') + 'px';
   // El fondo personalizado solo aplica cuando no se fuerza un tema dark/light
   // Si theme es 'dark' o 'light', el fondo del tema tiene prioridad
   var bgCSS = '';
@@ -307,7 +338,7 @@ function openLyricsModal(t, o) {
   var c = dark
     ? { bg: '#161616', tx: '#e8e8e8', tx2: '#777', bd: 'rgba(255,255,255,.08)' }
     : { bg: '#ffffff', tx: '#1a1a1a', tx2: '#888', bd: 'rgba(0,0,0,.10)' };
-  var ac   = o.accent || '#e8520a';
+  var ac   = safeColor(o.accent, '#e8520a');
   var font = o.mono ? '"JetBrains Mono",monospace' : '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif';
   var sub  = trackMeta(t, o.show || {}, false);
   var css = ':host{all:initial}'
@@ -329,7 +360,7 @@ function openLyricsModal(t, o) {
   var root = host.attachShadow({ mode: 'open' });
   root.innerHTML = '<style>' + css + '</style>'
     + '<div class="ov" role="dialog" aria-modal="true" aria-label="' + esc(T.lyrics) + '"><div class="box">'
-    + '<div class="hd"><div><div class="lbl">' + esc(T.lyrics) + '</div><div class="ti">' + t.titulo + '</div>' + (sub ? '<div class="sub">' + esc(sub) + '</div>' : '') + '</div>'
+    + '<div class="hd"><div><div class="lbl">' + esc(T.lyrics) + '</div><div class="ti">' + esc(t.titulo) + '</div>' + (sub ? '<div class="sub">' + esc(sub) + '</div>' : '') + '</div>'
     + '<button class="x" aria-label="' + esc(T.close) + '" title="' + esc(T.close) + '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button></div>'
     + '<div class="bd">' + esc(t.letra) + '</div>'
     + '</div></div>';
@@ -351,7 +382,7 @@ function openLyricsModal(t, o) {
 
 function dlBtn(t) {
   return t.descargable
-    ? '<a href="' + t.audio_url + '" download class="dl on" title="' + esc(T.download) + '">' + I.dl + '</a>'
+    ? '<a href="' + escUrl(t.audio_url) + '" download class="dl on" title="' + esc(T.download) + '">' + I.dl + '</a>'
     : '<span class="dl off" title="' + esc(T.noDownload) + '">' + I.lock + '</span>';
 }
 
@@ -398,7 +429,7 @@ function tracklistHtml(tracks, show, perTrack, mode) {
     return '<div class="trk">'
       + '<div class="track" data-index="' + i + '">'
         + '<div class="track-num"><span class="track-idx">' + (i+1) + '</span></div>'
-        + '<div class="track-info"><span class="track-name">' + t.titulo + '</span>'
+        + '<div class="track-info"><span class="track-name">' + esc(t.titulo) + '</span>'
         + (meta || lic ? '<span class="track-sub">' + esc(meta) + lic + '</span>' : '')
         + '</div>'
         + '<div class="track-actions">'
@@ -421,15 +452,15 @@ function foldableListHtml(tracks, show, perTrack, open, mode) {
 function renderFull(d, tracks, theme, accent, show, bg, radius, opts) {
   show = show || {}; opts = opts || {};
   var sc   = function(k) { return show[k] !== false; };
-  var meta = [sc('autores') && d.autores, sc('interpretes') && d.interpretes].filter(Boolean).join(' · ');
+  var meta = esc([sc('autores') && d.autores, sc('interpretes') && d.interpretes].filter(Boolean).join(' · '));
   var info = discInfo(d, show);
   var h    = '<style>' + buildCSS(accent, bg, radius) + '</style><div class="mp ' + theme + '">';
 
   h += '<div class="full-header">';
   if (sc('cover')) {
-    h += '<div class="full-thumb">' + (d.portada ? '<img src="' + d.portada + '" alt="">' : I.disc) + '</div>';
+    h += '<div class="full-thumb">' + (d.portada ? '<img src="' + escUrl(d.portada) + '" alt="">' : I.disc) + '</div>';
   }
-  h += '<div class="full-meta"><div class="full-title">' + d.titulo + '</div>';
+  h += '<div class="full-meta"><div class="full-title">' + esc(d.titulo) + '</div>';
   if (meta)      h += '<div class="full-sub">' + meta + '</div>';
   if (info.anio) h += '<div class="full-sub">' + info.anio + '</div>';
   if (info.lic)  h += '<span class="full-badge">' + info.lic + '</span>';
@@ -455,12 +486,12 @@ function renderCompact(d, tracks, theme, accent, show, bg, radius, opts) {
 
   h += '<div class="cov">';
   if (d.portada && show.cover !== false) {
-    h += '<img src="' + d.portada + '" alt="">';
+    h += '<img src="' + escUrl(d.portada) + '" alt="">';
   } else {
     h += '<div class="cov-ph">' + I.disc + '</div>';
   }
-  h += '<div class="cov-overlay"><div class="cov-title">' + (first.titulo || d.titulo) + '</div>'
-     + '<div class="cov-sub">' + d.titulo + '</div></div></div>';
+  h += '<div class="cov-overlay"><div class="cov-title">' + esc(first.titulo || d.titulo) + '</div>'
+     + '<div class="cov-sub">' + esc(d.titulo) + '</div></div></div>';
 
   h += '<div class="comp-body"><div class="comp-prog">' + progHtml() + '</div>'
      + '<div class="comp-ctrl">' + ctrlHtml() + '</div>';
@@ -481,18 +512,18 @@ function renderCompact(d, tracks, theme, accent, show, bg, radius, opts) {
 function renderWide(d, tracks, theme, accent, show, bg, radius, opts) {
   show     = show || {}; opts = opts || {};
   var sc   = function(k) { return show[k] !== false; };
-  var meta = [sc('autores') && d.autores, sc('interpretes') && d.interpretes].filter(Boolean).join(' · ');
+  var meta = esc([sc('autores') && d.autores, sc('interpretes') && d.interpretes].filter(Boolean).join(' · '));
   var info = discInfo(d, show);
   var h    = '<style>' + buildCSS(accent, bg, radius) + '</style><div class="mp ' + theme + '"><div class="wide-grid' + (sc('cover') ? '' : ' nocover') + '">';
 
   if (sc('cover')) {
     h += '<div class="wide-cover">';
-    h += d.portada ? '<img src="' + d.portada + '" alt="">' : '<div class="wide-cover-ph">' + I.disc + '</div>';
+    h += d.portada ? '<img src="' + escUrl(d.portada) + '" alt="">' : '<div class="wide-cover-ph">' + I.disc + '</div>';
     h += '</div>';
   }
 
   h += '<div class="wide-right">';
-  h += '<div class="wide-info"><div class="wide-title">' + d.titulo + '</div>';
+  h += '<div class="wide-info"><div class="wide-title">' + esc(d.titulo) + '</div>';
   if (meta)      h += '<div class="wide-sub">' + meta + '</div>';
   if (info.anio) h += '<div class="wide-sub">' + info.anio + '</div>';
   if (info.lic)  h += '<span class="wide-badge">' + info.lic + '</span>';
@@ -612,7 +643,7 @@ class MP3PlayerEngine {
     // Actualizar overlay now-playing
     const np = this.q('.np-text');
     const autor = this.show.autores !== false ? t.autor : '';
-    if (np) np.innerHTML = '<strong>' + t.titulo + '</strong>' + (autor ? ' <span style="opacity:.6">\xb7 ' + esc(autor) + '</span>' : '');
+    if (np) np.innerHTML = '<strong>' + esc(t.titulo) + '</strong>' + (autor ? ' <span style="opacity:.6">\xb7 ' + esc(autor) + '</span>' : '');
 
     // Overlay compact
     const ct = this.q('.cov-title');
@@ -728,15 +759,15 @@ class MP3PBase extends HTMLElement {
   _rerender() {
     if (this._initialized) return;
     this._initialized = true;
-    const theme  = resolveTheme(this.getAttribute('theme'), this.getAttribute('bg') || '');
-    const accent = this.getAttribute('accent') || '#e8520a';
+    const theme  = resolveTheme(this.getAttribute('theme'), safeBg(this.getAttribute('bg')));
+    const accent = safeColor(this.getAttribute('accent'), '#e8520a');
     const forcedTheme = this.getAttribute('theme');
-    const rawBg  = this.getAttribute('bg') || '';
+    const rawBg  = safeBg(this.getAttribute('bg'));
     const bg     = (forcedTheme === 'dark' || forcedTheme === 'light') ? '' : rawBg;
-    const radius = this.getAttribute('radius') || '4';
+    const radius = safeRadius(this.getAttribute('radius'), '4');
     const show   = getShow(this);
     const api    = this.getAttribute('api');
-    const id     = this.getAttribute('id');
+    const id     = String(parseInt(this.getAttribute('id'), 10) || '');
     if (!api || !id) { this._err('Faltan atributos id y/o api.', theme, accent, bg, radius); return; }
     this._load(api, id, theme, accent, show, bg, radius);
   }
@@ -753,9 +784,9 @@ class MP3PBase extends HTMLElement {
     this._initialized = true;
 
     this._shadow = this.attachShadow({ mode: 'closed' });
-    const accent = this.getAttribute('accent') || '#e8520a';
-    const rawBg  = this.getAttribute('bg') || '';
-    const radius = this.getAttribute('radius') || '4';
+    const accent = safeColor(this.getAttribute('accent'), '#e8520a');
+    const rawBg  = safeBg(this.getAttribute('bg'));
+    const radius = safeRadius(this.getAttribute('radius'), '4');
     const show   = getShow(this);
     // El fondo personalizado solo aplica si el tema no está forzado a dark/light
     const forcedTheme = this.getAttribute('theme');
@@ -763,7 +794,7 @@ class MP3PBase extends HTMLElement {
     const theme = resolveTheme(forcedTheme, bg);
     this._setContent('<style>' + buildCSS(accent, bg, radius) + '</style><div class="mp ' + theme + '"><div class="loading">' + esc(T.loading) + '</div></div>');
     const api = this.getAttribute('api');
-    const id  = this.getAttribute('id');
+    const id  = String(parseInt(this.getAttribute('id'), 10) || '');
     if (!api || !id) { this._err('Faltan atributos id y/o api.', theme, accent, bg, radius); return; }
     this._load(api, id, theme, accent, show, bg, radius);
   }
@@ -776,7 +807,7 @@ class MP3PBase extends HTMLElement {
   }
 
   _err(msg, theme, accent, bg, radius) {
-    this._setContent('<style>' + buildCSS(accent||'#e8520a', bg||'', radius||'4') + '</style><div class="mp ' + (theme||'dark') + '"><p class="error">' + msg + '</p></div>');
+    this._setContent('<style>' + buildCSS(accent||'#e8520a', bg||'', radius||'4') + '</style><div class="mp ' + (theme||'dark') + '"><p class="error">' + esc(msg) + '</p></div>');
   }
 }
 
@@ -861,7 +892,7 @@ class Mp3pPlaylist extends MP3PBase {
 
 /* ── CSS compartido hardware ─────────────────────────────────── */
 function buildHWCSS(accent) {
-  accent = accent || '#e8520a';
+  accent = safeColor(accent, '#e8520a');
 
   // Lighten accent for gradient top
   function lighten(hex) {
@@ -1064,17 +1095,17 @@ function hwPlaylist(tracks, current, accent, show, open, mode) {
   show = show || {};
   var items = tracks.map(function(t, i) {
     var active = i === current;
-    var markColor = active ? accent : '#999';
+    var markColor = active ? safeColor(accent, '#e8520a') : '#999';
     var hasLyr = show.letra !== false && t.letra;
     var lyr = show.letra === false ? ''
       : hasLyr ? '<button class="hw-pl-dl hw-lyr-btn" data-index="'+i+'" title="'+esc(T.lyrics)+'" aria-label="'+esc(T.lyrics)+'" aria-expanded="false">'+hwLyrIcon()+'</button>'
       :          '<span class="hw-pl-dl hw-lyr-btn off" title="'+esc(T.noLyrics)+'" aria-hidden="true">'+hwLyrIcon()+'</span>';
     var dl = t.descargable
-      ? '<a href="'+t.audio_url+'" download class="hw-pl-dl" title="'+esc(T.download)+'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>'
+      ? '<a href="'+escUrl(t.audio_url)+'" download class="hw-pl-dl" title="'+esc(T.download)+'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>'
       : '<span class="hw-pl-dl off"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>';
     return '<div class="hw-pl-track' + (active?' active':'') + '" data-index="'+i+'">'
       + '<div class="hw-pl-left"><span class="hw-pl-mark" style="color:'+markColor+'">'+(active?'●':'▸')+'</span>'
-      + '<span class="hw-pl-title">'+t.titulo+'</span></div>'
+      + '<span class="hw-pl-title">'+esc(t.titulo)+'</span></div>'
       + '<div style="display:flex;align-items:center;gap:4px"><span class="hw-pl-dur" style="margin-right:4px">'+fmt(t.duration || 0)+'</span>'+lyr+dl+'</div>'
       + '</div>'
       + (hasLyr && mode !== 'modal' ? '<div class="hw-lyr" data-index="'+i+'" style="height:0px"><div class="hw-lyr-in">'+esc(t.letra)+'</div></div>' : '');
@@ -1105,7 +1136,7 @@ function hwClock() {
 function renderVertical(d, tracks, accent, show, opts) {
   show = show || {}; opts = opts || {};
   var first = tracks[0] || {};
-  var portada = d.portada ? '<img src="'+d.portada+'" alt="'+d.titulo+'">' : '<span class="hw-cover-ph">PORTADA</span>';
+  var portada = d.portada ? '<img src="'+escUrl(d.portada)+'" alt="'+esc(d.titulo)+'">' : '<span class="hw-cover-ph">PORTADA</span>';
   return '<style>'+buildHWCSS(accent)+'</style>'
     + '<div class="hw vertical t-'+(opts.theme === 'dark' ? 'dark' : 'light')+'">'
     + '<div class="hw-strip"></div>'
@@ -1116,7 +1147,7 @@ function renderVertical(d, tracks, accent, show, opts) {
       + hwWaveform(0, 0, 36)
       + '<div class="hw-time"><span class="t-cur">0:00</span>&nbsp;/&nbsp;<span class="t-tot">0:00</span></div>'
     + '</div>'
-    + '<div class="hw-track-row"><div style="min-width:0"><div class="hw-track-title np-title">'+(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
+    + '<div class="hw-track-row"><div style="min-width:0"><div class="hw-track-title np-title">'+esc(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
     + hwInfo(d, show)
     + hwTransport()
     + hwVolRow()
@@ -1129,7 +1160,7 @@ function renderVertical(d, tracks, accent, show, opts) {
 function renderHorizontal(d, tracks, accent, show, opts) {
   show = show || {}; opts = opts || {};
   var first = tracks[0] || {};
-  var portada = d.portada ? '<img src="'+d.portada+'" alt="'+d.titulo+'">' : '<span class="hw-cover-ph">PORTADA</span>';
+  var portada = d.portada ? '<img src="'+escUrl(d.portada)+'" alt="'+esc(d.titulo)+'">' : '<span class="hw-cover-ph">PORTADA</span>';
   return '<style>'+buildHWCSS(accent)+'</style>'
     + '<div class="hw horizontal t-'+(opts.theme === 'dark' ? 'dark' : 'light')+'">'
     + '<div class="hw-h-body">'
@@ -1143,7 +1174,7 @@ function renderHorizontal(d, tracks, accent, show, opts) {
         + '</div>'
       + '</div>'
       + '<div class="hw-h-right">'
-        + '<div class="hw-track-row" style="padding:0"><div style="min-width:0"><div class="hw-track-title np-title" style="font-size:15px">'+(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
+        + '<div class="hw-track-row" style="padding:0"><div style="min-width:0"><div class="hw-track-title np-title" style="font-size:15px">'+esc(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
         + hwInfo(d, show)
         + hwTransport()
         + hwVolRow()
@@ -1158,7 +1189,7 @@ function renderHorizontal(d, tracks, accent, show, opts) {
 function renderMini(d, tracks, accent, show, opts) {
   show = show || {}; opts = opts || {};
   var first = tracks[0] || {};
-  var portada = d.portada ? '<img src="'+d.portada+'" alt="'+d.titulo+'">' : '';
+  var portada = d.portada ? '<img src="'+escUrl(d.portada)+'" alt="'+esc(d.titulo)+'">' : '';
   var anyLyr  = show.letra !== false;
   var inlineLyr = anyLyr && opts.lyrics !== 'modal';
   return '<style>'+buildHWCSS(accent)+'</style>'
@@ -1166,7 +1197,7 @@ function renderMini(d, tracks, accent, show, opts) {
     + '<div class="hw-mini-body">'
       + (show.cover !== false ? '<div class="hw-mini-cover">'+portada+'</div>' : '')
       + '<div class="hw-mini-info">'
-        + '<div class="hw-track-title np-title" style="font-size:12px">'+(first.titulo||d.titulo)+'</div>'
+        + '<div class="hw-track-title np-title" style="font-size:12px">'+esc(first.titulo||d.titulo)+'</div>'
         + '<div class="hw-track-artist np-artist" style="font-size:10px">'+esc(trackMeta(first, show, opts.perTrack))+'</div>'
         + '<div class="hw-mini-prog hw-seek"><div class="hw-mini-prog-fill prog-fill-hw" style="width:0%"></div></div>'
       + '</div>'

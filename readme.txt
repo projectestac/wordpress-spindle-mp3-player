@@ -4,7 +4,7 @@ Tags: audio, mp3, player, music, playlist
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,13 @@ This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.g
 3. Go to the "MP3 Player" menu to create your first album or import existing MP3 files
 
 == Changelog ==
+
+= 1.7.1 =
+* Seguridad: el player escapa todos los datos que inserta en el HTML (títulos, autores, intérpretes, portadas, URL de audio y mensajes de error), en todas las variantes, en el modal de letra y en el indicador de reproducción. Un título, una etiqueta ID3 o una respuesta de API manipulados ya no pueden ejecutar código en la página
+* Seguridad: el color de acento, el fondo y el radio se validan (solo colores hexadecimales, degradados lineales con colores hexadecimales y enteros), tanto en el shortcode como en el player, para no inyectar CSS ni HTML
+* Seguridad: las URL de portada y audio solo se aceptan si son http(s) o relativas
+* Seguridad: el shortcode usa siempre la API del propio sitio (se ignora el atributo api)
+* La dirección del degradado solo admite los valores del editor de diseño
 
 = 1.7.0 =
 * Nuevo: la Configuración general define los valores por defecto de variante, tema, color de acento, lista de pistas y modo de letra, con la misma interfaz que la caja de diseño de cada player
