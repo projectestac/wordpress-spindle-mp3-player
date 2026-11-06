@@ -713,7 +713,10 @@ class MP3P_Importer {
             ]);
             if ( is_wp_error($cancion_id) ) continue;
 
-            wp_update_post([ 'ID' => $att_id, 'post_parent' => $disco_id ]);
+            // Adjuntar el archivo al disco solo si no estaba adjunto a otra entrada
+            if ( ! wp_get_post_parent_id( $att_id ) ) {
+                wp_update_post([ 'ID' => $att_id, 'post_parent' => $disco_id ]);
+            }
 
             update_post_meta( $cancion_id, '_mp3p_disco_id',      $disco_id );
             update_post_meta( $cancion_id, '_mp3p_orden',         intval($t['orden'] ?? 0) );
@@ -758,6 +761,8 @@ class MP3P_Importer {
         }
 
         update_post_meta( $cancion_id, '_mp3p_attachment_id', $att_id );
+        // Archivo subido por el importador: se podrá borrar con la canción si nadie más lo usa
+        MP3P_Cascade_Delete::mark_created( $att_id, $cancion_id );
 
         $has_lyrics = self::apply_lyrics_from_file( $cancion_id, $att_id );
 
@@ -935,6 +940,8 @@ class MP3P_Importer {
         if ( is_wp_error($att_id) ) return false;
         require_once ABSPATH . 'wp-admin/includes/image.php';
         wp_update_attachment_metadata($att_id, wp_generate_attachment_metadata($att_id, $fpath));
+        // Portada extraída por el plugin: se podrá borrar con el disco si nadie más la usa
+        MP3P_Cascade_Delete::mark_created( $att_id, $post_id );
         return $att_id;
     }
 }

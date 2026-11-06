@@ -4,7 +4,7 @@ Tags: audio, mp3, player, music, playlist
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,12 @@ This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.g
 3. Go to the "MP3 Player" menu to create your first album or import existing MP3 files
 
 == Changelog ==
+
+= 1.7.2 =
+* Al borrar un disco o una canción solo se borran los archivos (audio y portada) creados por el propio plugin, y solo si el usuario puede borrarlos, ninguna otra canción los usa, no son la imagen destacada de otra entrada y no aparecen en el contenido de ninguna entrada o página. Los archivos que ya estaban en la biblioteca de medios nunca se borran
+* La portada del disco ya no se borra siempre: sigue las mismas reglas que el audio
+* Los archivos creados antes de esta versión no se borran en cascada (no tienen la marca de archivo creado por el plugin)
+* Importar desde la biblioteca ya no cambia la entrada a la que estaba adjunto un archivo
 
 = 1.7.1 =
 * Seguridad: el player escapa todos los datos que inserta en el HTML (títulos, autores, intérpretes, portadas, URL de audio y mensajes de error), en todas las variantes, en el modal de letra y en el indicador de reproducción. Un título, una etiqueta ID3 o una respuesta de API manipulados ya no pueden ejecutar código en la página
