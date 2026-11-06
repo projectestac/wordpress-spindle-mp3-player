@@ -29,11 +29,15 @@ class MP3P_API {
             'permission_callback' => '__return_true',
             'args'                => [ 'id' => [ 'validate_callback' => fn($v) => is_numeric($v) ] ],
         ] );
-        // Endpoint para buscar canciones (usado en el editor de playlist)
+        // Endpoint para buscar canciones (usado en el editor de playlist). Lo puede usar quien puede editar
+        // playlists (por defecto, los mismos usuarios que pueden editar entradas). Solo devuelve canciones publicadas.
         register_rest_route( self::NS, '/search/canciones', [
             'methods'             => 'GET',
             'callback'            => [ __CLASS__, 'search_canciones' ],
-            'permission_callback' => fn() => current_user_can('manage_options'),
+            'permission_callback' => function () {
+                $playlist = get_post_type_object( 'mp3p_playlist' );
+                return $playlist && current_user_can( $playlist->cap->edit_posts );
+            },
         ] );
     }
 

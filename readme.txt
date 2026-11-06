@@ -4,7 +4,7 @@ Tags: audio, mp3, player, music, playlist
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.g
 3. Go to the "MP3 Player" menu to create your first album or import existing MP3 files
 
 == Changelog ==
+
+= 1.7.3 =
+* La búsqueda de canciones del editor de playlists la pueden usar todos los usuarios que pueden editar playlists (antes solo los administradores, aunque editores y autores también pueden crear playlists). Solo devuelve canciones publicadas
 
 = 1.7.2 =
 * Al borrar un disco o una canción solo se borran los archivos (audio y portada) creados por el propio plugin, y solo si el usuario puede borrarlos, ninguna otra canción los usa, no son la imagen destacada de otra entrada y no aparecen en el contenido de ninguna entrada o página. Los archivos que ya estaban en la biblioteca de medios nunca se borran
