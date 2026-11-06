@@ -1,0 +1,185 @@
+/* ─── MP3 Player Pro — Admin CSS · Dieter Rams ──────────────── */
+:root {
+    --mp3p-ac: #e8520a;
+    --mp3p-bd: rgba(0,0,0,.08);
+    --mp3p-bd2: rgba(0,0,0,.06);
+    --mp3p-tx: #111111;
+    --mp3p-tx2: #999999;
+    --mp3p-bg2: #f5f5f4;
+    --mp3p-radius: 4px;
+}
+
+/* ── Dashboard: tarjetas de estadísticas ─────────────────────── */
+.mp3p-dashboard .mp3p-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--mp3p-bd);
+    border-radius: var(--mp3p-radius);
+    overflow: hidden;
+    margin: 20px 0 28px;
+}
+.mp3p-stat-card {
+    background: #fff;
+    padding: 20px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.mp3p-stat-card__icon { font-size:24px !important; width:24px !important; height:24px !important; color:var(--mp3p-ac); flex-shrink:0; opacity:.85; }
+.mp3p-stat-card__data { display:flex; flex-direction:column; }
+.mp3p-stat-card__num { font-size:26px; font-weight:400; letter-spacing:-.5px; color:var(--mp3p-tx); line-height:1.1; }
+.mp3p-stat-card__label { font-size:11px; color:var(--mp3p-tx2); margin-top:4px; letter-spacing:.2px; }
+
+.mp3p-dashboard-cols { display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:start; }
+@media(max-width:960px) { .mp3p-dashboard-cols { grid-template-columns:1fr; } }
+
+/* ── Paneles ──────────────────────────────────────────────────── */
+.mp3p-panel { background:#fff; border:0.5px solid var(--mp3p-bd); border-radius:var(--mp3p-radius); overflow:hidden; }
+.mp3p-panel__header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:0.5px solid var(--mp3p-bd); }
+.mp3p-panel__header h2 { font-size:14px; margin:0; font-weight:500; letter-spacing:-.2px; color:var(--mp3p-tx); }
+.mp3p-panel .widefat { border:none; box-shadow:none; }
+.mp3p-panel p { padding:14px 18px; margin:0; }
+
+.mp3p-help { padding:4px 18px 14px; }
+.mp3p-help__item { padding:12px 0; border-bottom:0.5px solid var(--mp3p-bd2); }
+.mp3p-help__item:last-child { border-bottom:none; }
+.mp3p-help__item strong { display:block; font-size:13px; margin-bottom:4px; color:var(--mp3p-tx); font-weight:500; }
+.mp3p-help__item code { display:block; background:var(--mp3p-bg2); padding:6px 10px; border-radius:2px; font-size:12px; margin:6px 0; color:var(--mp3p-ac); }
+.mp3p-help__item p { padding:0; font-size:12px; color:var(--mp3p-tx2); line-height:1.5; margin-top:4px; }
+
+/* ── Meta boxes / tablas de formulario ───────────────────────── */
+.mp3p-form-table { width:100%; border-collapse:collapse; }
+.mp3p-form-table th { width:180px; text-align:left; padding:10px 12px 10px 0; font-weight:500; font-size:13px; color:var(--mp3p-tx); vertical-align:top; }
+.mp3p-form-table td { padding:8px 0; }
+.mp3p-form-table tr { border-bottom:0.5px solid var(--mp3p-bd2); }
+.mp3p-hint { font-weight:400; color:var(--mp3p-tx2); font-size:12px; }
+.mp3p-shortcode { display:block; background:var(--mp3p-bg2); padding:8px 10px; border:0.5px solid var(--mp3p-bd); border-radius:2px; font-size:11px; word-break:break-all; margin-top:4px; font-family:monospace; }
+
+.mp3p-badge { display:inline-block; padding:2px 8px; border-radius:2px; font-size:10px; font-weight:500; letter-spacing:.3px; text-transform:uppercase; }
+.mp3p-badge--ok { background:#e8f5e9; color:#2e7d32; }
+.mp3p-badge--no { background:#fbe9e7; color:#c62828; }
+.mp3p-empty { color:var(--mp3p-tx2); font-style:italic; }
+
+/* Toggle switch (on/off simple) */
+.mp3p-toggle { position:relative; display:inline-block; width:38px; height:20px; vertical-align:middle; }
+.mp3p-toggle input { opacity:0; width:0; height:0; }
+.mp3p-toggle__slider { position:absolute; cursor:pointer; inset:0; background:#d8d8d6; border-radius:20px; transition:.2s; }
+.mp3p-toggle__slider:before { content:""; position:absolute; height:14px; width:14px; left:3px; bottom:3px; background:#fff; border-radius:50%; transition:.2s; box-shadow:0 1px 2px rgba(0,0,0,.15); }
+.mp3p-toggle input:checked + .mp3p-toggle__slider { background:var(--mp3p-ac); }
+.mp3p-toggle input:checked + .mp3p-toggle__slider:before { transform:translateX(18px); }
+
+/* ── Botones Rams (para complementar los de WP) ──────────────── */
+.mp3p-btn { border-radius:2px; padding:8px 16px; font-size:13px; border:none; cursor:pointer; font-weight:500; letter-spacing:.1px; transition:opacity .12s; }
+.mp3p-btn:hover { opacity:.85; }
+.mp3p-btn--primary { background:var(--mp3p-ac); color:#fff; }
+.mp3p-btn--secondary { background:var(--mp3p-bg2); color:#333; }
+
+/* ── Importador ───────────────────────────────────────────────── */
+.mp3p-importer .mp3p-step { background:#fff; border:0.5px solid var(--mp3p-bd); border-radius:var(--mp3p-radius); padding:20px 24px; margin-bottom:24px; }
+.mp3p-importer .mp3p-step h2 { margin-top:0; font-size:15px; font-weight:500; letter-spacing:-.2px; border-bottom:0.5px solid var(--mp3p-bd); padding-bottom:12px; margin-bottom:16px; color:var(--mp3p-tx); }
+
+.mp3p-upload-area { border:1px dashed rgba(0,0,0,.15); border-radius:var(--mp3p-radius); padding:36px 20px; text-align:center; transition:border-color .15s, background .15s; cursor:pointer; }
+.mp3p-upload-area:hover, .mp3p-drag-over { border-color:var(--mp3p-ac); background:#fdf6f3; }
+.mp3p-upload-area p { margin:8px 0 0; color:#555; font-size:13px; }
+.mp3p-upload-area .button { cursor:pointer; }
+
+.mp3p-progress-bar-wrap { height:2px; background:var(--mp3p-bd); border-radius:1px; overflow:hidden; margin:8px 0; }
+.mp3p-progress-bar { height:100%; background:var(--mp3p-ac); border-radius:1px; width:0%; transition:width .2s; }
+
+.mp3p-album-preview { border:0.5px solid var(--mp3p-bd); border-radius:var(--mp3p-radius); margin-bottom:24px; overflow:hidden; }
+.mp3p-album-preview__header { display:flex; gap:20px; align-items:flex-start; padding:20px; background:var(--mp3p-bg2); border-bottom:0.5px solid var(--mp3p-bd); }
+.mp3p-album-preview__cover { width:100px; height:100px; object-fit:cover; border-radius:2px; flex-shrink:0; }
+.mp3p-album-preview__cover--empty { background:#e5e5e3; display:flex; align-items:center; justify-content:center; }
+.mp3p-album-preview__cover--empty .dashicons { font-size:44px; width:44px; height:44px; color:#b5b5b2; }
+.mp3p-album-preview__meta { flex:1; }
+.mp3p-album-preview__meta h3 { margin:0 0 12px; font-size:15px; font-weight:500; letter-spacing:-.2px; color:var(--mp3p-tx); }
+.mp3p-edit-table { border-collapse:collapse; width:100%; }
+.mp3p-edit-table th { width:140px; text-align:left; padding:6px 12px 6px 0; font-weight:500; font-size:13px; color:#555; vertical-align:middle; }
+.mp3p-edit-table td { padding:4px 0; }
+.mp3p-tracks-table { margin:0; border-radius:0; }
+.mp3p-tracks-table thead th { background:var(--mp3p-bg2); font-size:11px; font-weight:500; letter-spacing:.3px; text-transform:uppercase; color:var(--mp3p-tx2); }
+.mp3p-tracks-table tbody td { padding:8px 10px; vertical-align:middle; border-bottom:0.5px solid var(--mp3p-bd2); }
+.mp3p-tracks-table tbody tr:last-child td { border-bottom:none; }
+
+/* Progreso por fila */
+.mp3p-row-progress-wrap { height:4px; background:var(--mp3p-bd); border-radius:2px; overflow:hidden; }
+.mp3p-row-progress { height:100%; background:var(--mp3p-ac); width:0%; transition:width .2s; }
+.mp3p-row-status { font-size:11px; color:var(--mp3p-tx2); display:block; margin-top:3px; }
+
+/* Progreso de subida por álbum */
+.mp3p-upload-status { background:var(--mp3p-bg2); border:0.5px solid var(--mp3p-bd); border-radius:2px; padding:12px 16px; }
+.mp3p-file-row { margin-bottom:10px; }
+.mp3p-file-row:last-child { margin-bottom:0; }
+.mp3p-file-row__header { display:flex; align-items:center; gap:8px; margin-bottom:4px; font-size:13px; }
+.mp3p-file-row__name { font-weight:500; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mp3p-file-row__size { color:var(--mp3p-tx2); font-size:12px; flex-shrink:0; }
+.mp3p-file-row__status { font-size:12px; color:var(--mp3p-tx2); min-width:70px; text-align:right; flex-shrink:0; }
+
+/* Nav tabs (importador) */
+.mp3p-importer .nav-tab-wrapper { border-bottom:0.5px solid var(--mp3p-bd); }
+.mp3p-importer .nav-tab {
+    border-radius: 2px 2px 0 0;
+    border: 0.5px solid transparent;
+    border-bottom: none;
+    background: transparent;
+    color: var(--mp3p-tx2);
+    font-size: 13px;
+    padding: 8px 14px;
+    margin-bottom: -1px;
+}
+.mp3p-importer .nav-tab-active {
+    background: #fff;
+    border-color: var(--mp3p-bd);
+    color: var(--mp3p-tx);
+    font-weight: 500;
+}
+
+/* ── Metabox diseño ───────────────────────────────────────────── */
+.mp3p-diseno-box { display:flex; flex-direction:column; gap:12px; }
+.mp3p-df { display:flex; flex-direction:column; gap:6px; }
+.mp3p-dl { font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.5px; color:var(--mp3p-tx2); }
+
+/* Toggle group */
+.mp3p-tg { display:flex; gap:2px; background:var(--mp3p-bg2); border-radius:var(--mp3p-radius); padding:2px; }
+.mp3p-tg-btn { flex:1; text-align:center; padding:6px 8px; border-radius:2px; font-size:12px; font-weight:500; color:#666; cursor:pointer; transition:all .12s; user-select:none; }
+.mp3p-tg-btn.active { background:#fff; color:var(--mp3p-tx); box-shadow:0 1px 2px rgba(0,0,0,.08); }
+.mp3p-tg-btn:hover:not(.active) { color:var(--mp3p-tx); }
+
+/* Color picker */
+.mp3p-color-row { display:flex; align-items:center; gap:8px; }
+.mp3p-color-picker { width:34px; height:28px; border:0.5px solid var(--mp3p-bd); border-radius:2px; cursor:pointer; padding:2px; background:none; }
+.mp3p-color-hex { width:80px; font-size:12px; font-family:monospace; border:0.5px solid var(--mp3p-bd); border-radius:2px; padding:4px 8px; }
+.mp3p-swatches { display:flex; gap:5px; flex-wrap:wrap; margin-top:2px; }
+.mp3p-swatch { width:20px; height:20px; border-radius:50%; border:2px solid transparent; cursor:pointer; transition:transform .15s, border-color .15s; padding:0; }
+.mp3p-swatch:hover { transform:scale(1.15); }
+.mp3p-swatch.active { border-color:var(--mp3p-tx); transform:scale(1.1); }
+
+/* Toggle switches (elementos visibles) */
+.mp3p-toggles { display:flex; flex-direction:column; gap:7px; }
+.mp3p-toggle-row { display:flex; align-items:center; justify-content:space-between; }
+.mp3p-toggle-name { font-size:12px; color:#444; }
+.mp3p-sw { position:relative; display:inline-block; width:32px; height:18px; cursor:pointer; }
+.mp3p-sw input { opacity:0; width:0; height:0; }
+.mp3p-sw-track { position:absolute; inset:0; background:#d8d8d6; border-radius:18px; transition:background .2s; }
+.mp3p-sw input:checked + .mp3p-sw-track { background:var(--mp3p-ac); }
+.mp3p-sw-thumb { position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%; transition:transform .2s; box-shadow:0 1px 2px rgba(0,0,0,.15); pointer-events:none; }
+.mp3p-sw input:checked ~ .mp3p-sw-thumb { transform:translateX(14px); }
+
+/* ── Tabla de últimos discos (dashboard) ─────────────────────── */
+.mp3p-discos-table th { padding:10px 8px; font-weight:500; }
+.mp3p-discos-table td { padding:8px; vertical-align:middle; }
+
+/* Importador: indicador de letra incluida en el archivo */
+.mp3p-importer .t-lyr { text-align:center; }
+.mp3p-lyr-badge { display:inline-block; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:9px; letter-spacing:.8px; text-transform:uppercase; line-height:1; padding:3px 5px; border:0.5px solid var(--mp3p-ac); border-radius:2px; color:var(--mp3p-ac); }
+.mp3p-lyr-badge--off { border-color:transparent; color:var(--mp3p-tx2); letter-spacing:0; }
+
+/* Ficha de canción: aviso de datos leídos del archivo */
+.mp3p-tags-note { margin-top:6px; padding-left:8px; border-left:2px solid var(--mp3p-ac); color:var(--mp3p-tx2); font-size:12px; }
+
+/* Configuración general */
+.mp3p-settings .mp3p-settings-panel { max-width:640px; }
+.mp3p-settings .mp3p-settings-body { padding:16px 18px; display:flex; flex-direction:column; gap:16px; }
+.mp3p-settings .mp3p-df { gap:6px; }
+.mp3p-tg-group { width:100%; font-size:10px; color:#aaa; letter-spacing:.4px; margin:4px 2px 1px; }

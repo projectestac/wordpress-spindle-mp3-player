@@ -1,0 +1,1067 @@
+# Copyright (C) 2026 dseny
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Spindle MP3 Player 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/spindle-mp3-player\n"
+"PO-Revision-Date: 2026-09-20\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: spindle-mp3-player\n"
+"X-Generator: manual-extraction\n"
+
+#: includes/class-admin-pages.php:217
+msgid ""
+" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
+" canción)."
+msgstr ""
+
+#: includes/class-importer.php:687
+msgid "%s — portada"
+msgstr ""
+
+#: includes/class-admin-pages.php:215
+msgid ""
+", todas sus canciones y todos los archivos de audio y portada de la "
+"biblioteca de medios."
+msgstr ""
+
+#: includes/class-settings.php:86
+msgid "API REST"
+msgstr ""
+
+#: admin/views/dashboard.php:129
+msgid "API:"
+msgstr ""
+
+#: includes/class-meta-boxes.php:112
+msgid "Acciones"
+msgstr ""
+
+#: admin/views/dashboard.php:138
+msgid "Acciones rápidas"
+msgstr ""
+
+#: includes/class-importer.php:72
+msgid "Agrupar y crear discos"
+msgstr ""
+
+#: includes/class-meta-boxes.php:468
+msgid "Ancho máximo"
+msgstr ""
+
+#: includes/class-settings.php:40
+msgid "Apariencia del player"
+msgstr ""
+
+#: includes/class-meta-boxes.php:243
+msgid "Archivo MP3"
+msgstr ""
+
+#: includes/class-meta-boxes.php:101
+msgid ""
+"Arrastra las filas para cambiar el orden de reproducción. Guarda el disco "
+"para aplicar los cambios."
+msgstr ""
+
+#: includes/class-importer.php:29
+msgid "Arrastra los archivos MP3 aquí o"
+msgstr ""
+
+#: includes/class-playlist-meta.php:380
+msgid "Arrastrar"
+msgstr ""
+
+#: includes/class-playlist-meta.php:128 includes/class-meta-boxes.php:122
+msgid "Arrastrar para reordenar"
+msgstr ""
+
+#: includes/class-meta-boxes.php:407
+msgid "Auto"
+msgstr ""
+
+#: includes/class-settings.php:46
+msgid "Automático (detecta el sistema del usuario)"
+msgstr ""
+
+#: includes/class-meta-boxes.php:109 includes/class-meta-boxes.php:235
+#: includes/class-assets.php:84
+msgid "Autor"
+msgstr ""
+
+#: includes/class-meta-boxes.php:39 includes/class-meta-boxes.php:412
+#: includes/class-assets.php:75
+msgid "Autores"
+msgstr ""
+
+#: includes/class-playlist-meta.php:376
+msgid "Añadir"
+msgstr ""
+
+#: includes/class-playlist-meta.php:75
+msgid "Añadir canciones"
+msgstr ""
+
+#: includes/class-meta-boxes.php:143 includes/class-post-types.php:32
+msgid "Añadir canción"
+msgstr ""
+
+#: includes/class-playlist-meta.php:92 includes/class-playlist-meta.php:378
+#: includes/class-post-types.php:12
+msgid "Añadir disco"
+msgstr ""
+
+#: includes/class-post-types.php:33
+msgid "Añadir nueva canción"
+msgstr ""
+
+#: includes/class-post-types.php:53
+msgid "Añadir nueva playlist"
+msgstr ""
+
+#: includes/class-post-types.php:13
+msgid "Añadir nuevo disco"
+msgstr ""
+
+#: includes/class-post-types.php:52
+msgid "Añadir playlist"
+msgstr ""
+
+#: includes/class-meta-boxes.php:95
+msgid "Añadir primera canción"
+msgstr ""
+
+#: includes/class-meta-boxes.php:47 includes/class-meta-boxes.php:414
+#: includes/class-assets.php:77
+msgid "Año"
+msgstr ""
+
+#: includes/class-playlist-meta.php:108 includes/class-playlist-meta.php:372
+msgid "Aún no hay canciones. Búscalas arriba o añade un disco completo."
+msgstr ""
+
+#: includes/class-settings.php:64
+msgid "Botón play, pista activa y barra de progreso"
+msgstr ""
+
+#: includes/class-playlist-meta.php:78
+msgid "Buscar"
+msgstr ""
+
+#: includes/class-post-types.php:36
+msgid "Buscar canciones"
+msgstr ""
+
+#: includes/class-post-types.php:16
+msgid "Buscar discos"
+msgstr ""
+
+#: includes/class-post-types.php:56
+msgid "Buscar playlists"
+msgstr ""
+
+#: includes/class-playlist-meta.php:77
+msgid "Buscar por título de canción..."
+msgstr ""
+
+#: includes/class-meta-boxes.php:248 includes/class-meta-boxes.php:808
+msgid "Cambiar archivo"
+msgstr ""
+
+#: includes/class-admin-pages.php:128
+msgid "Cancelar"
+msgstr ""
+
+#: admin/views/dashboard.php:20 includes/class-post-types.php:30
+msgid "Canciones"
+msgstr ""
+
+#: includes/class-playlist-meta.php:13
+msgid "Canciones de la playlist"
+msgstr ""
+
+#: includes/class-meta-boxes.php:16
+msgid "Canciones del disco"
+msgstr ""
+
+#: includes/class-post-types.php:31
+msgid "Canción"
+msgstr ""
+
+#: includes/class-api.php:69
+msgid "Canción no encontrada."
+msgstr ""
+
+#: includes/class-importer.php:646
+msgid "Canción no válida."
+msgstr ""
+
+#: includes/class-playlist-meta.php:377
+msgid "Cargando..."
+msgstr ""
+
+#: includes/class-settings.php:61 includes/class-meta-boxes.php:451
+msgid "Color de acento"
+msgstr ""
+
+#: includes/class-meta-boxes.php:525
+msgid "Color fin"
+msgstr ""
+
+#: includes/class-meta-boxes.php:523
+msgid "Color inicio"
+msgstr ""
+
+#: includes/class-meta-boxes.php:405
+msgid "Compact"
+msgstr ""
+
+#: admin/views/dashboard.php:27
+msgid "Con descarga activa"
+msgstr ""
+
+#: admin/views/dashboard.php:143 includes/class-settings.php:35
+#: includes/class-admin-pages.php:24 includes/class-admin-pages.php:24
+msgid "Configuración"
+msgstr ""
+
+#: includes/class-playlist-meta.php:44 includes/class-meta-boxes.php:194
+#: includes/class-meta-boxes.php:291 includes/class-meta-boxes.php:547
+msgid "Copiar Web Component"
+msgstr ""
+
+#: admin/views/dashboard.php:76 includes/class-playlist-meta.php:40
+#: includes/class-playlist-meta.php:383 includes/class-meta-boxes.php:189
+#: includes/class-meta-boxes.php:286
+msgid "Copiar shortcode"
+msgstr ""
+
+#: includes/class-assets.php:100
+msgid "Creando…"
+msgstr ""
+
+#: includes/class-assets.php:80
+msgid "Crear disco"
+msgstr ""
+
+#: admin/views/dashboard.php:114
+msgid "Cómo usar"
+msgstr ""
+
+#: includes/class-meta-boxes.php:407
+msgid "Dark"
+msgstr ""
+
+#: includes/class-settings.php:47
+msgid "Dark (oscuro)"
+msgstr ""
+
+#: includes/class-admin-pages.php:20 includes/class-admin-pages.php:20
+msgid "Dashboard"
+msgstr ""
+
+#: includes/class-meta-boxes.php:111
+msgid "Descarga"
+msgstr ""
+
+#: includes/class-meta-boxes.php:272
+msgid "Descarga activa"
+msgstr ""
+
+#: includes/class-meta-boxes.php:272
+msgid "Descarga desactivada (candado)"
+msgstr ""
+
+#: includes/class-assets.php:81
+msgid "Descargable"
+msgstr ""
+
+#: includes/class-playlist-meta.php:27 includes/class-meta-boxes.php:62
+#: includes/class-meta-boxes.php:416
+msgid "Descripción"
+msgstr ""
+
+#: includes/class-importer.php:21
+msgid "Desde biblioteca de medios"
+msgstr ""
+
+#: includes/class-meta-boxes.php:409
+msgid "Diagonal"
+msgstr ""
+
+#: includes/class-meta-boxes.php:409
+msgid "Diagonal 2"
+msgstr ""
+
+#: includes/class-meta-boxes.php:220 includes/class-post-types.php:11
+msgid "Disco"
+msgstr ""
+
+#: includes/class-api.php:52
+msgid "Disco no encontrado."
+msgstr ""
+
+#: admin/views/dashboard.php:13 includes/class-post-types.php:10
+msgid "Discos"
+msgstr ""
+
+#: includes/class-playlist-meta.php:17 includes/class-meta-boxes.php:17
+#: includes/class-meta-boxes.php:19
+msgid "Diseño del player"
+msgstr ""
+
+#: includes/class-meta-boxes.php:33
+msgid "Dominio público"
+msgstr ""
+
+#: includes/class-meta-boxes.php:137
+msgid "Editar"
+msgstr ""
+
+#: includes/class-post-types.php:34
+msgid "Editar canción"
+msgstr ""
+
+#: includes/class-post-types.php:14
+msgid "Editar disco"
+msgstr ""
+
+#: includes/class-post-types.php:54
+msgid "Editar playlist"
+msgstr ""
+
+#: includes/class-meta-boxes.php:44
+msgid "Ej: Coro Municipal, Orquesta Sinfónica"
+msgstr ""
+
+#: includes/class-meta-boxes.php:40
+msgid "Ej: Juan García, María López"
+msgstr ""
+
+#: includes/class-importer.php:542 includes/class-importer.php:599
+msgid "El disco necesita un título."
+msgstr ""
+
+#: admin/views/dashboard.php:133
+msgid "El plugin lee las etiquetas ID3 y crea el disco automáticamente."
+msgstr ""
+
+#: includes/class-meta-boxes.php:475
+msgid "Elementos visibles"
+msgstr ""
+
+#: includes/class-admin-pages.php:218
+msgid "Eliminando..."
+msgstr ""
+
+#: includes/class-admin-pages.php:63
+msgid "Eliminar canción"
+msgstr ""
+
+#: includes/class-admin-pages.php:62
+msgid "Eliminar disco y canciones"
+msgstr ""
+
+#: includes/class-settings.php:102
+msgid "Endpoints"
+msgstr ""
+
+#: includes/class-playlist-meta.php:373
+msgid "Error al buscar."
+msgstr ""
+
+#: includes/class-playlist-meta.php:379
+msgid "Error al cargar el disco."
+msgstr ""
+
+#: includes/class-importer.php:549 includes/class-importer.php:606
+msgid "Error al crear el disco."
+msgstr ""
+
+#: includes/class-importer.php:662
+msgid "Error al subir:"
+msgstr ""
+
+#: includes/class-admin-pages.php:222
+msgid "Error de conexión."
+msgstr ""
+
+#: includes/class-importer.php:650
+msgid "Error en la subida del archivo."
+msgstr ""
+
+#: includes/class-assets.php:87 includes/class-admin-pages.php:220
+msgid "Error:"
+msgstr ""
+
+#: includes/class-shortcodes.php:106
+msgid "Error: falta id en [mp3p_cancion]"
+msgstr ""
+
+#: includes/class-shortcodes.php:50
+msgid "Error: falta id en [mp3p_disco]"
+msgstr ""
+
+#: includes/class-shortcodes.php:124
+msgid "Error: falta id en [mp3p_playlist]"
+msgstr ""
+
+#: includes/class-meta-boxes.php:495
+msgid "Esquinas redondeadas"
+msgstr ""
+
+#: includes/class-admin-pages.php:213
+msgid "Esta acción no se puede deshacer."
+msgstr ""
+
+#: includes/class-assets.php:82
+msgid "Estado"
+msgstr ""
+
+#: includes/class-meta-boxes.php:506
+msgid "Fondo"
+msgstr ""
+
+#: includes/class-meta-boxes.php:405
+msgid "Full"
+msgstr ""
+
+#: includes/class-meta-boxes.php:408
+msgid "Gradiente"
+msgstr ""
+
+#: includes/class-settings.php:112
+msgid "Guardar configuración"
+msgstr ""
+
+#: includes/class-meta-boxes.php:406 includes/class-meta-boxes.php:409
+msgid "Horizontal"
+msgstr ""
+
+#: admin/views/dashboard.php:51
+msgid "Importa tu primer disco"
+msgstr ""
+
+#: includes/class-assets.php:86
+msgid "Importando…"
+msgstr ""
+
+#: admin/views/dashboard.php:140 includes/class-importer.php:17
+#: includes/class-admin-pages.php:22 includes/class-admin-pages.php:22
+msgid "Importar MP3"
+msgstr ""
+
+#: includes/class-importer.php:59
+msgid "Importar desde la biblioteca de medios"
+msgstr ""
+
+#: admin/views/dashboard.php:132
+msgid "Importar discos"
+msgstr ""
+
+#: includes/class-assets.php:79
+msgid "Importar este disco"
+msgstr ""
+
+#: includes/class-playlist-meta.php:15
+msgid "Información"
+msgstr ""
+
+#: includes/class-meta-boxes.php:18
+msgid "Información de la canción"
+msgstr ""
+
+#: includes/class-meta-boxes.php:15
+msgid "Información del disco"
+msgstr ""
+
+#: includes/class-meta-boxes.php:43 includes/class-meta-boxes.php:110
+#: includes/class-meta-boxes.php:239 includes/class-meta-boxes.php:413
+#: includes/class-assets.php:76
+msgid "Intérpretes"
+msgstr ""
+
+#: includes/class-assets.php:72
+msgid "Lectura completada"
+msgstr ""
+
+#: includes/class-importer.php:41
+msgid "Leyendo etiquetas ID3..."
+msgstr ""
+
+#: includes/class-meta-boxes.php:51 includes/class-meta-boxes.php:415
+msgid "Licencia"
+msgstr ""
+
+#: includes/class-meta-boxes.php:407
+msgid "Light"
+msgstr ""
+
+#: includes/class-settings.php:48
+msgid "Light (claro)"
+msgstr ""
+
+#: includes/class-meta-boxes.php:406
+msgid "Mini"
+msgstr ""
+
+#: admin/views/dashboard.php:122
+msgid "Mini player de canción"
+msgstr ""
+
+#: includes/class-importer.php:35
+msgid "Máximo por archivo: %s · Puedes seleccionar varios a la vez"
+msgstr ""
+
+#: includes/class-meta-boxes.php:134
+msgid "No"
+msgstr ""
+
+#: includes/class-post-types.php:38
+msgid "No hay canciones en la papelera"
+msgstr ""
+
+#: includes/class-post-types.php:18
+msgid "No hay discos en la papelera"
+msgstr ""
+
+#: admin/views/dashboard.php:50
+msgid "No hay discos. %s."
+msgstr ""
+
+#: includes/class-post-types.php:58
+msgid "No hay playlists en la papelera"
+msgstr ""
+
+#: includes/class-assets.php:71
+msgid "No se detectaron archivos MP3."
+msgstr ""
+
+#: includes/class-post-types.php:37
+msgid "No se encontraron canciones"
+msgstr ""
+
+#: includes/class-playlist-meta.php:374
+msgid "No se encontraron canciones."
+msgstr ""
+
+#: includes/class-post-types.php:17
+msgid "No se encontraron discos"
+msgstr ""
+
+#: includes/class-post-types.php:57
+msgid "No se encontraron playlists"
+msgstr ""
+
+#: includes/class-admin-pages.php:221 includes/class-admin-pages.php:252
+msgid "No se pudo eliminar."
+msgstr ""
+
+#: includes/class-admin-pages.php:234
+msgid "Nonce inválido."
+msgstr ""
+
+#: admin/views/dashboard.php:142
+msgid "Nueva canción"
+msgstr ""
+
+#: admin/views/dashboard.php:44
+msgid "Nuevo disco"
+msgstr ""
+
+#: admin/views/dashboard.php:141
+msgid "Nuevo disco manual"
+msgstr ""
+
+#: includes/class-meta-boxes.php:231
+msgid "Nº de pista"
+msgstr ""
+
+#: includes/class-playlist-meta.php:99
+msgid "Orden de reproducción"
+msgstr ""
+
+#: includes/class-importer.php:27
+msgid "Paso 1 — Selecciona los archivos MP3"
+msgstr ""
+
+#: includes/class-importer.php:50
+msgid "Paso 2 — Revisa y confirma"
+msgstr ""
+
+#: includes/class-meta-boxes.php:265
+msgid "Permitir descarga"
+msgstr ""
+
+#: admin/views/dashboard.php:59
+msgid "Pistas"
+msgstr ""
+
+#: admin/views/dashboard.php:117
+msgid "Player de disco completo"
+msgstr ""
+
+#: includes/class-post-types.php:51
+msgid "Playlist"
+msgstr ""
+
+#: includes/class-api.php:78
+msgid "Playlist no encontrada."
+msgstr ""
+
+#: includes/class-post-types.php:50
+msgid "Playlists"
+msgstr ""
+
+#: admin/views/dashboard.php:57 includes/class-meta-boxes.php:411
+msgid "Portada"
+msgstr ""
+
+#: admin/views/dashboard.php:119
+msgid "Portada + lista de canciones con controles y botón de descarga."
+msgstr ""
+
+#: includes/class-playlist-meta.php:381
+msgid "Quitar"
+msgstr ""
+
+#: includes/class-playlist-meta.php:142
+msgid "Quitar de la playlist"
+msgstr ""
+
+#: admin/views/dashboard.php:124
+msgid "Reproductor compacto para una sola pista."
+msgstr ""
+
+#: includes/class-importer.php:51
+msgid ""
+"Revisa los datos, edita lo que necesites y confirma la importación disco a "
+"disco."
+msgstr ""
+
+#: includes/class-assets.php:99
+msgid "Revisa y confirma"
+msgstr ""
+
+#: includes/class-admin-pages.php:216
+msgid "Se eliminará la canción"
+msgstr ""
+
+#: includes/class-admin-pages.php:214
+msgid "Se eliminarán"
+msgstr ""
+
+#: includes/class-settings.php:54
+msgid "Se puede sobreescribir en cada shortcode: %s"
+msgstr ""
+
+#: includes/class-importer.php:60
+msgid ""
+"Selecciona archivos MP3 que ya están en tu biblioteca de medios de "
+"WordPress. El plugin los agrupará por álbum y creará los discos "
+"automáticamente."
+msgstr ""
+
+#: includes/class-meta-boxes.php:261
+msgid "Selecciona un archivo MP3 de la biblioteca de medios de WordPress."
+msgstr ""
+
+#: includes/class-meta-boxes.php:248
+msgid "Seleccionar MP3"
+msgstr ""
+
+#: includes/class-importer.php:65
+msgid "Seleccionar MP3 de la biblioteca"
+msgstr ""
+
+#: includes/class-meta-boxes.php:806
+msgid "Seleccionar archivo MP3"
+msgstr ""
+
+#: includes/class-importer.php:30
+msgid "Seleccionar archivos"
+msgstr ""
+
+#: includes/class-assets.php:96
+msgid "Seleccionar archivos MP3"
+msgstr ""
+
+#: admin/views/dashboard.php:60
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-playlist-meta.php:38 includes/class-meta-boxes.php:187
+#: includes/class-meta-boxes.php:284
+msgid "Shortcode para Cornerstone:"
+msgstr ""
+
+#: includes/class-assets.php:92
+msgid "Sin archivo"
+msgstr ""
+
+#: includes/class-meta-boxes.php:126
+msgid "Sin archivo de audio"
+msgstr ""
+
+#: includes/class-meta-boxes.php:258
+msgid "Sin archivo seleccionado"
+msgstr ""
+
+#: includes/class-meta-boxes.php:94
+msgid "Sin canciones. %s"
+msgstr ""
+
+#: admin/views/dashboard.php:34
+msgid "Sin descarga"
+msgstr ""
+
+#: includes/class-importer.php:535 includes/class-importer.php:592
+#: includes/class-importer.php:642 includes/class-admin-pages.php:237
+msgid "Sin permisos."
+msgstr ""
+
+#: includes/class-importer.php:564 includes/class-importer.php:618
+msgid "Sin título"
+msgstr ""
+
+#: includes/class-assets.php:73
+msgid "Sin álbum"
+msgstr ""
+
+#: admin/views/dashboard.php:133
+msgid "Sube tus MP3"
+msgstr ""
+
+#: includes/class-assets.php:91
+msgid "Subiendo…"
+msgstr ""
+
+#: includes/class-importer.php:20
+msgid "Subir archivos"
+msgstr ""
+
+#: includes/class-meta-boxes.php:132
+msgid "Sí"
+msgstr ""
+
+#: includes/class-admin-pages.php:127 includes/class-admin-pages.php:219
+msgid "Sí, eliminar"
+msgstr ""
+
+#: includes/class-meta-boxes.php:408
+msgid "Sólido"
+msgstr ""
+
+#: includes/class-settings.php:68
+msgid "También sobreescribible: %s"
+msgstr ""
+
+#: includes/class-meta-boxes.php:440
+msgid "Tema"
+msgstr ""
+
+#: includes/class-settings.php:43
+msgid "Tema por defecto"
+msgstr ""
+
+#: includes/class-admin-pages.php:242
+msgid "Tipo de post no válido."
+msgstr ""
+
+#: includes/class-post-types.php:35
+msgid "Todas las canciones"
+msgstr ""
+
+#: includes/class-post-types.php:55
+msgid "Todas las playlists"
+msgstr ""
+
+#: includes/class-meta-boxes.php:34
+msgid "Todos los derechos reservados"
+msgstr ""
+
+#: includes/class-post-types.php:15
+msgid "Todos los discos"
+msgstr ""
+
+#: includes/class-meta-boxes.php:408
+msgid "Transparente"
+msgstr ""
+
+#: admin/views/dashboard.php:58 includes/class-meta-boxes.php:108
+#: includes/class-assets.php:83
+msgid "Título"
+msgstr ""
+
+#: includes/class-assets.php:74
+msgid "Título del disco"
+msgstr ""
+
+#: includes/class-settings.php:89
+msgid "URL base"
+msgstr ""
+
+#: includes/class-settings.php:95
+msgid "Usa esta URL en el atributo %s del Web Component para webs externas."
+msgstr ""
+
+#: includes/class-meta-boxes.php:807
+msgid "Usar este archivo"
+msgstr ""
+
+#: includes/class-assets.php:97
+msgid "Usar estos archivos"
+msgstr ""
+
+#: includes/class-meta-boxes.php:423
+msgid "Variante"
+msgstr ""
+
+#: includes/class-settings.php:75
+msgid "Variante por defecto"
+msgstr ""
+
+#: includes/class-assets.php:89
+msgid "Ver disco"
+msgstr ""
+
+#: admin/views/dashboard.php:107
+msgid "Ver todos los discos"
+msgstr ""
+
+#: includes/class-meta-boxes.php:406 includes/class-meta-boxes.php:409
+msgid "Vertical"
+msgstr ""
+
+#: includes/class-meta-boxes.php:192
+msgid "Web Component (cualquier web):"
+msgstr ""
+
+#: admin/views/dashboard.php:127
+msgid "Web Component (otras webs)"
+msgstr ""
+
+#: includes/class-playlist-meta.php:42 includes/class-meta-boxes.php:289
+msgid "Web Component:"
+msgstr ""
+
+#: includes/class-meta-boxes.php:405
+msgid "Wide"
+msgstr ""
+
+#: includes/class-playlist-meta.php:375
+msgid "Ya añadida"
+msgstr ""
+
+#: includes/class-assets.php:98
+msgid "archivo(s) seleccionado(s)"
+msgstr ""
+
+#: includes/class-playlist-meta.php:100
+msgid "arrastra para reordenar"
+msgstr ""
+
+#: includes/class-settings.php:80
+msgid "combinado"
+msgstr ""
+
+#: includes/class-meta-boxes.php:235
+msgid "compositor"
+msgstr ""
+
+#: includes/class-meta-boxes.php:39
+msgid "compositores"
+msgstr ""
+
+#: includes/class-assets.php:78
+msgid "pistas"
+msgstr ""
+
+#: includes/class-settings.php:79
+msgid "player compacto"
+msgstr ""
+
+#: includes/class-settings.php:78
+msgid "player completo"
+msgstr ""
+
+#: includes/class-assets.php:90
+msgid "subiendo…"
+msgstr ""
+
+#: includes/class-admin-pages.php:123 includes/class-admin-pages.php:212
+msgid "¿Eliminar definitivamente?"
+msgstr ""
+
+#: admin/views/dashboard.php:43
+msgid "Últimos discos"
+msgstr ""
+
+#: includes/class-playlist-meta.php:87
+msgid "— Añadir disco completo —"
+msgstr ""
+
+#: includes/class-meta-boxes.php:223
+msgid "— Canción sin disco —"
+msgstr ""
+
+#: includes/class-meta-boxes.php:54
+msgid "— Sin especificar —"
+msgstr ""
+
+#: includes/class-settings.php:25
+msgid "✓ Configuración guardada."
+msgstr ""
+
+#: includes/class-playlist-meta.php:382 includes/class-meta-boxes.php:715
+#: includes/class-meta-boxes.php:809
+msgid "✓ Copiado"
+msgstr ""
+
+#: includes/class-assets.php:101
+msgid "✓ Creado"
+msgstr ""
+
+#: includes/class-assets.php:102
+msgid "✓ Disco creado"
+msgstr ""
+
+#: includes/class-assets.php:88
+msgid "✓ Importado"
+msgstr ""
+
+#: includes/class-assets.php:93
+msgid "✓ Subido"
+msgstr ""
+
+#: includes/class-assets.php:94
+msgid "✗ Error"
+msgstr ""
+
+#: includes/class-assets.php:95
+msgid "✗ Error de red"
+msgstr ""
+
+msgid "Letra"
+msgstr ""
+
+msgid ""
+"Opcional. Se muestra en un desplegable junto a la canción. Respeta los "
+"saltos de línea; deja una línea en blanco entre estrofas."
+msgstr ""
+
+msgid "Desplegada"
+msgstr ""
+
+msgid "Plegada"
+msgstr ""
+
+msgid "Ancho"
+msgstr ""
+
+#, no-php-format
+msgid "Por defecto 100% del contenedor. Admite %, px, rem, vw."
+msgstr ""
+
+msgid "Lista de pistas"
+msgstr ""
+
+#. translators: %s is a literal shortcode example
+#, php-format
+msgid ""
+"Estado inicial de la lista en todos los players que no tengan su propia "
+"opción guardada. Sobreescribible: %s"
+msgstr ""
+
+msgid "Descargar"
+msgstr ""
+
+msgid "Anterior"
+msgstr ""
+
+msgid "Siguiente"
+msgstr ""
+
+#. translators: %d: number of songs (always 1)
+#, php-format
+msgid "%d canción"
+msgstr ""
+
+#. translators: %d: number of songs
+#, php-format
+msgid "%d canciones"
+msgstr ""
+
+msgid "Ocultar lista"
+msgstr ""
+
+msgid "Cargando…"
+msgstr ""
+
+msgid "EN PAUSA"
+msgstr ""
+
+msgid "REPRODUCIENDO"
+msgstr ""
+
+msgid "Cerrar"
+msgstr ""
+
+msgid "Sin letra"
+msgstr ""
+
+msgid "Mostrar letra en"
+msgstr ""
+
+msgid "Desplegable"
+msgstr ""
+
+msgid "Ventana"
+msgstr ""
+
+msgid "El archivo incluye letra; se añadirá a la canción al importar"
+msgstr ""
+
+msgid "No se han podido leer las etiquetas del archivo."
+msgstr ""
+
+msgid "Datos leídos del archivo:"
+msgstr ""
+
+msgid "El archivo no aporta datos nuevos: los campos ya estaban rellenos."
+msgstr ""
+
+msgid "Revísalos y guarda la canción."
+msgstr ""
+
+msgid "título"
+msgstr ""
+
+msgid "autor"
+msgstr ""
+
+msgid "intérpretes"
+msgstr ""
+
+msgid "nº de pista"
+msgstr ""
+
+msgid "disco"
+msgstr ""
+
+msgid "letra"
+msgstr ""
+
+msgid "Valores por defecto del player"
+msgstr ""
+
+msgid ""
+"Se aplican a los discos, canciones y playlists que se creen a partir de "
+"ahora (también al importar). Los players ya creados conservan sus valores; "
+"cada uno se puede cambiar en su caja de diseño o con atributos del "
+"shortcode."
+msgstr ""
+
+msgid "Shortcode equivalente"
+msgstr ""

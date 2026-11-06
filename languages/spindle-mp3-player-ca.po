@@ -1,0 +1,844 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Spindle MP3 Player 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/spindle-mp3-player\n"
+"PO-Revision-Date: 2026-10-18\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: spindle-mp3-player\n"
+"X-Generator: manual-translation\n"
+
+msgid ""
+" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
+" canción)."
+msgstr ""
+" i el seu arxiu d'àudio de la biblioteca de mitjans (si no l'utilitza cap "
+"altra cançó)."
+
+msgid "%s — portada"
+msgstr "%s — portada"
+
+msgid ""
+", todas sus canciones y todos los archivos de audio y portada de la "
+"biblioteca de medios."
+msgstr ""
+", totes les seves cançons i tots els arxius d'àudio i portada de la "
+"biblioteca de mitjans."
+
+msgid "API REST"
+msgstr "API REST"
+
+msgid "API:"
+msgstr "API:"
+
+msgid "Acciones"
+msgstr "Accions"
+
+msgid "Acciones rápidas"
+msgstr "Accions ràpides"
+
+msgid "Agrupar y crear discos"
+msgstr "Agrupar i crear discs"
+
+msgid "Ancho máximo"
+msgstr "Amplada màxima"
+
+msgid "Apariencia del player"
+msgstr "Aparença del reproductor"
+
+msgid "Archivo MP3"
+msgstr "Arxiu MP3"
+
+msgid ""
+"Arrastra las filas para cambiar el orden de reproducción. Guarda el disco "
+"para aplicar los cambios."
+msgstr ""
+"Arrossega les files per canviar l'ordre de reproducció. Desa el disc per "
+"aplicar els canvis."
+
+msgid "Arrastra los archivos MP3 aquí o"
+msgstr "Arrossega els arxius MP3 aquí o"
+
+msgid "Arrastrar"
+msgstr "Arrossegar"
+
+msgid "Arrastrar para reordenar"
+msgstr "Arrossegar per reordenar"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Automático (detecta el sistema del usuario)"
+msgstr "Automàtic (detecta el sistema de l'usuari)"
+
+msgid "Autor"
+msgstr "Autor"
+
+msgid "Autores"
+msgstr "Autors"
+
+msgid "Añadir"
+msgstr "Afegir"
+
+msgid "Añadir canciones"
+msgstr "Afegir cançons"
+
+msgid "Añadir canción"
+msgstr "Afegir cançó"
+
+msgid "Añadir disco"
+msgstr "Afegir disc"
+
+msgid "Añadir nueva canción"
+msgstr "Afegir nova cançó"
+
+msgid "Añadir nueva playlist"
+msgstr "Afegir nova llista de reproducció"
+
+msgid "Añadir nuevo disco"
+msgstr "Afegir nou disc"
+
+msgid "Añadir playlist"
+msgstr "Afegir llista de reproducció"
+
+msgid "Añadir primera canción"
+msgstr "Afegir primera cançó"
+
+msgid "Año"
+msgstr "Any"
+
+msgid "Aún no hay canciones. Búscalas arriba o añade un disco completo."
+msgstr "Encara no hi ha cançons. Cerca-les a dalt o afegeix un disc complet."
+
+msgid "Botón play, pista activa y barra de progreso"
+msgstr "Botó de reproducció, pista activa i barra de progrés"
+
+msgid "Buscar"
+msgstr "Cercar"
+
+msgid "Buscar canciones"
+msgstr "Cercar cançons"
+
+msgid "Buscar discos"
+msgstr "Cercar discs"
+
+msgid "Buscar playlists"
+msgstr "Cercar llistes de reproducció"
+
+msgid "Buscar por título de canción..."
+msgstr "Cerca pel títol de la cançó..."
+
+msgid "Cambiar archivo"
+msgstr "Canviar arxiu"
+
+msgid "Cancelar"
+msgstr "Cancel·lar"
+
+msgid "Canciones"
+msgstr "Cançons"
+
+msgid "Canciones de la playlist"
+msgstr "Cançons de la llista de reproducció"
+
+msgid "Canciones del disco"
+msgstr "Cançons del disc"
+
+msgid "Canción"
+msgstr "Cançó"
+
+msgid "Canción no encontrada."
+msgstr "Cançó no trobada."
+
+msgid "Canción no válida."
+msgstr "Cançó no vàlida."
+
+msgid "Cargando..."
+msgstr "Carregant..."
+
+msgid "Color de acento"
+msgstr "Color d'accent"
+
+msgid "Color fin"
+msgstr "Color final"
+
+msgid "Color inicio"
+msgstr "Color inicial"
+
+msgid "Compact"
+msgstr "Compact"
+
+msgid "Con descarga activa"
+msgstr "Amb descàrrega activa"
+
+msgid "Configuración"
+msgstr "Configuració"
+
+msgid "Copiar Web Component"
+msgstr "Copiar Web Component"
+
+msgid "Copiar shortcode"
+msgstr "Copiar shortcode"
+
+msgid "Creando…"
+msgstr "Creant…"
+
+msgid "Crear disco"
+msgstr "Crear disc"
+
+msgid "Cómo usar"
+msgstr "Com utilitzar-lo"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Dark (oscuro)"
+msgstr "Dark (fosc)"
+
+msgid "Dashboard"
+msgstr "Tauler"
+
+msgid "Descarga"
+msgstr "Descàrrega"
+
+msgid "Descarga activa"
+msgstr "Descàrrega activa"
+
+msgid "Descarga desactivada (candado)"
+msgstr "Descàrrega desactivada (cadenat)"
+
+msgid "Descargable"
+msgstr "Descarregable"
+
+msgid "Descripción"
+msgstr "Descripció"
+
+msgid "Desde biblioteca de medios"
+msgstr "Des de la biblioteca de mitjans"
+
+msgid "Diagonal"
+msgstr "Diagonal"
+
+msgid "Diagonal 2"
+msgstr "Diagonal 2"
+
+msgid "Disco"
+msgstr "Disc"
+
+msgid "Disco no encontrado."
+msgstr "Disc no trobat."
+
+msgid "Discos"
+msgstr "Discs"
+
+msgid "Diseño del player"
+msgstr "Disseny del reproductor"
+
+msgid "Dominio público"
+msgstr "Domini públic"
+
+msgid "Editar"
+msgstr "Editar"
+
+msgid "Editar canción"
+msgstr "Editar cançó"
+
+msgid "Editar disco"
+msgstr "Editar disc"
+
+msgid "Editar playlist"
+msgstr "Editar llista de reproducció"
+
+msgid "Ej: Coro Municipal, Orquesta Sinfónica"
+msgstr "Ex: Cor Municipal, Orquestra Simfònica"
+
+msgid "Ej: Juan García, María López"
+msgstr "Ex: Joan García, Maria López"
+
+msgid "El disco necesita un título."
+msgstr "El disc necessita un títol."
+
+msgid "El plugin lee las etiquetas ID3 y crea el disco automáticamente."
+msgstr "El plugin llegeix les etiquetes ID3 i crea el disc automàticament."
+
+msgid "Elementos visibles"
+msgstr "Elements visibles"
+
+msgid "Eliminando..."
+msgstr "Eliminant..."
+
+msgid "Eliminar canción"
+msgstr "Eliminar cançó"
+
+msgid "Eliminar disco y canciones"
+msgstr "Eliminar disc i cançons"
+
+msgid "Endpoints"
+msgstr "Endpoints"
+
+msgid "Error al buscar."
+msgstr "Error en cercar."
+
+msgid "Error al cargar el disco."
+msgstr "Error en carregar el disc."
+
+msgid "Error al crear el disco."
+msgstr "Error en crear el disc."
+
+msgid "Error al subir:"
+msgstr "Error en pujar:"
+
+msgid "Error de conexión."
+msgstr "Error de connexió."
+
+msgid "Error en la subida del archivo."
+msgstr "Error en la pujada de l'arxiu."
+
+msgid "Error:"
+msgstr "Error:"
+
+msgid "Error: falta id en [mp3p_cancion]"
+msgstr "Error: falta id a [mp3p_cancion]"
+
+msgid "Error: falta id en [mp3p_disco]"
+msgstr "Error: falta id a [mp3p_disco]"
+
+msgid "Error: falta id en [mp3p_playlist]"
+msgstr "Error: falta id a [mp3p_playlist]"
+
+msgid "Esquinas redondeadas"
+msgstr "Cantonades arrodonides"
+
+msgid "Esta acción no se puede deshacer."
+msgstr "Aquesta acció no es pot desfer."
+
+msgid "Estado"
+msgstr "Estat"
+
+msgid "Fondo"
+msgstr "Fons"
+
+msgid "Full"
+msgstr "Full"
+
+msgid "Gradiente"
+msgstr "Degradat"
+
+msgid "Guardar configuración"
+msgstr "Desar configuració"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Importa tu primer disco"
+msgstr "Importa el teu primer disc"
+
+msgid "Importando…"
+msgstr "Important…"
+
+msgid "Importar MP3"
+msgstr "Importar MP3"
+
+msgid "Importar desde la biblioteca de medios"
+msgstr "Importar des de la biblioteca de mitjans"
+
+msgid "Importar discos"
+msgstr "Importar discs"
+
+msgid "Importar este disco"
+msgstr "Importar aquest disc"
+
+msgid "Información"
+msgstr "Informació"
+
+msgid "Información de la canción"
+msgstr "Informació de la cançó"
+
+msgid "Información del disco"
+msgstr "Informació del disc"
+
+msgid "Intérpretes"
+msgstr "Intèrprets"
+
+msgid "Lectura completada"
+msgstr "Lectura completada"
+
+msgid "Leyendo etiquetas ID3..."
+msgstr "Llegint etiquetes ID3..."
+
+msgid "Licencia"
+msgstr "Llicència"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Light (claro)"
+msgstr "Light (clar)"
+
+msgid "Mini"
+msgstr "Mini"
+
+msgid "Mini player de canción"
+msgstr "Minireproductor de cançó"
+
+msgid "Máximo por archivo: %s · Puedes seleccionar varios a la vez"
+msgstr "Màxim per arxiu: %s · Pots seleccionar-ne diversos alhora"
+
+msgid "No"
+msgstr "No"
+
+msgid "No hay canciones en la papelera"
+msgstr "No hi ha cançons a la paperera"
+
+msgid "No hay discos en la papelera"
+msgstr "No hi ha discs a la paperera"
+
+msgid "No hay discos. %s."
+msgstr "No hi ha discs. %s."
+
+msgid "No hay playlists en la papelera"
+msgstr "No hi ha llistes de reproducció a la paperera"
+
+msgid "No se detectaron archivos MP3."
+msgstr "No s'han detectat arxius MP3."
+
+msgid "No se encontraron canciones"
+msgstr "No s'han trobat cançons"
+
+msgid "No se encontraron canciones."
+msgstr "No s'han trobat cançons."
+
+msgid "No se encontraron discos"
+msgstr "No s'han trobat discs"
+
+msgid "No se encontraron playlists"
+msgstr "No s'han trobat llistes de reproducció"
+
+msgid "No se pudo eliminar."
+msgstr "No s'ha pogut eliminar."
+
+msgid "Nonce inválido."
+msgstr "Nonce no vàlid."
+
+msgid "Nueva canción"
+msgstr "Nova cançó"
+
+msgid "Nuevo disco"
+msgstr "Nou disc"
+
+msgid "Nuevo disco manual"
+msgstr "Nou disc manual"
+
+msgid "Nº de pista"
+msgstr "Núm. de pista"
+
+msgid "Orden de reproducción"
+msgstr "Ordre de reproducció"
+
+msgid "Paso 1 — Selecciona los archivos MP3"
+msgstr "Pas 1 — Selecciona els arxius MP3"
+
+msgid "Paso 2 — Revisa y confirma"
+msgstr "Pas 2 — Revisa i confirma"
+
+msgid "Permitir descarga"
+msgstr "Permetre descàrrega"
+
+msgid "Pistas"
+msgstr "Pistes"
+
+msgid "Player de disco completo"
+msgstr "Reproductor de disc complet"
+
+msgid "Playlist"
+msgstr "Llista de reproducció"
+
+msgid "Playlist no encontrada."
+msgstr "Llista de reproducció no trobada."
+
+msgid "Playlists"
+msgstr "Llistes de reproducció"
+
+msgid "Portada"
+msgstr "Portada"
+
+msgid "Portada + lista de canciones con controles y botón de descarga."
+msgstr "Portada + llista de cançons amb controls i botó de descàrrega."
+
+msgid "Quitar"
+msgstr "Treure"
+
+msgid "Quitar de la playlist"
+msgstr "Treure de la llista de reproducció"
+
+msgid "Reproductor compacto para una sola pista."
+msgstr "Reproductor compacte per a una sola pista."
+
+msgid ""
+"Revisa los datos, edita lo que necesites y confirma la importación disco a "
+"disco."
+msgstr ""
+"Revisa les dades, edita el que calgui i confirma la importació disc a disc."
+
+msgid "Revisa y confirma"
+msgstr "Revisa i confirma"
+
+msgid "Se eliminará la canción"
+msgstr "S'eliminarà la cançó"
+
+msgid "Se eliminarán"
+msgstr "S'eliminaran"
+
+msgid "Se puede sobreescribir en cada shortcode: %s"
+msgstr "Es pot sobreescriure a cada shortcode: %s"
+
+msgid ""
+"Selecciona archivos MP3 que ya están en tu biblioteca de medios de "
+"WordPress. El plugin los agrupará por álbum y creará los discos "
+"automáticamente."
+msgstr ""
+"Selecciona arxius MP3 que ja són a la teva biblioteca de mitjans de "
+"WordPress. El plugin els agruparà per àlbum i crearà els discs "
+"automàticament."
+
+msgid "Selecciona un archivo MP3 de la biblioteca de medios de WordPress."
+msgstr "Selecciona un arxiu MP3 de la biblioteca de mitjans de WordPress."
+
+msgid "Seleccionar MP3"
+msgstr "Seleccionar MP3"
+
+msgid "Seleccionar MP3 de la biblioteca"
+msgstr "Seleccionar MP3 de la biblioteca"
+
+msgid "Seleccionar archivo MP3"
+msgstr "Seleccionar arxiu MP3"
+
+msgid "Seleccionar archivos"
+msgstr "Seleccionar arxius"
+
+msgid "Seleccionar archivos MP3"
+msgstr "Seleccionar arxius MP3"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Shortcode para Cornerstone:"
+msgstr "Shortcode per a Cornerstone:"
+
+msgid "Sin archivo"
+msgstr "Sense arxiu"
+
+msgid "Sin archivo de audio"
+msgstr "Sense arxiu d'àudio"
+
+msgid "Sin archivo seleccionado"
+msgstr "Cap arxiu seleccionat"
+
+msgid "Sin canciones. %s"
+msgstr "Sense cançons. %s"
+
+msgid "Sin descarga"
+msgstr "Sense descàrrega"
+
+msgid "Sin permisos."
+msgstr "Sense permisos."
+
+msgid "Sin título"
+msgstr "Sense títol"
+
+msgid "Sin álbum"
+msgstr "Sense àlbum"
+
+msgid "Sube tus MP3"
+msgstr "Puja els teus MP3"
+
+msgid "Subiendo…"
+msgstr "Pujant…"
+
+msgid "Subir archivos"
+msgstr "Pujar arxius"
+
+msgid "Sí"
+msgstr "Sí"
+
+msgid "Sí, eliminar"
+msgstr "Sí, eliminar"
+
+msgid "Sólido"
+msgstr "Sòlid"
+
+msgid "También sobreescribible: %s"
+msgstr "També es pot sobreescriure: %s"
+
+msgid "Tema"
+msgstr "Tema"
+
+msgid "Tema por defecto"
+msgstr "Tema per defecte"
+
+msgid "Tipo de post no válido."
+msgstr "Tipus d'entrada no vàlid."
+
+msgid "Todas las canciones"
+msgstr "Totes les cançons"
+
+msgid "Todas las playlists"
+msgstr "Totes les llistes de reproducció"
+
+msgid "Todos los derechos reservados"
+msgstr "Tots els drets reservats"
+
+msgid "Todos los discos"
+msgstr "Tots els discs"
+
+msgid "Transparente"
+msgstr "Transparent"
+
+msgid "Título"
+msgstr "Títol"
+
+msgid "Título del disco"
+msgstr "Títol del disc"
+
+msgid "URL base"
+msgstr "URL base"
+
+msgid "Usa esta URL en el atributo %s del Web Component para webs externas."
+msgstr ""
+"Utilitza aquesta URL a l'atribut %s del Web Component per a webs externes."
+
+msgid "Usar este archivo"
+msgstr "Utilitzar aquest arxiu"
+
+msgid "Usar estos archivos"
+msgstr "Utilitzar aquests arxius"
+
+msgid "Variante"
+msgstr "Variant"
+
+msgid "Variante por defecto"
+msgstr "Variant per defecte"
+
+msgid "Ver disco"
+msgstr "Veure disc"
+
+msgid "Ver todos los discos"
+msgstr "Veure tots els discs"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Web Component (cualquier web):"
+msgstr "Web Component (qualsevol web):"
+
+msgid "Web Component (otras webs)"
+msgstr "Web Component (altres webs)"
+
+msgid "Web Component:"
+msgstr "Web Component:"
+
+msgid "Wide"
+msgstr "Wide"
+
+msgid "Ya añadida"
+msgstr "Ja afegida"
+
+msgid "archivo(s) seleccionado(s)"
+msgstr "arxiu(s) seleccionat(s)"
+
+msgid "arrastra para reordenar"
+msgstr "arrossega per reordenar"
+
+msgid "combinado"
+msgstr "combinat"
+
+msgid "compositor"
+msgstr "compositor"
+
+msgid "compositores"
+msgstr "compositors"
+
+msgid "pistas"
+msgstr "pistes"
+
+msgid "player compacto"
+msgstr "reproductor compacte"
+
+msgid "player completo"
+msgstr "reproductor complet"
+
+msgid "subiendo…"
+msgstr "pujant…"
+
+msgid "¿Eliminar definitivamente?"
+msgstr "Eliminar definitivament?"
+
+msgid "Últimos discos"
+msgstr "Últims discs"
+
+msgid "— Añadir disco completo —"
+msgstr "— Afegir disc complet —"
+
+msgid "— Canción sin disco —"
+msgstr "— Cançó sense disc —"
+
+msgid "— Sin especificar —"
+msgstr "— Sense especificar —"
+
+msgid "✓ Configuración guardada."
+msgstr "✓ Configuració desada."
+
+msgid "✓ Copiado"
+msgstr "✓ Copiat"
+
+msgid "✓ Creado"
+msgstr "✓ Creat"
+
+msgid "✓ Disco creado"
+msgstr "✓ Disc creat"
+
+msgid "✓ Importado"
+msgstr "✓ Importat"
+
+msgid "✓ Subido"
+msgstr "✓ Pujat"
+
+msgid "✗ Error"
+msgstr "✗ Error"
+
+msgid "✗ Error de red"
+msgstr "✗ Error de xarxa"
+
+msgid "Letra"
+msgstr "Lletra"
+
+msgid ""
+"Opcional. Se muestra en un desplegable junto a la canción. Respeta los "
+"saltos de línea; deja una línea en blanco entre estrofas."
+msgstr ""
+"Opcional. Es mostra en un desplegable al costat de la cançó. Respecta els "
+"salts de línia; deixa una línia en blanc entre estrofes."
+
+msgid "Desplegada"
+msgstr "Desplegada"
+
+msgid "Plegada"
+msgstr "Plegada"
+
+msgid "Ancho"
+msgstr "Amplada"
+
+#, no-php-format
+msgid "Por defecto 100% del contenedor. Admite %, px, rem, vw."
+msgstr "Per defecte 100% del contenidor. Admet %, px, rem, vw."
+
+msgid "Lista de pistas"
+msgstr "Llista de pistes"
+
+#. translators: %s is a literal shortcode example
+#, php-format
+msgid ""
+"Estado inicial de la lista en todos los players que no tengan su propia "
+"opción guardada. Sobreescribible: %s"
+msgstr ""
+"Estat inicial de la llista en tots els players que no tinguin la seva pròpia"
+" opció desada. Es pot sobreescriure: %s"
+
+msgid "Descargar"
+msgstr "Descarregar"
+
+msgid "Anterior"
+msgstr "Anterior"
+
+msgid "Siguiente"
+msgstr "Següent"
+
+#. translators: %d: number of songs (always 1)
+#, php-format
+msgid "%d canción"
+msgstr "%d cançó"
+
+#. translators: %d: number of songs
+#, php-format
+msgid "%d canciones"
+msgstr "%d cançons"
+
+msgid "Ocultar lista"
+msgstr "Amagar la llista"
+
+msgid "Cargando…"
+msgstr "Carregant…"
+
+msgid "EN PAUSA"
+msgstr "EN PAUSA"
+
+msgid "REPRODUCIENDO"
+msgstr "REPRODUINT"
+
+msgid "Cerrar"
+msgstr "Tancar"
+
+msgid "Sin letra"
+msgstr "Sense lletra"
+
+msgid "Mostrar letra en"
+msgstr "Mostrar la lletra en"
+
+msgid "Desplegable"
+msgstr "Desplegable"
+
+msgid "Ventana"
+msgstr "Finestra"
+
+msgid "El archivo incluye letra; se añadirá a la canción al importar"
+msgstr "L'arxiu inclou lletra; s'afegirà a la cançó en importar"
+
+msgid "No se han podido leer las etiquetas del archivo."
+msgstr "No s'han pogut llegir les etiquetes de l'arxiu."
+
+msgid "Datos leídos del archivo:"
+msgstr "Dades llegides de l'arxiu:"
+
+msgid "El archivo no aporta datos nuevos: los campos ya estaban rellenos."
+msgstr "L'arxiu no aporta dades noves: els camps ja estaven omplerts."
+
+msgid "Revísalos y guarda la canción."
+msgstr "Revisa-les i desa la cançó."
+
+msgid "título"
+msgstr "títol"
+
+msgid "autor"
+msgstr "autor"
+
+msgid "intérpretes"
+msgstr "intèrprets"
+
+msgid "nº de pista"
+msgstr "núm. de pista"
+
+msgid "disco"
+msgstr "disc"
+
+msgid "letra"
+msgstr "lletra"
+
+msgid "Valores por defecto del player"
+msgstr "Valors per defecte del player"
+
+msgid ""
+"Se aplican a los discos, canciones y playlists que se creen a partir de "
+"ahora (también al importar). Los players ya creados conservan sus valores; "
+"cada uno se puede cambiar en su caja de diseño o con atributos del "
+"shortcode."
+msgstr ""
+"S'apliquen als discos, cançons i playlists que es creïn a partir d'ara "
+"(també en importar). Els players ja creats conserven els seus valors; "
+"cadascun es pot canviar a la seva caixa de disseny o amb atributs del "
+"shortcode."
+
+msgid "Shortcode equivalente"
+msgstr "Shortcode equivalent"

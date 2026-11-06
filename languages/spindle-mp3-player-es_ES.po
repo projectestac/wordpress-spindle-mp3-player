@@ -1,0 +1,844 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Spindle MP3 Player 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/spindle-mp3-player\n"
+"PO-Revision-Date: 2026-10-18\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: spindle-mp3-player\n"
+"X-Generator: manual-translation\n"
+
+msgid ""
+" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
+" canción)."
+msgstr ""
+" y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra"
+" canción)."
+
+msgid "%s — portada"
+msgstr "%s — portada"
+
+msgid ""
+", todas sus canciones y todos los archivos de audio y portada de la "
+"biblioteca de medios."
+msgstr ""
+", todas sus canciones y todos los archivos de audio y portada de la "
+"biblioteca de medios."
+
+msgid "API REST"
+msgstr "API REST"
+
+msgid "API:"
+msgstr "API:"
+
+msgid "Acciones"
+msgstr "Acciones"
+
+msgid "Acciones rápidas"
+msgstr "Acciones rápidas"
+
+msgid "Agrupar y crear discos"
+msgstr "Agrupar y crear discos"
+
+msgid "Ancho máximo"
+msgstr "Ancho máximo"
+
+msgid "Apariencia del player"
+msgstr "Apariencia del player"
+
+msgid "Archivo MP3"
+msgstr "Archivo MP3"
+
+msgid ""
+"Arrastra las filas para cambiar el orden de reproducción. Guarda el disco "
+"para aplicar los cambios."
+msgstr ""
+"Arrastra las filas para cambiar el orden de reproducción. Guarda el disco "
+"para aplicar los cambios."
+
+msgid "Arrastra los archivos MP3 aquí o"
+msgstr "Arrastra los archivos MP3 aquí o"
+
+msgid "Arrastrar"
+msgstr "Arrastrar"
+
+msgid "Arrastrar para reordenar"
+msgstr "Arrastrar para reordenar"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Automático (detecta el sistema del usuario)"
+msgstr "Automático (detecta el sistema del usuario)"
+
+msgid "Autor"
+msgstr "Autor"
+
+msgid "Autores"
+msgstr "Autores"
+
+msgid "Añadir"
+msgstr "Añadir"
+
+msgid "Añadir canciones"
+msgstr "Añadir canciones"
+
+msgid "Añadir canción"
+msgstr "Añadir canción"
+
+msgid "Añadir disco"
+msgstr "Añadir disco"
+
+msgid "Añadir nueva canción"
+msgstr "Añadir nueva canción"
+
+msgid "Añadir nueva playlist"
+msgstr "Añadir nueva playlist"
+
+msgid "Añadir nuevo disco"
+msgstr "Añadir nuevo disco"
+
+msgid "Añadir playlist"
+msgstr "Añadir playlist"
+
+msgid "Añadir primera canción"
+msgstr "Añadir primera canción"
+
+msgid "Año"
+msgstr "Año"
+
+msgid "Aún no hay canciones. Búscalas arriba o añade un disco completo."
+msgstr "Aún no hay canciones. Búscalas arriba o añade un disco completo."
+
+msgid "Botón play, pista activa y barra de progreso"
+msgstr "Botón play, pista activa y barra de progreso"
+
+msgid "Buscar"
+msgstr "Buscar"
+
+msgid "Buscar canciones"
+msgstr "Buscar canciones"
+
+msgid "Buscar discos"
+msgstr "Buscar discos"
+
+msgid "Buscar playlists"
+msgstr "Buscar playlists"
+
+msgid "Buscar por título de canción..."
+msgstr "Buscar por título de canción..."
+
+msgid "Cambiar archivo"
+msgstr "Cambiar archivo"
+
+msgid "Cancelar"
+msgstr "Cancelar"
+
+msgid "Canciones"
+msgstr "Canciones"
+
+msgid "Canciones de la playlist"
+msgstr "Canciones de la playlist"
+
+msgid "Canciones del disco"
+msgstr "Canciones del disco"
+
+msgid "Canción"
+msgstr "Canción"
+
+msgid "Canción no encontrada."
+msgstr "Canción no encontrada."
+
+msgid "Canción no válida."
+msgstr "Canción no válida."
+
+msgid "Cargando..."
+msgstr "Cargando..."
+
+msgid "Color de acento"
+msgstr "Color de acento"
+
+msgid "Color fin"
+msgstr "Color fin"
+
+msgid "Color inicio"
+msgstr "Color inicio"
+
+msgid "Compact"
+msgstr "Compact"
+
+msgid "Con descarga activa"
+msgstr "Con descarga activa"
+
+msgid "Configuración"
+msgstr "Configuración"
+
+msgid "Copiar Web Component"
+msgstr "Copiar Web Component"
+
+msgid "Copiar shortcode"
+msgstr "Copiar shortcode"
+
+msgid "Creando…"
+msgstr "Creando…"
+
+msgid "Crear disco"
+msgstr "Crear disco"
+
+msgid "Cómo usar"
+msgstr "Cómo usar"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Dark (oscuro)"
+msgstr "Dark (oscuro)"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Descarga"
+msgstr "Descarga"
+
+msgid "Descarga activa"
+msgstr "Descarga activa"
+
+msgid "Descarga desactivada (candado)"
+msgstr "Descarga desactivada (candado)"
+
+msgid "Descargable"
+msgstr "Descargable"
+
+msgid "Descripción"
+msgstr "Descripción"
+
+msgid "Desde biblioteca de medios"
+msgstr "Desde biblioteca de medios"
+
+msgid "Diagonal"
+msgstr "Diagonal"
+
+msgid "Diagonal 2"
+msgstr "Diagonal 2"
+
+msgid "Disco"
+msgstr "Disco"
+
+msgid "Disco no encontrado."
+msgstr "Disco no encontrado."
+
+msgid "Discos"
+msgstr "Discos"
+
+msgid "Diseño del player"
+msgstr "Diseño del player"
+
+msgid "Dominio público"
+msgstr "Dominio público"
+
+msgid "Editar"
+msgstr "Editar"
+
+msgid "Editar canción"
+msgstr "Editar canción"
+
+msgid "Editar disco"
+msgstr "Editar disco"
+
+msgid "Editar playlist"
+msgstr "Editar playlist"
+
+msgid "Ej: Coro Municipal, Orquesta Sinfónica"
+msgstr "Ej: Coro Municipal, Orquesta Sinfónica"
+
+msgid "Ej: Juan García, María López"
+msgstr "Ej: Juan García, María López"
+
+msgid "El disco necesita un título."
+msgstr "El disco necesita un título."
+
+msgid "El plugin lee las etiquetas ID3 y crea el disco automáticamente."
+msgstr "El plugin lee las etiquetas ID3 y crea el disco automáticamente."
+
+msgid "Elementos visibles"
+msgstr "Elementos visibles"
+
+msgid "Eliminando..."
+msgstr "Eliminando..."
+
+msgid "Eliminar canción"
+msgstr "Eliminar canción"
+
+msgid "Eliminar disco y canciones"
+msgstr "Eliminar disco y canciones"
+
+msgid "Endpoints"
+msgstr "Endpoints"
+
+msgid "Error al buscar."
+msgstr "Error al buscar."
+
+msgid "Error al cargar el disco."
+msgstr "Error al cargar el disco."
+
+msgid "Error al crear el disco."
+msgstr "Error al crear el disco."
+
+msgid "Error al subir:"
+msgstr "Error al subir:"
+
+msgid "Error de conexión."
+msgstr "Error de conexión."
+
+msgid "Error en la subida del archivo."
+msgstr "Error en la subida del archivo."
+
+msgid "Error:"
+msgstr "Error:"
+
+msgid "Error: falta id en [mp3p_cancion]"
+msgstr "Error: falta id en [mp3p_cancion]"
+
+msgid "Error: falta id en [mp3p_disco]"
+msgstr "Error: falta id en [mp3p_disco]"
+
+msgid "Error: falta id en [mp3p_playlist]"
+msgstr "Error: falta id en [mp3p_playlist]"
+
+msgid "Esquinas redondeadas"
+msgstr "Esquinas redondeadas"
+
+msgid "Esta acción no se puede deshacer."
+msgstr "Esta acción no se puede deshacer."
+
+msgid "Estado"
+msgstr "Estado"
+
+msgid "Fondo"
+msgstr "Fondo"
+
+msgid "Full"
+msgstr "Full"
+
+msgid "Gradiente"
+msgstr "Gradiente"
+
+msgid "Guardar configuración"
+msgstr "Guardar configuración"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Importa tu primer disco"
+msgstr "Importa tu primer disco"
+
+msgid "Importando…"
+msgstr "Importando…"
+
+msgid "Importar MP3"
+msgstr "Importar MP3"
+
+msgid "Importar desde la biblioteca de medios"
+msgstr "Importar desde la biblioteca de medios"
+
+msgid "Importar discos"
+msgstr "Importar discos"
+
+msgid "Importar este disco"
+msgstr "Importar este disco"
+
+msgid "Información"
+msgstr "Información"
+
+msgid "Información de la canción"
+msgstr "Información de la canción"
+
+msgid "Información del disco"
+msgstr "Información del disco"
+
+msgid "Intérpretes"
+msgstr "Intérpretes"
+
+msgid "Lectura completada"
+msgstr "Lectura completada"
+
+msgid "Leyendo etiquetas ID3..."
+msgstr "Leyendo etiquetas ID3..."
+
+msgid "Licencia"
+msgstr "Licencia"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Light (claro)"
+msgstr "Light (claro)"
+
+msgid "Mini"
+msgstr "Mini"
+
+msgid "Mini player de canción"
+msgstr "Mini player de canción"
+
+msgid "Máximo por archivo: %s · Puedes seleccionar varios a la vez"
+msgstr "Máximo por archivo: %s · Puedes seleccionar varios a la vez"
+
+msgid "No"
+msgstr "No"
+
+msgid "No hay canciones en la papelera"
+msgstr "No hay canciones en la papelera"
+
+msgid "No hay discos en la papelera"
+msgstr "No hay discos en la papelera"
+
+msgid "No hay discos. %s."
+msgstr "No hay discos. %s."
+
+msgid "No hay playlists en la papelera"
+msgstr "No hay playlists en la papelera"
+
+msgid "No se detectaron archivos MP3."
+msgstr "No se detectaron archivos MP3."
+
+msgid "No se encontraron canciones"
+msgstr "No se encontraron canciones"
+
+msgid "No se encontraron canciones."
+msgstr "No se encontraron canciones."
+
+msgid "No se encontraron discos"
+msgstr "No se encontraron discos"
+
+msgid "No se encontraron playlists"
+msgstr "No se encontraron playlists"
+
+msgid "No se pudo eliminar."
+msgstr "No se pudo eliminar."
+
+msgid "Nonce inválido."
+msgstr "Nonce inválido."
+
+msgid "Nueva canción"
+msgstr "Nueva canción"
+
+msgid "Nuevo disco"
+msgstr "Nuevo disco"
+
+msgid "Nuevo disco manual"
+msgstr "Nuevo disco manual"
+
+msgid "Nº de pista"
+msgstr "Nº de pista"
+
+msgid "Orden de reproducción"
+msgstr "Orden de reproducción"
+
+msgid "Paso 1 — Selecciona los archivos MP3"
+msgstr "Paso 1 — Selecciona los archivos MP3"
+
+msgid "Paso 2 — Revisa y confirma"
+msgstr "Paso 2 — Revisa y confirma"
+
+msgid "Permitir descarga"
+msgstr "Permitir descarga"
+
+msgid "Pistas"
+msgstr "Pistas"
+
+msgid "Player de disco completo"
+msgstr "Player de disco completo"
+
+msgid "Playlist"
+msgstr "Playlist"
+
+msgid "Playlist no encontrada."
+msgstr "Playlist no encontrada."
+
+msgid "Playlists"
+msgstr "Playlists"
+
+msgid "Portada"
+msgstr "Portada"
+
+msgid "Portada + lista de canciones con controles y botón de descarga."
+msgstr "Portada + lista de canciones con controles y botón de descarga."
+
+msgid "Quitar"
+msgstr "Quitar"
+
+msgid "Quitar de la playlist"
+msgstr "Quitar de la playlist"
+
+msgid "Reproductor compacto para una sola pista."
+msgstr "Reproductor compacto para una sola pista."
+
+msgid ""
+"Revisa los datos, edita lo que necesites y confirma la importación disco a "
+"disco."
+msgstr ""
+"Revisa los datos, edita lo que necesites y confirma la importación disco a "
+"disco."
+
+msgid "Revisa y confirma"
+msgstr "Revisa y confirma"
+
+msgid "Se eliminará la canción"
+msgstr "Se eliminará la canción"
+
+msgid "Se eliminarán"
+msgstr "Se eliminarán"
+
+msgid "Se puede sobreescribir en cada shortcode: %s"
+msgstr "Se puede sobreescribir en cada shortcode: %s"
+
+msgid ""
+"Selecciona archivos MP3 que ya están en tu biblioteca de medios de "
+"WordPress. El plugin los agrupará por álbum y creará los discos "
+"automáticamente."
+msgstr ""
+"Selecciona archivos MP3 que ya están en tu biblioteca de medios de "
+"WordPress. El plugin los agrupará por álbum y creará los discos "
+"automáticamente."
+
+msgid "Selecciona un archivo MP3 de la biblioteca de medios de WordPress."
+msgstr "Selecciona un archivo MP3 de la biblioteca de medios de WordPress."
+
+msgid "Seleccionar MP3"
+msgstr "Seleccionar MP3"
+
+msgid "Seleccionar MP3 de la biblioteca"
+msgstr "Seleccionar MP3 de la biblioteca"
+
+msgid "Seleccionar archivo MP3"
+msgstr "Seleccionar archivo MP3"
+
+msgid "Seleccionar archivos"
+msgstr "Seleccionar archivos"
+
+msgid "Seleccionar archivos MP3"
+msgstr "Seleccionar archivos MP3"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Shortcode para Cornerstone:"
+msgstr "Shortcode para Cornerstone:"
+
+msgid "Sin archivo"
+msgstr "Sin archivo"
+
+msgid "Sin archivo de audio"
+msgstr "Sin archivo de audio"
+
+msgid "Sin archivo seleccionado"
+msgstr "Sin archivo seleccionado"
+
+msgid "Sin canciones. %s"
+msgstr "Sin canciones. %s"
+
+msgid "Sin descarga"
+msgstr "Sin descarga"
+
+msgid "Sin permisos."
+msgstr "Sin permisos."
+
+msgid "Sin título"
+msgstr "Sin título"
+
+msgid "Sin álbum"
+msgstr "Sin álbum"
+
+msgid "Sube tus MP3"
+msgstr "Sube tus MP3"
+
+msgid "Subiendo…"
+msgstr "Subiendo…"
+
+msgid "Subir archivos"
+msgstr "Subir archivos"
+
+msgid "Sí"
+msgstr "Sí"
+
+msgid "Sí, eliminar"
+msgstr "Sí, eliminar"
+
+msgid "Sólido"
+msgstr "Sólido"
+
+msgid "También sobreescribible: %s"
+msgstr "También sobreescribible: %s"
+
+msgid "Tema"
+msgstr "Tema"
+
+msgid "Tema por defecto"
+msgstr "Tema por defecto"
+
+msgid "Tipo de post no válido."
+msgstr "Tipo de post no válido."
+
+msgid "Todas las canciones"
+msgstr "Todas las canciones"
+
+msgid "Todas las playlists"
+msgstr "Todas las playlists"
+
+msgid "Todos los derechos reservados"
+msgstr "Todos los derechos reservados"
+
+msgid "Todos los discos"
+msgstr "Todos los discos"
+
+msgid "Transparente"
+msgstr "Transparente"
+
+msgid "Título"
+msgstr "Título"
+
+msgid "Título del disco"
+msgstr "Título del disco"
+
+msgid "URL base"
+msgstr "URL base"
+
+msgid "Usa esta URL en el atributo %s del Web Component para webs externas."
+msgstr "Usa esta URL en el atributo %s del Web Component para webs externas."
+
+msgid "Usar este archivo"
+msgstr "Usar este archivo"
+
+msgid "Usar estos archivos"
+msgstr "Usar estos archivos"
+
+msgid "Variante"
+msgstr "Variante"
+
+msgid "Variante por defecto"
+msgstr "Variante por defecto"
+
+msgid "Ver disco"
+msgstr "Ver disco"
+
+msgid "Ver todos los discos"
+msgstr "Ver todos los discos"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Web Component (cualquier web):"
+msgstr "Web Component (cualquier web):"
+
+msgid "Web Component (otras webs)"
+msgstr "Web Component (otras webs)"
+
+msgid "Web Component:"
+msgstr "Web Component:"
+
+msgid "Wide"
+msgstr "Wide"
+
+msgid "Ya añadida"
+msgstr "Ya añadida"
+
+msgid "archivo(s) seleccionado(s)"
+msgstr "archivo(s) seleccionado(s)"
+
+msgid "arrastra para reordenar"
+msgstr "arrastra para reordenar"
+
+msgid "combinado"
+msgstr "combinado"
+
+msgid "compositor"
+msgstr "compositor"
+
+msgid "compositores"
+msgstr "compositores"
+
+msgid "pistas"
+msgstr "pistas"
+
+msgid "player compacto"
+msgstr "player compacto"
+
+msgid "player completo"
+msgstr "player completo"
+
+msgid "subiendo…"
+msgstr "subiendo…"
+
+msgid "¿Eliminar definitivamente?"
+msgstr "¿Eliminar definitivamente?"
+
+msgid "Últimos discos"
+msgstr "Últimos discos"
+
+msgid "— Añadir disco completo —"
+msgstr "— Añadir disco completo —"
+
+msgid "— Canción sin disco —"
+msgstr "— Canción sin disco —"
+
+msgid "— Sin especificar —"
+msgstr "— Sin especificar —"
+
+msgid "✓ Configuración guardada."
+msgstr "✓ Configuración guardada."
+
+msgid "✓ Copiado"
+msgstr "✓ Copiado"
+
+msgid "✓ Creado"
+msgstr "✓ Creado"
+
+msgid "✓ Disco creado"
+msgstr "✓ Disco creado"
+
+msgid "✓ Importado"
+msgstr "✓ Importado"
+
+msgid "✓ Subido"
+msgstr "✓ Subido"
+
+msgid "✗ Error"
+msgstr "✗ Error"
+
+msgid "✗ Error de red"
+msgstr "✗ Error de red"
+
+msgid "Letra"
+msgstr "Letra"
+
+msgid ""
+"Opcional. Se muestra en un desplegable junto a la canción. Respeta los "
+"saltos de línea; deja una línea en blanco entre estrofas."
+msgstr ""
+"Opcional. Se muestra en un desplegable junto a la canción. Respeta los "
+"saltos de línea; deja una línea en blanco entre estrofas."
+
+msgid "Desplegada"
+msgstr "Desplegada"
+
+msgid "Plegada"
+msgstr "Plegada"
+
+msgid "Ancho"
+msgstr "Ancho"
+
+#, no-php-format
+msgid "Por defecto 100% del contenedor. Admite %, px, rem, vw."
+msgstr "Por defecto 100% del contenedor. Admite %, px, rem, vw."
+
+msgid "Lista de pistas"
+msgstr "Lista de pistas"
+
+#. translators: %s is a literal shortcode example
+#, php-format
+msgid ""
+"Estado inicial de la lista en todos los players que no tengan su propia "
+"opción guardada. Sobreescribible: %s"
+msgstr ""
+"Estado inicial de la lista en todos los players que no tengan su propia "
+"opción guardada. Sobreescribible: %s"
+
+msgid "Descargar"
+msgstr "Descargar"
+
+msgid "Anterior"
+msgstr "Anterior"
+
+msgid "Siguiente"
+msgstr "Siguiente"
+
+#. translators: %d: number of songs (always 1)
+#, php-format
+msgid "%d canción"
+msgstr "%d canción"
+
+#. translators: %d: number of songs
+#, php-format
+msgid "%d canciones"
+msgstr "%d canciones"
+
+msgid "Ocultar lista"
+msgstr "Ocultar lista"
+
+msgid "Cargando…"
+msgstr "Cargando…"
+
+msgid "EN PAUSA"
+msgstr "EN PAUSA"
+
+msgid "REPRODUCIENDO"
+msgstr "REPRODUCIENDO"
+
+msgid "Cerrar"
+msgstr "Cerrar"
+
+msgid "Sin letra"
+msgstr "Sin letra"
+
+msgid "Mostrar letra en"
+msgstr "Mostrar letra en"
+
+msgid "Desplegable"
+msgstr "Desplegable"
+
+msgid "Ventana"
+msgstr "Ventana"
+
+msgid "El archivo incluye letra; se añadirá a la canción al importar"
+msgstr "El archivo incluye letra; se añadirá a la canción al importar"
+
+msgid "No se han podido leer las etiquetas del archivo."
+msgstr "No se han podido leer las etiquetas del archivo."
+
+msgid "Datos leídos del archivo:"
+msgstr "Datos leídos del archivo:"
+
+msgid "El archivo no aporta datos nuevos: los campos ya estaban rellenos."
+msgstr "El archivo no aporta datos nuevos: los campos ya estaban rellenos."
+
+msgid "Revísalos y guarda la canción."
+msgstr "Revísalos y guarda la canción."
+
+msgid "título"
+msgstr "título"
+
+msgid "autor"
+msgstr "autor"
+
+msgid "intérpretes"
+msgstr "intérpretes"
+
+msgid "nº de pista"
+msgstr "nº de pista"
+
+msgid "disco"
+msgstr "disco"
+
+msgid "letra"
+msgstr "letra"
+
+msgid "Valores por defecto del player"
+msgstr "Valores por defecto del player"
+
+msgid ""
+"Se aplican a los discos, canciones y playlists que se creen a partir de "
+"ahora (también al importar). Los players ya creados conservan sus valores; "
+"cada uno se puede cambiar en su caja de diseño o con atributos del "
+"shortcode."
+msgstr ""
+"Se aplican a los discos, canciones y playlists que se creen a partir de "
+"ahora (también al importar). Los players ya creados conservan sus valores; "
+"cada uno se puede cambiar en su caja de diseño o con atributos del "
+"shortcode."
+
+msgid "Shortcode equivalente"
+msgstr "Shortcode equivalente"
