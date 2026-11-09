@@ -4,7 +4,7 @@ Tags: audio, mp3, player, music, playlist
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,11 +27,9 @@ Spindle MP3 Player is an audio player for WordPress built as a Web Component wit
 
 = External services =
 
-This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.googleapis.com`) when a "Modern Player" style (Vertical, Horizontal or Mini) is used on a page. This request is only made on the front-end pages where such a player is displayed, and in the design-options preview inside the admin metabox. No personal data is sent beyond what any browser normally sends to a font CDN (IP address, user agent).
+This plugin does not connect to any external service. The **JetBrains Mono** typeface used by the "Modern Player" styles (Vertical, Horizontal and Mini) is bundled with the plugin and served from your own site.
 
-* Service: Google Fonts
-* Privacy policy: https://policies.google.com/privacy
-* Terms of service: https://developers.google.com/fonts/faq
+JetBrains Mono is Copyright 2020 The JetBrains Mono Project Authors and is licensed under the SIL Open Font License 1.1 (see `public/fonts/jetbrains-mono/OFL.txt`).
 
 == Installation ==
 
@@ -39,7 +37,65 @@ This plugin may load the **JetBrains Mono** typeface from Google Fonts (`fonts.g
 2. Activate the plugin from the WordPress "Plugins" menu
 3. Go to the "MP3 Player" menu to create your first album or import existing MP3 files
 
+== Frequently Asked Questions ==
+
+= Does the plugin connect to any external service? =
+
+No. Audio, covers and the JetBrains Mono typeface are all served from your own site.
+
+= Does "Allow download" protect my audio files? =
+
+No. It only shows or hides the download button in the player. The MP3 file is a regular, public file in your media library: anyone who knows its URL can download it.
+
+= Can the importer read lyrics, covers and other tags? =
+
+Yes. When importing, the plugin reads the ID3 tags of each MP3: title, artist, composer, album, year, track number, embedded cover and unsynchronised lyrics (USLT or Lyrics3). If a file has no lyrics you can add them by hand in the song screen.
+
+= What happens to my media files when I delete an album or a song? =
+
+Only files created by the plugin are deleted: audio files uploaded with the importer and covers extracted from ID3 tags. Even then, a file is kept if you are not allowed to delete it, if another song uses it, if it is the featured image of another post, or if it appears in the content of any post or page. Files that were already in your media library are never deleted.
+
+= What happens when I uninstall the plugin? =
+
+The plugin options are always removed. Albums, songs and playlists are only removed if you tick "Delete data on uninstall" in the plugin settings. Media library files are always kept.
+
+= Who can manage albums, songs and playlists? =
+
+Any user who can edit posts (administrators, editors, authors…) can manage them from the "MP3 Player" menu. The importer and the settings page are for administrators only.
+
+= Can I embed a player on another website? =
+
+Yes. Use the `<mp3p-disco>`, `<mp3p-cancion>` or `<mp3p-playlist>` Web Component with the `api` attribute pointing to your site's REST API (shown in the plugin settings). Inside WordPress, the shortcodes always use your own site's API.
+
+= How do I get all albums from the REST API? =
+
+`/wp-json/mp3p/v1/discos` returns up to 100 albums per request. Use the `page` and `per_page` parameters (maximum 100) to paginate; the total number of albums and pages is returned in the `X-WP-Total` and `X-WP-TotalPages` headers.
+
 == Changelog ==
+
+= 1.8.0 =
+* Borrado de archivos: el plugin marca los archivos que crea (audios subidos con el importador y portadas extraídas de las etiquetas ID3). Al borrar un disco o una canción solo se borran esos archivos, y solo si el usuario puede borrarlos, ninguna otra canción los usa, no son la imagen destacada de otra entrada y no aparecen en el contenido de ninguna entrada o página. Los archivos que ya estaban en la biblioteca no se borran nunca
+* La portada del disco sigue las mismas reglas (antes se borraba siempre)
+* Importar desde la biblioteca ya no cambia la entrada a la que estaba adjunto un archivo
+* Los avisos de confirmación de borrado explican qué archivos se borran
+* Editores y autores ven el menú "MP3 Player" y pueden gestionar discos, canciones y playlists; el importador y la Configuración siguen siendo solo para administradores
+* Nuevo botón de letra con icono y texto ("Text" por defecto, configurable en Configuración); los botones de letra y descarga llevan borde redondo
+* Variants Vertical y Horizontal: barra de progreso en la pantalla, bajo las barras de sonido, que también permite saltar a otro punto de la canción; la línea de posición sobre las barras usa el color de acento del player
+* Nuevo uninstall.php: al borrar el plugin se eliminan sus opciones; los discos, canciones y playlists solo se eliminan si está marcada la opción "Eliminar los datos al desinstalar". Los archivos de la biblioteca se conservan
+* API /discos: paginación con los parámetros page y per_page (máximo 100 por petición) y cabeceras X-WP-Total y X-WP-TotalPages. Por defecto devuelve los 100 primeros discos
+* La imagen incrustada en los MP3 solo se omite en las subidas del importador; antes el filtro afectaba a todas las subidas de audio del sitio
+* En la ficha de la canción, un aviso explica que "Permitir descarga" solo muestra u oculta el botón: el archivo de audio es público
+* Nueva sección de preguntas frecuentes en el readme
+* Traducción catalana: URL en masculino
+
+= 1.7.1 =
+* Seguridad: el reproductor escapa todos los datos que inserta en el HTML (títulos de disco y pista, autores, intérpretes, portadas, URL de audio y mensajes de error) en las seis variantes, la ventana de letra y el indicador de reproducción
+* Seguridad: el color de acento, el fondo y el radio de las esquinas se validan en el reproductor y en el shortcode; solo se aceptan colores hexadecimales, degradados lineales con colores hexadecimales y números enteros
+* Seguridad: las URL de portadas y audios solo se aceptan si son http(s) o relativas
+* Seguridad: el shortcode usa siempre la API del propio sitio; se ignora el atributo api
+* Seguridad: la dirección del degradado solo admite los valores que ofrece el editor de diseño
+* La búsqueda de canciones del editor de playlists puede usarla cualquier usuario que pueda editar playlists (editores, autores…), no solo los administradores; solo devuelve canciones publicadas
+* La fuente JetBrains Mono (variants Vertical, Horizontal y Mini) se sirve desde el propio plugin en lugar de Google Fonts; el plugin ya no se conecta a ningún servicio externo
 
 = 1.7.0 =
 * Nuevo: la Configuración general define los valores por defecto de variante, tema, color de acento, lista de pistas y modo de letra, con la misma interfaz que la caja de diseño de cada player

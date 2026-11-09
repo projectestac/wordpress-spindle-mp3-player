@@ -280,6 +280,7 @@ class MP3P_Meta_Boxes {
                     <span style="margin-left:10px;vertical-align:middle;font-size:13px">
                         <?php echo $descargable === '1' ? esc_html__( 'Descarga activa', 'spindle-mp3-player' ) : esc_html__( 'Descarga desactivada (candado)', 'spindle-mp3-player' ); ?>
                     </span>
+                    <p class="description mp3p-tags-note" style="margin-top:8px"><?php esc_html_e( 'Esta opción solo muestra u oculta el botón de descarga en el player. El archivo de audio es público: cualquiera que tenga su URL puede descargarlo.', 'spindle-mp3-player' ); ?></p>
                 </td>
             </tr>
             <tr>
@@ -387,13 +388,16 @@ class MP3P_Meta_Boxes {
         if ( isset($_POST['mp3p_max_width']) ) update_post_meta( $post_id, '_mp3p_max_width', MP3P_Shortcodes::css_length( sanitize_text_field( wp_unslash( $_POST['mp3p_max_width'] ) ), '100%' ) );
         if ( isset($_POST['mp3p_lyrics']) )    update_post_meta( $post_id, '_mp3p_lyrics',    sanitize_key( wp_unslash( $_POST['mp3p_lyrics'] ) ) === 'modal' ? 'modal' : 'inline' );
         if ( isset($_POST['mp3p_tracklist']) ) update_post_meta( $post_id, '_mp3p_tracklist', sanitize_key( wp_unslash( $_POST['mp3p_tracklist'] ) ) === 'closed' ? 'closed' : 'open' );
-        if ( isset($_POST['mp3p_border_radius']) ) update_post_meta( $post_id, '_mp3p_border_radius', intval($_POST['mp3p_border_radius']) );
+        if ( isset($_POST['mp3p_border_radius']) ) update_post_meta( $post_id, '_mp3p_border_radius', max( 0, min( 100, intval( $_POST['mp3p_border_radius'] ) ) ) );
         // Fondo
-        if ( isset($_POST['mp3p_bg_type']) )     update_post_meta( $post_id, '_mp3p_bg_type',     sanitize_text_field( wp_unslash( $_POST['mp3p_bg_type'] ) ) );
+        if ( isset($_POST['mp3p_bg_type']) ) {
+            $bg_type = sanitize_key( wp_unslash( $_POST['mp3p_bg_type'] ) );
+            update_post_meta( $post_id, '_mp3p_bg_type', in_array( $bg_type, MP3P_Shortcodes::BG_TYPES, true ) ? $bg_type : 'solid' );
+        }
         if ( isset($_POST['mp3p_bg_color']) )    update_post_meta( $post_id, '_mp3p_bg_color',    sanitize_hex_color( wp_unslash( $_POST['mp3p_bg_color'] ) ) );
         if ( isset($_POST['mp3p_bg_grad1']) )    update_post_meta( $post_id, '_mp3p_bg_grad1',    sanitize_hex_color( wp_unslash( $_POST['mp3p_bg_grad1'] ) ) );
         if ( isset($_POST['mp3p_bg_grad2']) )    update_post_meta( $post_id, '_mp3p_bg_grad2',    sanitize_hex_color( wp_unslash( $_POST['mp3p_bg_grad2'] ) ) );
-        if ( isset($_POST['mp3p_bg_grad_dir']) ) update_post_meta( $post_id, '_mp3p_bg_grad_dir', sanitize_text_field( wp_unslash( $_POST['mp3p_bg_grad_dir'] ) ) );
+        if ( isset($_POST['mp3p_bg_grad_dir']) ) update_post_meta( $post_id, '_mp3p_bg_grad_dir', MP3P_Shortcodes::grad_dir( sanitize_text_field( wp_unslash( $_POST['mp3p_bg_grad_dir'] ) ) ) );
         // Elementos visibles (solo los que se muestran para este tipo de contenido)
         foreach ( self::show_keys_for( get_post_type( $post_id ) ) as $key ) {
             update_post_meta( $post_id, '_mp3p_show_' . $key, isset($_POST['mp3p_show'][$key]) ? '1' : '0' );

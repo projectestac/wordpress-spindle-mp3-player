@@ -6,6 +6,42 @@ class MP3P_Shortcodes {
     // Elementos visibles que el Web Component entiende (atributos show_*)
     const SHOW_KEYS = [ 'cover', 'autores', 'interpretes', 'anio', 'licencia', 'descripcion', 'letra' ];
 
+    // Direcciones de degradado que ofrece el editor de diseño
+    const GRAD_DIRS = [ '135deg', 'to right', 'to bottom', 'to bottom right' ];
+    const BG_TYPES  = [ 'solid', 'gradient', 'transparent' ];
+
+    /** Color hexadecimal o $fallback. */
+    public static function hex( $value, $fallback = '' ) {
+        $hex = sanitize_hex_color( trim( (string) $value ) );
+        return $hex ? $hex : $fallback;
+    }
+
+    /** Dirección de degradado de la lista o la diagonal por defecto. */
+    public static function grad_dir( $value ) {
+        $value = strtolower( trim( (string) $value ) );
+        return in_array( $value, self::GRAD_DIRS, true ) ? $value : '135deg';
+    }
+
+    /**
+     * Fondo válido: transparent, #hex o linear-gradient(dir,#hex,#hex[,...]) con dir de la lista.
+     * Cualquier otra cosa se descarta (cadena vacía = fondo del tema).
+     */
+    public static function sanitize_bg( $value ) {
+        $value = trim( (string) $value );
+        if ( $value === '' || $value === 'transparent' ) return $value;
+        if ( self::hex( $value ) ) return self::hex( $value );
+        if ( ! preg_match( '/^linear-gradient\((.+)\)$/i', $value, $m ) ) return '';
+        $parts = array_map( 'trim', explode( ',', $m[1] ) );
+        if ( count( $parts ) < 3 || ! in_array( strtolower( $parts[0] ), self::GRAD_DIRS, true ) ) return '';
+        $out = [ strtolower( $parts[0] ) ];
+        foreach ( array_slice( $parts, 1 ) as $c ) {
+            $h = self::hex( $c );
+            if ( ! $h ) return '';
+            $out[] = $h;
+        }
+        return 'linear-gradient(' . implode( ',', $out ) . ')';
+    }
+
     public static function register() {
         add_shortcode( 'mp3p_disco',    [ __CLASS__, 'render_disco' ] );
         add_shortcode( 'mp3p_cancion',  [ __CLASS__, 'render_cancion' ] );
@@ -34,19 +70,18 @@ class MP3P_Shortcodes {
         if ( $bg_type === 'transparent' ) {
             $bg = 'transparent';
         } elseif ( $bg_type === 'gradient' ) {
-            $c1  = get_post_meta( $id, '_mp3p_bg_grad1',    true ) ?: '#ffffff';
-            $c2  = get_post_meta( $id, '_mp3p_bg_grad2',    true ) ?: '#f0f0f0';
-            $dir = get_post_meta( $id, '_mp3p_bg_grad_dir', true ) ?: '135deg';
+            $c1  = self::hex( get_post_meta( $id, '_mp3p_bg_grad1', true ), '#ffffff' );
+            $c2  = self::hex( get_post_meta( $id, '_mp3p_bg_grad2', true ), '#f0f0f0' );
+            $dir = self::grad_dir( get_post_meta( $id, '_mp3p_bg_grad_dir', true ) );
             $bg  = 'linear-gradient(' . $dir . ',' . $c1 . ',' . $c2 . ')';
         } else {
-            $bg = get_post_meta( $id, '_mp3p_bg_color', true ) ?: '#ffffff';
+            $bg = self::hex( get_post_meta( $id, '_mp3p_bg_color', true ), '#ffffff' );
         }
 
         $radius = get_post_meta( $id, '_mp3p_border_radius', true );
         $gd     = MP3P_Settings::defaults();
 
         $defaults = [
-            'api'       => rest_url( 'mp3p/v1' ),
             'variant'   => get_post_meta( $id, '_mp3p_variant',   true ) ?: $gd['variant'],
             'theme'     => get_post_meta( $id, '_mp3p_theme',     true ) ?: $gd['theme'],
             'accent'    => get_post_meta( $id, '_mp3p_accent',    true ) ?: $gd['accent'],
@@ -84,6 +119,14 @@ class MP3P_Shortcodes {
             }
         }
 
+        // Validación: solo valores conocidos, colores hex, fondos válidos y enteros
+        $gd = MP3P_Settings::defaults();
+        $atts['variant'] = in_array( $atts['variant'], MP3P_Settings::VARIANTS, true ) ? $atts['variant'] : $gd['variant'];
+        $atts['theme']   = in_array( $atts['theme'],   MP3P_Settings::THEMES,   true ) ? $atts['theme']   : $gd['theme'];
+        $atts['accent']  = self::hex( $atts['accent'], $gd['accent'] );
+        $atts['bg']      = self::sanitize_bg( $atts['bg'] );
+        $atts['radius']  = ( $atts['radius'] !== '' && is_numeric( $atts['radius'] ) ) ? (string) max( 0, min( 100, intval( $atts['radius'] ) ) ) : '';
+
         wp_enqueue_script( 'mp3p-component' );
         if ( in_array( $atts['variant'], [ 'vertical', 'horizontal', 'mini' ], true ) ) {
             wp_enqueue_style( 'jetbrains-mono' ); // Variants Modern Player
@@ -96,7 +139,8 @@ class MP3P_Shortcodes {
         if ( $max_width !== '100%' ) $style .= 'max-width:' . $max_width . ';';
 
         $html  = '<' . $tag . ' id="' . $id . '"';
-        $html .= ' api="'       . esc_url( $atts['api'] ) . '"';
+        // Siempre la API de este sitio: el atributo api del shortcode se ignora
+        $html .= ' api="'       . esc_url( rest_url( 'mp3p/v1' ) ) . '"';
         $html .= ' theme="'     . esc_attr( $atts['theme'] ) . '"';
         $html .= ' accent="'    . esc_attr( $atts['accent'] ) . '"';
         $html .= ' variant="'   . esc_attr( $atts['variant'] ) . '"';

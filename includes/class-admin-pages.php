@@ -13,12 +13,12 @@ class MP3P_Admin_Pages {
 
     public static function add_menu() {
         add_menu_page(
-            'Spindle MP3 Player', 'MP3 Player', 'manage_options',
+            'Spindle MP3 Player', 'MP3 Player', 'edit_posts',
             'mp3p_menu', [ __CLASS__, 'render_dashboard' ],
             'dashicons-album', 30
         );
         add_submenu_page( 'mp3p_menu', __( 'Dashboard', 'spindle-mp3-player' ), __( 'Dashboard', 'spindle-mp3-player' ),
-            'manage_options', 'mp3p_menu', [ __CLASS__, 'render_dashboard' ] );
+            'edit_posts', 'mp3p_menu', [ __CLASS__, 'render_dashboard' ] );
         add_submenu_page( 'mp3p_menu', __( 'Importar MP3', 'spindle-mp3-player' ), __( 'Importar MP3', 'spindle-mp3-player' ),
             'manage_options', 'mp3p_importar', [ 'MP3P_Importer', 'render' ] );
         add_submenu_page( 'mp3p_menu', __( 'Configuración', 'spindle-mp3-player' ), __( 'Configuración', 'spindle-mp3-player' ),
@@ -212,9 +212,9 @@ class MP3P_Admin_Pages {
                 'confirmTitle'        => __( '¿Eliminar definitivamente?', 'spindle-mp3-player' ),
                 'cannotUndo'          => __( 'Esta acción no se puede deshacer.', 'spindle-mp3-player' ),
                 'deleteDiscoBefore'   => __( 'Se eliminarán', 'spindle-mp3-player' ),
-                'deleteDiscoAfter'    => __( ', todas sus canciones y todos los archivos de audio y portada de la biblioteca de medios.', 'spindle-mp3-player' ),
+                'deleteDiscoAfter'    => __( ' y todas sus canciones. También se borrarán los archivos de audio y la portada que creó el plugin al importar, si no se usan en ningún otro sitio. Los archivos que ya estaban en la biblioteca de medios se conservan.', 'spindle-mp3-player' ),
                 'deleteCancionBefore' => __( 'Se eliminará la canción', 'spindle-mp3-player' ),
-                'deleteCancionAfter'  => __( ' y su archivo de audio de la biblioteca de medios (si no lo usa ninguna otra canción).', 'spindle-mp3-player' ),
+                'deleteCancionAfter'  => __( '. Su archivo de audio solo se borrará si lo creó el plugin al importar y no se usa en ningún otro sitio.', 'spindle-mp3-player' ),
                 'deleting'            => __( 'Eliminando...', 'spindle-mp3-player' ),
                 'confirmDelete'       => __( 'Sí, eliminar', 'spindle-mp3-player' ),
                 'errorPrefix'         => __( 'Error:', 'spindle-mp3-player' ),

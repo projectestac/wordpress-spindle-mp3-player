@@ -8,14 +8,14 @@ class MP3P_Assets {
         add_action( 'admin_enqueue_scripts', [ __CLASS__, 'admin' ] );
     }
 
+    // JetBrains Mono — variants Modern Player. Servida en local: el plugin no conecta con servicios externos.
+    public static function register_font() {
+        if ( wp_style_is( 'jetbrains-mono', 'registered' ) ) return;
+        wp_register_style( 'jetbrains-mono', MP3P_URL . 'public/css/jetbrains-mono.css', [], MP3P_VERSION );
+    }
+
     public static function frontend() {
-        // JetBrains Mono — usada en variants Modern Player
-        wp_register_style(
-            'jetbrains-mono',
-            'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
-            [],
-            MP3P_VERSION
-        );
+        self::register_font();
         // Howler.js — motor de audio
         wp_register_script(
             'howler',
@@ -50,6 +50,7 @@ class MP3P_Assets {
             'playing'    => __( 'REPRODUCIENDO', 'spindle-mp3-player' ),
             'close'      => __( 'Cerrar', 'spindle-mp3-player' ),
             'noLyrics'   => __( 'Sin letra', 'spindle-mp3-player' ),
+            'lyricsBtn'  => MP3P_Settings::lyrics_label(),
         ] );
     }
 
@@ -63,6 +64,8 @@ class MP3P_Assets {
 
         if ( $is_cpt || $is_mp3p_page ) {
             wp_enqueue_media();
+            self::register_font();
+            wp_enqueue_style( 'jetbrains-mono' ); // vista previa de diseño e importador
         }
 
         if ( $is_cpt || $is_mp3p_page ) {

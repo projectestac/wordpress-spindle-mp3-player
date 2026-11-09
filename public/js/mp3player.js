@@ -1,5 +1,5 @@
 /*!
- * Spindle MP3 Player — Web Component v1.3.0
+ * Spindle MP3 Player — Web Component v1.8.0
  * Diseño Dieter Rams · Shadow DOM · Dark/Light/Auto · Full/Compact/Wide · Vertical/Horizontal/Mini
  * Requiere: howler.min.js
  */
@@ -22,13 +22,67 @@ var T = Object.assign({
   playing:    'REPRODUCIENDO',
   close:      'Cerrar',
   noLyrics:   'Sin letra',
+  lyricsBtn:  'Text',
 }, (typeof window !== 'undefined' && window.mp3pI18n) || {});
 
 function nSongs(n) { return (n === 1 ? T.song : T.songs).replace('%d', n); }
 
 function esc(s) {
   return String(s == null ? '' : s)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+/* ── Validación de datos y atributos ──────────────────────────── */
+var HEX_RE    = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
+var GRAD_DIRS = ['135deg', 'to right', 'to bottom', 'to bottom right'];
+
+// Color hexadecimal o fallback
+function safeColor(c, fallback) {
+  c = String(c == null ? '' : c).trim();
+  return HEX_RE.test(c) ? c : fallback;
+}
+
+// Fondo: transparent | #hex | linear-gradient(dir, #hex, #hex[, ...]) con dir de la lista
+function safeBg(bg) {
+  bg = String(bg == null ? '' : bg).trim();
+  if (bg === '' || bg === 'transparent' || HEX_RE.test(bg)) return bg;
+  var m = /^linear-gradient\((.+)\)$/i.exec(bg);
+  if (!m) return '';
+  var parts = m[1].split(',').map(function (x) { return x.trim(); });
+  if (parts.length < 3 || GRAD_DIRS.indexOf(parts[0].toLowerCase()) === -1) return '';
+  for (var i = 1; i < parts.length; i++) if (!HEX_RE.test(parts[i])) return '';
+  return 'linear-gradient(' + parts.join(',') + ')';
+}
+
+// Radio de borde: entero 0–100
+function safeRadius(r, fallback) {
+  r = String(r == null ? '' : r).trim();
+  if (!/^\d{1,3}$/.test(r)) return fallback;
+  return String(Math.min(100, parseInt(r, 10)));
+}
+
+// URL http(s) o relativa; cualquier otro esquema (javascript:, data:…) se descarta
+function safeUrl(u) {
+  u = String(u == null ? '' : u).trim();
+  if (u === '' || /[\s"'<>`\\]/.test(u)) return '';  // comillas, espacios o < > no son de una URL válida
+  if (/^https?:\/\//i.test(u)) return u;
+  if (/^\/\//.test(u)) return u;                     // protocol-relative (CDN): hereda http(s)
+  if (/^[a-z][a-z0-9+.\-]*:/i.test(u)) return '';    // cualquier otro esquema
+  return u;                                          // relativa
+}
+
+// Normaliza los datos recibidos de la API (URLs de portada y audio)
+function cleanTrack(t) {
+  t = Object.assign({}, t || {});
+  t.portada   = safeUrl(t.portada);
+  t.audio_url = safeUrl(t.audio_url);
+  return t;
+}
+function cleanDisc(d) {
+  d = Object.assign({}, d || {});
+  d.portada = safeUrl(d.portada);
+  d.tracks  = (d.tracks || []).map(cleanTrack);
+  return d;
 }
 
 /* Plegar / desplegar un panel animando su altura.
@@ -103,8 +157,9 @@ const I = {
 
 /* ── CSS ─────────────────────────────────────────────────────── */
 function buildCSS(accent, bg, radius) {
-  accent = accent || '#e8520a';
-  radius = (radius !== undefined && radius !== '') ? radius + 'px' : '4px';
+  accent = safeColor(accent, '#e8520a');
+  bg     = safeBg(bg);
+  radius = safeRadius(radius, '4') + 'px';
   // El fondo personalizado solo aplica cuando no se fuerza un tema dark/light
   // Si theme es 'dark' o 'light', el fondo del tema tiene prioridad
   var bgCSS = '';
@@ -172,11 +227,12 @@ function buildCSS(accent, bg, radius) {
   + '.track.active .track-name{color:var(--ac)}'
   + '.track-sub{display:block;font-size:14px;color:var(--tx2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
   + '.track-lic{display:inline-block;font-size:10px;line-height:1.4;padding:0 4px;border:0.5px solid var(--tx2);border-radius:2px;margin-left:6px;vertical-align:1px}'
-  + '.track-actions{flex-shrink:0;display:flex;align-items:center;gap:2px}'
-  + '.lyr-btn{display:flex;align-items:center;justify-content:center;width:22px;height:22px;flex-shrink:0;background:none;border:none;cursor:pointer;color:var(--tx2);padding:0;border-radius:2px;transition:color .12s}'
+  + '.track-actions{flex-shrink:0;display:flex;align-items:center;gap:6px}'
+  + '.lyr-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:26px;padding:0 12px 0 10px;flex-shrink:0;background:none;border:1px solid currentColor;border-radius:999px;cursor:pointer;color:var(--tx2);font:inherit;font-size:11px;letter-spacing:.3px;line-height:1;white-space:nowrap;transition:color .12s,border-color .12s}'
   + '.lyr-btn:hover{color:var(--tx)}'
   + '.lyr-btn.on{color:var(--ac)}'
-  + '.lyr-btn.off{opacity:.25;cursor:default;pointer-events:none}'
+  + '.lyr-btn.off{opacity:.3;cursor:default;pointer-events:none}'
+  + '.lyr-btn:focus-visible,.dl:focus-visible{outline:1px solid var(--ac);outline-offset:2px}'
   + '.lyr{overflow:hidden;transition:height .25s ease}'
   + '.lyr-in{padding:2px 24px 16px 29px;font-size:14px;line-height:1.65;color:var(--tx2);white-space:pre-line;max-height:360px;overflow-y:auto}'
   /* Plegar/desplegar lista (Full y Wide) */
@@ -190,9 +246,9 @@ function buildCSS(accent, bg, radius) {
   + '.comp-info{text-align:center;font-size:12px;color:var(--tx2);margin-top:12px}'
   + '.comp-info .full-badge{margin:0 0 0 6px;vertical-align:1px}'
   + '.comp-info .desc{text-align:left;margin-top:8px}'
-  + '.dl{display:flex;align-items:center;justify-content:center;width:22px;height:22px;flex-shrink:0;background:none;border:none;cursor:pointer;color:var(--tx2);padding:0;border-radius:2px;text-decoration:none;transition:color .12s}'
+  + '.dl{display:flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0;background:none;border:1px solid currentColor;cursor:pointer;color:var(--tx2);padding:0;border-radius:50%;text-decoration:none;transition:color .12s,border-color .12s}'
   + '.dl:hover{color:var(--tx)}'
-  + '.dl.off{opacity:.12;cursor:not-allowed;pointer-events:none}'
+  + '.dl.off{opacity:.3;cursor:not-allowed;pointer-events:none}'
   + '.np{display:flex;align-items:center;gap:8px;min-height:18px;overflow:hidden}'
   + '.np-text{font-size:13px;color:var(--tx2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
   + '.np-text strong{color:var(--ac);font-weight:500}'
@@ -307,7 +363,7 @@ function openLyricsModal(t, o) {
   var c = dark
     ? { bg: '#161616', tx: '#e8e8e8', tx2: '#777', bd: 'rgba(255,255,255,.08)' }
     : { bg: '#ffffff', tx: '#1a1a1a', tx2: '#888', bd: 'rgba(0,0,0,.10)' };
-  var ac   = o.accent || '#e8520a';
+  var ac   = safeColor(o.accent, '#e8520a');
   var font = o.mono ? '"JetBrains Mono",monospace' : '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif';
   var sub  = trackMeta(t, o.show || {}, false);
   var css = ':host{all:initial}'
@@ -329,7 +385,7 @@ function openLyricsModal(t, o) {
   var root = host.attachShadow({ mode: 'open' });
   root.innerHTML = '<style>' + css + '</style>'
     + '<div class="ov" role="dialog" aria-modal="true" aria-label="' + esc(T.lyrics) + '"><div class="box">'
-    + '<div class="hd"><div><div class="lbl">' + esc(T.lyrics) + '</div><div class="ti">' + t.titulo + '</div>' + (sub ? '<div class="sub">' + esc(sub) + '</div>' : '') + '</div>'
+    + '<div class="hd"><div><div class="lbl">' + esc(T.lyrics) + '</div><div class="ti">' + esc(t.titulo) + '</div>' + (sub ? '<div class="sub">' + esc(sub) + '</div>' : '') + '</div>'
     + '<button class="x" aria-label="' + esc(T.close) + '" title="' + esc(T.close) + '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button></div>'
     + '<div class="bd">' + esc(t.letra) + '</div>'
     + '</div></div>';
@@ -350,8 +406,8 @@ function openLyricsModal(t, o) {
 }
 
 function dlBtn(t) {
-  return t.descargable
-    ? '<a href="' + t.audio_url + '" download class="dl on" title="' + esc(T.download) + '">' + I.dl + '</a>'
+  return t.descargable && t.audio_url
+    ? '<a href="' + esc(t.audio_url) + '" download class="dl on" title="' + esc(T.download) + '">' + I.dl + '</a>'
     : '<span class="dl off" title="' + esc(T.noDownload) + '">' + I.lock + '</span>';
 }
 
@@ -393,12 +449,12 @@ function tracklistHtml(tracks, show, perTrack, mode) {
     var hasLyr = sc('letra') && t.letra;
     var inline = hasLyr && mode !== 'modal';
     var lyrBtn = !sc('letra') ? ''
-      : hasLyr ? '<button class="lyr-btn" data-index="' + i + '" title="' + esc(T.lyrics) + '" aria-label="' + esc(T.lyrics) + '" aria-expanded="false">' + I.lyr + '</button>'
-      :          '<span class="lyr-btn off" title="' + esc(T.noLyrics) + '" aria-hidden="true">' + I.lyr + '</span>';
+      : hasLyr ? '<button class="lyr-btn" data-index="' + i + '" title="' + esc(T.lyrics) + '" aria-label="' + esc(T.lyrics) + '" aria-expanded="false">' + I.lyr + '<span>' + esc(T.lyricsBtn) + '</span></button>'
+      :          '<span class="lyr-btn off" title="' + esc(T.noLyrics) + '" aria-hidden="true">' + I.lyr + '<span>' + esc(T.lyricsBtn) + '</span></span>';
     return '<div class="trk">'
       + '<div class="track" data-index="' + i + '">'
         + '<div class="track-num"><span class="track-idx">' + (i+1) + '</span></div>'
-        + '<div class="track-info"><span class="track-name">' + t.titulo + '</span>'
+        + '<div class="track-info"><span class="track-name">' + esc(t.titulo) + '</span>'
         + (meta || lic ? '<span class="track-sub">' + esc(meta) + lic + '</span>' : '')
         + '</div>'
         + '<div class="track-actions">'
@@ -427,10 +483,10 @@ function renderFull(d, tracks, theme, accent, show, bg, radius, opts) {
 
   h += '<div class="full-header">';
   if (sc('cover')) {
-    h += '<div class="full-thumb">' + (d.portada ? '<img src="' + d.portada + '" alt="">' : I.disc) + '</div>';
+    h += '<div class="full-thumb">' + (d.portada ? '<img src="' + esc(d.portada) + '" alt="">' : I.disc) + '</div>';
   }
-  h += '<div class="full-meta"><div class="full-title">' + d.titulo + '</div>';
-  if (meta)      h += '<div class="full-sub">' + meta + '</div>';
+  h += '<div class="full-meta"><div class="full-title">' + esc(d.titulo) + '</div>';
+  if (meta)      h += '<div class="full-sub">' + esc(meta) + '</div>';
   if (info.anio) h += '<div class="full-sub">' + info.anio + '</div>';
   if (info.lic)  h += '<span class="full-badge">' + info.lic + '</span>';
   h += info.desc;
@@ -455,12 +511,12 @@ function renderCompact(d, tracks, theme, accent, show, bg, radius, opts) {
 
   h += '<div class="cov">';
   if (d.portada && show.cover !== false) {
-    h += '<img src="' + d.portada + '" alt="">';
+    h += '<img src="' + esc(d.portada) + '" alt="">';
   } else {
     h += '<div class="cov-ph">' + I.disc + '</div>';
   }
-  h += '<div class="cov-overlay"><div class="cov-title">' + (first.titulo || d.titulo) + '</div>'
-     + '<div class="cov-sub">' + d.titulo + '</div></div></div>';
+  h += '<div class="cov-overlay"><div class="cov-title">' + esc(first.titulo || d.titulo) + '</div>'
+     + '<div class="cov-sub">' + esc(d.titulo) + '</div></div></div>';
 
   h += '<div class="comp-body"><div class="comp-prog">' + progHtml() + '</div>'
      + '<div class="comp-ctrl">' + ctrlHtml() + '</div>';
@@ -487,13 +543,13 @@ function renderWide(d, tracks, theme, accent, show, bg, radius, opts) {
 
   if (sc('cover')) {
     h += '<div class="wide-cover">';
-    h += d.portada ? '<img src="' + d.portada + '" alt="">' : '<div class="wide-cover-ph">' + I.disc + '</div>';
+    h += d.portada ? '<img src="' + esc(d.portada) + '" alt="">' : '<div class="wide-cover-ph">' + I.disc + '</div>';
     h += '</div>';
   }
 
   h += '<div class="wide-right">';
-  h += '<div class="wide-info"><div class="wide-title">' + d.titulo + '</div>';
-  if (meta)      h += '<div class="wide-sub">' + meta + '</div>';
+  h += '<div class="wide-info"><div class="wide-title">' + esc(d.titulo) + '</div>';
+  if (meta)      h += '<div class="wide-sub">' + esc(meta) + '</div>';
   if (info.anio) h += '<div class="wide-sub">' + info.anio + '</div>';
   if (info.lic)  h += '<span class="wide-badge">' + info.lic + '</span>';
   h += info.desc;
@@ -612,7 +668,7 @@ class MP3PlayerEngine {
     // Actualizar overlay now-playing
     const np = this.q('.np-text');
     const autor = this.show.autores !== false ? t.autor : '';
-    if (np) np.innerHTML = '<strong>' + t.titulo + '</strong>' + (autor ? ' <span style="opacity:.6">\xb7 ' + esc(autor) + '</span>' : '');
+    if (np) np.innerHTML = '<strong>' + esc(t.titulo) + '</strong>' + (autor ? ' <span style="opacity:.6">\xb7 ' + esc(autor) + '</span>' : '');
 
     // Overlay compact
     const ct = this.q('.cov-title');
@@ -753,9 +809,9 @@ class MP3PBase extends HTMLElement {
     this._initialized = true;
 
     this._shadow = this.attachShadow({ mode: 'closed' });
-    const accent = this.getAttribute('accent') || '#e8520a';
-    const rawBg  = this.getAttribute('bg') || '';
-    const radius = this.getAttribute('radius') || '4';
+    const accent = safeColor(this.getAttribute('accent'), '#e8520a');
+    const rawBg  = safeBg(this.getAttribute('bg'));
+    const radius = safeRadius(this.getAttribute('radius'), '4');
     const show   = getShow(this);
     // El fondo personalizado solo aplica si el tema no está forzado a dark/light
     const forcedTheme = this.getAttribute('theme');
@@ -776,7 +832,7 @@ class MP3PBase extends HTMLElement {
   }
 
   _err(msg, theme, accent, bg, radius) {
-    this._setContent('<style>' + buildCSS(accent||'#e8520a', bg||'', radius||'4') + '</style><div class="mp ' + (theme||'dark') + '"><p class="error">' + msg + '</p></div>');
+    this._setContent('<style>' + buildCSS(accent||'#e8520a', bg||'', radius||'4') + '</style><div class="mp ' + (theme||'dark') + '"><p class="error">' + esc(msg) + '</p></div>');
   }
 }
 
@@ -787,8 +843,9 @@ class Mp3pDisco extends MP3PBase {
     const opts    = { open: getOpen(this), perTrack: false, theme: theme, accent: accent, lyrics: getLyricsMode(this) };
     fetch(api + '/disco/' + id)
       .then(r => r.ok ? r.json() : Promise.reject(r.status))
-      .then(d => {
-        const tracks = d.tracks || [];
+      .then(raw => {
+        const d      = cleanDisc(raw);
+        const tracks = d.tracks;
         const isHW   = variant === 'vertical' || variant === 'horizontal' || variant === 'mini';
         let html;
         if (isHW) {
@@ -815,7 +872,8 @@ class Mp3pCancion extends MP3PBase {
     const opts = { open: getOpen(this), perTrack: false, theme: theme, accent: accent, lyrics: getLyricsMode(this) };
     fetch(api + '/cancion/' + id)
       .then(r => r.ok ? r.json() : Promise.reject(r.status))
-      .then(t => {
+      .then(raw => {
+        const t = cleanTrack(raw);
         const d = { titulo: t.titulo, portada: t.portada, autores: t.autor, interpretes: t.interpretes, anio: t.anio || '', licencia: t.licencia || '', descripcion: '' };
         this._setContent(renderCompact(d, [t], theme, accent, show, bg, radius, opts));
         new MP3PlayerEngine(this._shadow, [t], show, opts).bindEvents();
@@ -832,8 +890,9 @@ class Mp3pPlaylist extends MP3PBase {
     const opts    = { open: getOpen(this), perTrack: true, theme: theme, accent: accent, lyrics: getLyricsMode(this) };
     fetch(api + '/playlist/' + id)
       .then(r => r.ok ? r.json() : Promise.reject(r.status))
-      .then(d => {
-        const tracks = d.tracks || [];
+      .then(raw => {
+        const d      = cleanDisc(raw);
+        const tracks = d.tracks;
         const disco  = { titulo: d.titulo, portada: tracks[0]?.portada || '', autores: '', interpretes: '', anio: '', licencia: '', descripcion: d.descripcion };
         if (variant === 'vertical' || variant === 'horizontal' || variant === 'mini') {
           const html = variant === 'vertical'   ? renderVertical(disco, tracks, accent, show, opts)
@@ -861,7 +920,7 @@ class Mp3pPlaylist extends MP3PBase {
 
 /* ── CSS compartido hardware ─────────────────────────────────── */
 function buildHWCSS(accent) {
-  accent = accent || '#e8520a';
+  accent = safeColor(accent, '#e8520a');
 
   // Lighten accent for gradient top
   function lighten(hex) {
@@ -901,6 +960,12 @@ function buildHWCSS(accent) {
   + '.hw-status.paused{color:#8a8a8a}'
   + '.hw-status.paused .hw-status-dot{background:#8a8a8a}'
   + '.hw-waveform{display:flex;align-items:flex-end;gap:3px;height:36px;flex:1}'
+  /* Barra de progreso de la pantalla (Vertical / Horizontal) */
+  + '.hw-scr-prog{position:relative;z-index:3;height:3px;border-radius:2px;background:rgba(255,255,255,.16);margin-top:4px}'
+  + '.hw-scr-prog::before{content:"";position:absolute;left:0;right:0;top:-7px;bottom:-7px}'
+  + '.hw-scr-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:var(--hw-ac);border-radius:2px;pointer-events:none}'
+  + '.hw-scr-fill::after{content:"";position:absolute;right:-4px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--hw-ac)}'
+  + '.hw.t-light .hw-scr-prog{background:rgba(0,0,0,.10)}'
   + '.hw-bar{border-radius:2px;flex-shrink:0;transform-origin:bottom}'
   + '.hw-bar.playing{animation:hw-eq .8s ease-in-out infinite}'
   + '.hw-bar.playing:nth-child(2n){animation-delay:.15s}'
@@ -943,9 +1008,11 @@ function buildHWCSS(accent) {
   + '.hw-grille{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;width:120px}'
   + '.hw-gdot{width:3px;height:3px;border-radius:50%;background:#c9c7c1}'
   + '.hw-brand{font-size:9px;color:#b3b1ab;letter-spacing:1px}'
-  + '.hw-pl-dl{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:4px;color:#777;text-decoration:none;flex-shrink:0;background:none;border:none;cursor:pointer;padding:0;transition:color .12s}'
+  + '.hw-pl-dl{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;color:#777;text-decoration:none;flex-shrink:0;background:none;border:1px solid currentColor;cursor:pointer;padding:0;transition:color .12s,border-color .12s}'
+  + '.hw-pl-dl.hw-lyr-btn,.hw-icon-btn.btn-lyr-hw{width:auto;gap:5px;padding:0 11px 0 9px;border-radius:999px;font-family:inherit;font-size:9px;letter-spacing:.8px;text-transform:uppercase;line-height:1;white-space:nowrap}'
+  + '.hw-pl-dl:focus-visible,.hw-icon-btn:focus-visible{outline:1px solid var(--hw-ac);outline-offset:2px}'
   + '.hw-pl-dl:hover{color:#333}'
-  + '.hw-pl-dl.off{opacity:.25;cursor:not-allowed}'
+  + '.hw-pl-dl.off{opacity:.3;cursor:not-allowed}'
   /* Letra */
   + '.hw-lyr-btn.on{color:var(--hw-ac)}'
   + '.hw-icon-btn.download.btn-lyr-hw{color:#444}'
@@ -1031,7 +1098,7 @@ function hwWaveform(trackIdx, playedFraction, height) {
   var pctX = Math.round(playedFraction * 100);
   return '<div class="hw-waveform" style="height:'+height+'px;position:relative">'
     + bars
-    + '<div style="position:absolute;left:'+pctX+'%;top:0;bottom:0;width:2px;background:#ff5a3c;border-radius:1px;transform:translateX(-50%)"></div>'
+    + '<div class="hw-playhead" style="position:absolute;left:'+pctX+'%;top:0;bottom:0;width:2px;background:var(--hw-ac);border-radius:1px;transform:translateX(-50%)"></div>'
     + '</div>';
 }
 
@@ -1067,14 +1134,14 @@ function hwPlaylist(tracks, current, accent, show, open, mode) {
     var markColor = active ? accent : '#999';
     var hasLyr = show.letra !== false && t.letra;
     var lyr = show.letra === false ? ''
-      : hasLyr ? '<button class="hw-pl-dl hw-lyr-btn" data-index="'+i+'" title="'+esc(T.lyrics)+'" aria-label="'+esc(T.lyrics)+'" aria-expanded="false">'+hwLyrIcon()+'</button>'
-      :          '<span class="hw-pl-dl hw-lyr-btn off" title="'+esc(T.noLyrics)+'" aria-hidden="true">'+hwLyrIcon()+'</span>';
-    var dl = t.descargable
-      ? '<a href="'+t.audio_url+'" download class="hw-pl-dl" title="'+esc(T.download)+'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>'
+      : hasLyr ? '<button class="hw-pl-dl hw-lyr-btn" data-index="'+i+'" title="'+esc(T.lyrics)+'" aria-label="'+esc(T.lyrics)+'" aria-expanded="false">'+hwLyrIcon()+'<span>'+esc(T.lyricsBtn)+'</span></button>'
+      :          '<span class="hw-pl-dl hw-lyr-btn off" title="'+esc(T.noLyrics)+'" aria-hidden="true">'+hwLyrIcon()+'<span>'+esc(T.lyricsBtn)+'</span></span>';
+    var dl = t.descargable && t.audio_url
+      ? '<a href="'+esc(t.audio_url)+'" download class="hw-pl-dl" title="'+esc(T.download)+'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>'
       : '<span class="hw-pl-dl off"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>';
     return '<div class="hw-pl-track' + (active?' active':'') + '" data-index="'+i+'">'
       + '<div class="hw-pl-left"><span class="hw-pl-mark" style="color:'+markColor+'">'+(active?'●':'▸')+'</span>'
-      + '<span class="hw-pl-title">'+t.titulo+'</span></div>'
+      + '<span class="hw-pl-title">'+esc(t.titulo)+'</span></div>'
       + '<div style="display:flex;align-items:center;gap:4px"><span class="hw-pl-dur" style="margin-right:4px">'+fmt(t.duration || 0)+'</span>'+lyr+dl+'</div>'
       + '</div>'
       + (hasLyr && mode !== 'modal' ? '<div class="hw-lyr" data-index="'+i+'" style="height:0px"><div class="hw-lyr-in">'+esc(t.letra)+'</div></div>' : '');
@@ -1105,7 +1172,7 @@ function hwClock() {
 function renderVertical(d, tracks, accent, show, opts) {
   show = show || {}; opts = opts || {};
   var first = tracks[0] || {};
-  var portada = d.portada ? '<img src="'+d.portada+'" alt="'+d.titulo+'">' : '<span class="hw-cover-ph">PORTADA</span>';
+  var portada = d.portada ? '<img src="'+esc(d.portada)+'" alt="'+esc(d.titulo)+'">' : '<span class="hw-cover-ph">PORTADA</span>';
   return '<style>'+buildHWCSS(accent)+'</style>'
     + '<div class="hw vertical t-'+(opts.theme === 'dark' ? 'dark' : 'light')+'">'
     + '<div class="hw-strip"></div>'
@@ -1114,9 +1181,10 @@ function renderVertical(d, tracks, accent, show, opts) {
       + '<div class="hw-screen-lines"></div>'
       + '<div class="hw-screen-top"><span class="hw-clock">'+hwClock()+'</span><span class="hw-status paused"><span class="hw-status-dot"></span><span class="hw-status-label">'+esc(T.paused)+'</span></span></div>'
       + hwWaveform(0, 0, 36)
+      + '<div class="hw-scr-prog"><div class="hw-scr-fill"></div></div>'
       + '<div class="hw-time"><span class="t-cur">0:00</span>&nbsp;/&nbsp;<span class="t-tot">0:00</span></div>'
     + '</div>'
-    + '<div class="hw-track-row"><div style="min-width:0"><div class="hw-track-title np-title">'+(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
+    + '<div class="hw-track-row"><div style="min-width:0"><div class="hw-track-title np-title">'+esc(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
     + hwInfo(d, show)
     + hwTransport()
     + hwVolRow()
@@ -1129,7 +1197,7 @@ function renderVertical(d, tracks, accent, show, opts) {
 function renderHorizontal(d, tracks, accent, show, opts) {
   show = show || {}; opts = opts || {};
   var first = tracks[0] || {};
-  var portada = d.portada ? '<img src="'+d.portada+'" alt="'+d.titulo+'">' : '<span class="hw-cover-ph">PORTADA</span>';
+  var portada = d.portada ? '<img src="'+esc(d.portada)+'" alt="'+esc(d.titulo)+'">' : '<span class="hw-cover-ph">PORTADA</span>';
   return '<style>'+buildHWCSS(accent)+'</style>'
     + '<div class="hw horizontal t-'+(opts.theme === 'dark' ? 'dark' : 'light')+'">'
     + '<div class="hw-h-body">'
@@ -1139,11 +1207,12 @@ function renderHorizontal(d, tracks, accent, show, opts) {
           + '<div class="hw-screen-lines"></div>'
           + '<div class="hw-screen-top"><span class="hw-clock">'+hwClock()+'</span><span class="hw-status paused"><span class="hw-status-dot"></span><span class="hw-status-label">'+esc(T.paused)+'</span></span></div>'
           + hwWaveform(0, 0, 28)
+          + '<div class="hw-scr-prog"><div class="hw-scr-fill"></div></div>'
           + '<div class="hw-time" style="font-size:14px"><span class="t-cur">0:00</span>&nbsp;/&nbsp;<span class="t-tot">0:00</span></div>'
         + '</div>'
       + '</div>'
       + '<div class="hw-h-right">'
-        + '<div class="hw-track-row" style="padding:0"><div style="min-width:0"><div class="hw-track-title np-title" style="font-size:15px">'+(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
+        + '<div class="hw-track-row" style="padding:0"><div style="min-width:0"><div class="hw-track-title np-title" style="font-size:15px">'+esc(first.titulo||d.titulo)+'</div><div class="hw-track-artist np-artist">'+esc(trackMeta(first, show, opts.perTrack))+'</div></div><div class="hw-track-pos np-pos">1/'+tracks.length+'</div></div>'
         + hwInfo(d, show)
         + hwTransport()
         + hwVolRow()
@@ -1158,7 +1227,7 @@ function renderHorizontal(d, tracks, accent, show, opts) {
 function renderMini(d, tracks, accent, show, opts) {
   show = show || {}; opts = opts || {};
   var first = tracks[0] || {};
-  var portada = d.portada ? '<img src="'+d.portada+'" alt="'+d.titulo+'">' : '';
+  var portada = d.portada ? '<img src="'+esc(d.portada)+'" alt="'+esc(d.titulo)+'">' : '';
   var anyLyr  = show.letra !== false;
   var inlineLyr = anyLyr && opts.lyrics !== 'modal';
   return '<style>'+buildHWCSS(accent)+'</style>'
@@ -1166,7 +1235,7 @@ function renderMini(d, tracks, accent, show, opts) {
     + '<div class="hw-mini-body">'
       + (show.cover !== false ? '<div class="hw-mini-cover">'+portada+'</div>' : '')
       + '<div class="hw-mini-info">'
-        + '<div class="hw-track-title np-title" style="font-size:12px">'+(first.titulo||d.titulo)+'</div>'
+        + '<div class="hw-track-title np-title" style="font-size:12px">'+esc(first.titulo||d.titulo)+'</div>'
         + '<div class="hw-track-artist np-artist" style="font-size:10px">'+esc(trackMeta(first, show, opts.perTrack))+'</div>'
         + '<div class="hw-mini-prog hw-seek"><div class="hw-mini-prog-fill prog-fill-hw" style="width:0%"></div></div>'
       + '</div>'
@@ -1179,7 +1248,7 @@ function renderMini(d, tracks, accent, show, opts) {
     + '<div class="hw-mini-footer">'
       + '<div class="hw-mini-vol"><span class="hw-vol-label">VOL</span><div class="hw-vol-track vol-track"><div class="hw-vol-fill vol-fill" style="width:75%"></div><div class="hw-vol-thumb" style="left:75%"></div></div></div>'
       + '<div style="display:flex;gap:6px">'
-        + (anyLyr ? '<div class="hw-icon-btn download btn-lyr-hw" title="'+esc(first.letra ? T.lyrics : T.noLyrics)+'" role="button" tabindex="0" aria-expanded="false"'+(first.letra ? '' : ' style="opacity:.3;pointer-events:none"')+'>'+hwLyrIcon()+'</div>' : '')
+        + (anyLyr ? '<div class="hw-icon-btn download btn-lyr-hw" title="'+esc(first.letra ? T.lyrics : T.noLyrics)+'" role="button" tabindex="0" aria-expanded="false"'+(first.letra ? '' : ' style="opacity:.3;pointer-events:none"')+'>'+hwLyrIcon()+'<span>'+esc(T.lyricsBtn)+'</span></div>' : '')
         + '<div class="hw-icon-btn download btn-dl-hw" title="'+esc(T.download)+'">↓</div>'
       + '</div>'
     + '</div>'
@@ -1193,7 +1262,7 @@ class HWPlayerEngine {
   constructor(root, tracks, accent, show, opts) {
     this.root    = root;
     this.tracks  = tracks;
-    this.accent  = accent || '#e8520a';
+    this.accent  = safeColor(accent, '#e8520a');
     this.show    = show || {};
     this.opts    = opts || {};
     this.current = 0;
@@ -1219,9 +1288,12 @@ class HWPlayerEngine {
       if (!el) return;
       el.addEventListener('click', e => {
         if (!this.howl) return;
-        var r = el.getBoundingClientRect();
+        // Si se pulsa la barra de progreso de la pantalla, la posición se mide sobre la barra
+        var target = (e.target.closest && e.target.closest('.hw-scr-prog')) || el;
+        var r = target.getBoundingClientRect();
         var p = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
         this.howl.seek(p * (this.howl.duration() || 0));
+        this._setProgress(p);
       });
     });
 
@@ -1331,6 +1403,8 @@ class HWPlayerEngine {
       var h = wf.offsetHeight || 36;
       wf.outerHTML = hwWaveform(idx, 0, h);
     }
+    var sfr = this.q('.hw-scr-fill'); if (sfr) sfr.style.width = '0%';
+    var mfr = this.q('.prog-fill-hw'); if (mfr) mfr.style.width = '0%';
 
     // Playlist activa
     this.qa('.hw-pl-track').forEach((row, i) => {
@@ -1399,14 +1473,9 @@ class HWPlayerEngine {
     var bars = this.qa('.hw-bar');
     var played = Math.round(pct * bars.length);
     bars.forEach((b, i) => { b.classList.toggle('on', i < played); });
-    // Playhead line
-    var ph = this.q('.hw-waveform + div, .hw-waveform ~ div');
-    // playhead inside waveform wrapper
-    var wfw = this.q('.hw-waveform')?.parentElement;
-    if (wfw) {
-      var pl = wfw.querySelector('div[style*="border-radius:1px"]');
-      if (pl) pl.style.left = (pct*100)+'%';
-    }
+    // Línea vertical sobre las barras y barra de progreso de la pantalla
+    var pl = this.q('.hw-playhead');  if (pl) pl.style.left  = (pct*100)+'%';
+    var sf = this.q('.hw-scr-fill');  if (sf) sf.style.width = (pct*100)+'%';
   }
 
   _setVol(pct) {

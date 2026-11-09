@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Spindle MP3 Player 1.7.0\n"
+"Project-Id-Version: Spindle MP3 Player 1.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/spindle-mp3-player\n"
 "PO-Revision-Date: 2026-09-20\n"
 "MIME-Version: 1.0\n"
@@ -1064,4 +1064,49 @@ msgid ""
 msgstr ""
 
 msgid "Shortcode equivalente"
+msgstr ""
+
+msgid "Textos del player"
+msgstr ""
+
+msgid "Texto del botón de letra"
+msgstr ""
+
+msgid ""
+"Aparece junto al icono en el botón que despliega la letra. Se aplica a todos"
+" los players, también a los ya creados."
+msgstr ""
+
+msgid "Desinstalación"
+msgstr ""
+
+msgid "Eliminar los datos al desinstalar"
+msgstr ""
+
+msgid ""
+"Si está marcada, al borrar el plugin desde la pantalla de plugins se "
+"eliminarán todos los discos, canciones y playlists. Los archivos de la "
+"biblioteca de medios se conservan siempre. Las opciones del plugin se "
+"eliminan en cualquier caso."
+msgstr ""
+
+msgid ""
+"/discos devuelve como máximo 100 discos por petición; el total va en las "
+"cabeceras X-WP-Total y X-WP-TotalPages."
+msgstr ""
+
+msgid ""
+" y todas sus canciones. También se borrarán los archivos de audio y la "
+"portada que creó el plugin al importar, si no se usan en ningún otro sitio. "
+"Los archivos que ya estaban en la biblioteca de medios se conservan."
+msgstr ""
+
+msgid ""
+". Su archivo de audio solo se borrará si lo creó el plugin al importar y no "
+"se usa en ningún otro sitio."
+msgstr ""
+
+msgid ""
+"Esta opción solo muestra u oculta el botón de descarga en el player. El "
+"archivo de audio es público: cualquiera que tenga su URL puede descargarlo."
 msgstr ""

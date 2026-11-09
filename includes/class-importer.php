@@ -713,7 +713,6 @@ class MP3P_Importer {
             ]);
             if ( is_wp_error($cancion_id) ) continue;
 
-            wp_update_post([ 'ID' => $att_id, 'post_parent' => $disco_id ]);
 
             update_post_meta( $cancion_id, '_mp3p_disco_id',      $disco_id );
             update_post_meta( $cancion_id, '_mp3p_orden',         intval($t['orden'] ?? 0) );
@@ -751,7 +750,11 @@ class MP3P_Importer {
 
         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- media_handle_upload() valida el archivo (tipo, extensión) internamente.
         $_FILES['mp3_upload'] = $_FILES['mp3_file'];
+        // Solo en las subidas del importador: que WordPress no extraiga la portada incrustada como adjunto aparte
+        add_filter( 'wp_read_audio_metadata', [ 'MP3P_Cascade_Delete', 'suppress_mp3_image' ], 10, 1 );
         $att_id = media_handle_upload( 'mp3_upload', $cancion_id );
+        remove_filter( 'wp_read_audio_metadata', [ 'MP3P_Cascade_Delete', 'suppress_mp3_image' ], 10 );
+        if ( ! is_wp_error( $att_id ) ) MP3P_Cascade_Delete::mark_created( $att_id );
 
         if ( is_wp_error($att_id) ) {
             wp_send_json_error( __( 'Error al subir:', 'spindle-mp3-player' ) . ' ' . $att_id->get_error_message() );
@@ -767,7 +770,8 @@ class MP3P_Importer {
     // ── AJAX: leer etiquetas ID3 de adjuntos de la biblioteca ─────
     public static function ajax_read_tags() {
         check_ajax_referer( 'mp3p_importer', 'nonce' );
-        if ( ! current_user_can('manage_options') ) wp_send_json_error( __( 'Sin permisos.', 'spindle-mp3-player' ) );
+        // También desde la ficha de canción: basta con poder editar y subir archivos
+        if ( ! current_user_can('edit_posts') || ! current_user_can('upload_files') ) wp_send_json_error( __( 'Sin permisos.', 'spindle-mp3-player' ) );
 
         $ids  = isset( $_POST['ids'] ) ? array_map( 'absint', (array) wp_unslash( $_POST['ids'] ) ) : [];
         $full = ! empty( $_POST['full'] ); // incluir el texto de la letra (ficha de canción)
@@ -793,7 +797,8 @@ class MP3P_Importer {
     // ── AJAX: portada incrustada de un adjunto (vista previa) ─────
     public static function ajax_get_cover() {
         check_ajax_referer( 'mp3p_importer', 'nonce' );
-        if ( ! current_user_can('manage_options') ) wp_send_json_error( __( 'Sin permisos.', 'spindle-mp3-player' ) );
+        // También desde la ficha de canción: basta con poder editar y subir archivos
+        if ( ! current_user_can('edit_posts') || ! current_user_can('upload_files') ) wp_send_json_error( __( 'Sin permisos.', 'spindle-mp3-player' ) );
 
         $att_id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
         if ( ! $att_id || get_post_type( $att_id ) !== 'attachment' ) wp_send_json_error();
@@ -933,6 +938,7 @@ class MP3P_Importer {
         ], $fpath, $post_id);
 
         if ( is_wp_error($att_id) ) return false;
+        MP3P_Cascade_Delete::mark_created( $att_id );
         require_once ABSPATH . 'wp-admin/includes/image.php';
         wp_update_attachment_metadata($att_id, wp_generate_attachment_metadata($att_id, $fpath));
         return $att_id;

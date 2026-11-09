@@ -20,6 +20,21 @@ class MP3P_Settings {
         register_setting( 'mp3p_settings', 'mp3p_player_accent',  [ 'sanitize_callback' => 'sanitize_hex_color' ] );
         register_setting( 'mp3p_settings', 'mp3p_tracklist',      [ 'sanitize_callback' => [ __CLASS__, 'sanitize_tracklist' ] ] );
         register_setting( 'mp3p_settings', 'mp3p_lyrics',         [ 'sanitize_callback' => [ __CLASS__, 'sanitize_lyrics' ] ] );
+        register_setting( 'mp3p_settings', 'mp3p_lyrics_label',   [ 'sanitize_callback' => [ __CLASS__, 'sanitize_label' ] ] );
+        register_setting( 'mp3p_settings', 'mp3p_delete_data_on_uninstall', [ 'sanitize_callback' => [ __CLASS__, 'sanitize_bool' ] ] );
+    }
+
+    const DEFAULT_LYRICS_LABEL = 'Text';
+
+    public static function sanitize_label( $v ) {
+        $v = trim( sanitize_text_field( (string) $v ) );
+        return $v === '' ? self::DEFAULT_LYRICS_LABEL : mb_substr( $v, 0, 20 );
+    }
+    public static function sanitize_bool( $v ) { return $v === '1' || $v === 1 || $v === true ? '1' : '0'; }
+
+    /** Texto del botón de letra en todos los players. */
+    public static function lyrics_label() {
+        return self::sanitize_label( get_option( 'mp3p_lyrics_label', self::DEFAULT_LYRICS_LABEL ) );
     }
 
     public static function sanitize_variant( $v )   { return in_array( $v, self::VARIANTS, true ) ? $v : 'full'; }
@@ -100,6 +115,8 @@ class MP3P_Settings {
             update_option( 'mp3p_player_accent',  sanitize_hex_color( wp_unslash( $_POST['mp3p_player_accent'] ?? self::DEFAULT_ACCENT ) ) ?: self::DEFAULT_ACCENT );
             update_option( 'mp3p_tracklist',      self::sanitize_tracklist( sanitize_key( wp_unslash( $_POST['mp3p_tracklist'] ?? 'open' ) ) ) );
             update_option( 'mp3p_lyrics',         self::sanitize_lyrics( sanitize_key( wp_unslash( $_POST['mp3p_lyrics'] ?? 'inline' ) ) ) );
+            update_option( 'mp3p_lyrics_label',   self::sanitize_label( sanitize_text_field( wp_unslash( $_POST['mp3p_lyrics_label'] ?? '' ) ) ) );
+            update_option( 'mp3p_delete_data_on_uninstall', ! empty( $_POST['mp3p_delete_data_on_uninstall'] ) ? '1' : '0' );
             echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( '✓ Configuración guardada.', 'spindle-mp3-player' ) . '</p></div>';
         }
 
@@ -188,6 +205,34 @@ class MP3P_Settings {
 
                 <div class="mp3p-panel mp3p-settings-panel" style="margin-top:20px">
                     <div class="mp3p-panel__header">
+                        <h2><?php esc_html_e( 'Textos del player', 'spindle-mp3-player' ); ?></h2>
+                    </div>
+                    <div class="mp3p-settings-body">
+                        <div class="mp3p-df">
+                            <div class="mp3p-dl"><label for="mp3pg_lyrics_label"><?php esc_html_e( 'Texto del botón de letra', 'spindle-mp3-player' ); ?></label></div>
+                            <input type="text" name="mp3p_lyrics_label" id="mp3pg_lyrics_label" value="<?php echo esc_attr( self::lyrics_label() ); ?>" maxlength="20" class="regular-text" style="max-width:220px">
+                            <p class="mp3p-hint" style="margin:0"><?php esc_html_e( 'Aparece junto al icono en el botón que despliega la letra. Se aplica a todos los players, también a los ya creados.', 'spindle-mp3-player' ); ?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mp3p-panel mp3p-settings-panel" style="margin-top:20px">
+                    <div class="mp3p-panel__header">
+                        <h2><?php esc_html_e( 'Desinstalación', 'spindle-mp3-player' ); ?></h2>
+                    </div>
+                    <div class="mp3p-settings-body">
+                        <div class="mp3p-df">
+                            <label style="display:flex;gap:8px;align-items:flex-start">
+                                <input type="checkbox" name="mp3p_delete_data_on_uninstall" value="1" <?php checked( get_option( 'mp3p_delete_data_on_uninstall', '0' ), '1' ); ?> style="margin-top:2px">
+                                <span><?php esc_html_e( 'Eliminar los datos al desinstalar', 'spindle-mp3-player' ); ?></span>
+                            </label>
+                            <p class="mp3p-hint" style="margin:0"><?php esc_html_e( 'Si está marcada, al borrar el plugin desde la pantalla de plugins se eliminarán todos los discos, canciones y playlists. Los archivos de la biblioteca de medios se conservan siempre. Las opciones del plugin se eliminan en cualquier caso.', 'spindle-mp3-player' ); ?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mp3p-panel mp3p-settings-panel" style="margin-top:20px">
+                    <div class="mp3p-panel__header">
                         <h2><?php esc_html_e( 'API REST', 'spindle-mp3-player' ); ?></h2>
                     </div>
                     <div class="mp3p-settings-body">
@@ -204,7 +249,8 @@ class MP3P_Settings {
                         </div>
                         <div class="mp3p-df">
                             <div class="mp3p-dl"><?php esc_html_e( 'Endpoints', 'spindle-mp3-player' ); ?></div>
-                            <code class="mp3p-shortcode"><?php echo esc_url( $api ); ?>/disco/{id}<br><?php echo esc_url( $api ); ?>/cancion/{id}<br><?php echo esc_url( $api ); ?>/playlist/{id}<br><?php echo esc_url( $api ); ?>/discos</code>
+                            <code class="mp3p-shortcode"><?php echo esc_url( $api ); ?>/disco/{id}<br><?php echo esc_url( $api ); ?>/cancion/{id}<br><?php echo esc_url( $api ); ?>/playlist/{id}<br><?php echo esc_url( $api ); ?>/discos?page=1&amp;per_page=100</code>
+                            <p class="mp3p-hint" style="margin:0"><?php esc_html_e( '/discos devuelve como máximo 100 discos por petición; el total va en las cabeceras X-WP-Total y X-WP-TotalPages.', 'spindle-mp3-player' ); ?></p>
                         </div>
                     </div>
                 </div>

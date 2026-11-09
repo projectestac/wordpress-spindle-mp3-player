@@ -1,0 +1,9 @@
+/*
+ * JetBrains Mono — servida desde el propio plugin (sin Google Fonts).
+ * Subconjunto latino (Latin, Latin-1, Latin Extended-A y signos usados por el player).
+ * Copyright 2020 The JetBrains Mono Project Authors · SIL Open Font License 1.1 (ver ../fonts/jetbrains-mono/OFL.txt)
+ */
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/jetbrains-mono/JetBrainsMono-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/jetbrains-mono/JetBrainsMono-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('../fonts/jetbrains-mono/JetBrainsMono-Bold.woff2') format('woff2'); }

@@ -10,6 +10,10 @@ class MP3P_API {
             'methods'             => 'GET',
             'callback'            => [ __CLASS__, 'get_discos' ],
             'permission_callback' => '__return_true',
+            'args'                => [
+                'page'     => [ 'default' => 1,   'sanitize_callback' => 'absint' ],
+                'per_page' => [ 'default' => 100, 'sanitize_callback' => 'absint' ],
+            ],
         ] );
         register_rest_route( self::NS, '/disco/(?P<id>\d+)', [
             'methods'             => 'GET',
@@ -33,16 +37,29 @@ class MP3P_API {
         register_rest_route( self::NS, '/search/canciones', [
             'methods'             => 'GET',
             'callback'            => [ __CLASS__, 'search_canciones' ],
-            'permission_callback' => fn() => current_user_can('manage_options'),
+            // Cualquier usuario que pueda editar playlists (editores, autores…); solo devuelve canciones publicadas
+            'permission_callback' => function () {
+                $pt = get_post_type_object( 'mp3p_playlist' );
+                return $pt && current_user_can( $pt->cap->edit_posts );
+            },
         ] );
     }
 
     public static function get_discos( $request ) {
-        $discos = get_posts([
-            'post_type' => 'mp3p_disco', 'posts_per_page' => -1,
-            'orderby' => 'title', 'order' => 'ASC', 'post_status' => 'publish',
+        $per_page = max( 1, min( 100, intval( $request->get_param('per_page') ?: 100 ) ) );
+        $page     = max( 1, intval( $request->get_param('page') ?: 1 ) );
+        $query    = new WP_Query([
+            'post_type'      => 'mp3p_disco',
+            'post_status'    => 'publish',
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'posts_per_page' => $per_page,
+            'paged'          => $page,
         ]);
-        return self::response( array_map( fn($d) => self::format_disco_summary($d), $discos ) );
+        $r = self::response( array_map( fn($d) => self::format_disco_summary($d), $query->posts ) );
+        $r->header( 'X-WP-Total',      (string) intval( $query->found_posts ) );
+        $r->header( 'X-WP-TotalPages', (string) intval( $query->max_num_pages ) );
+        return $r;
     }
 
     public static function get_disco( $request ) {
@@ -158,6 +175,7 @@ class MP3P_API {
         $r = new WP_REST_Response($data, 200);
         $r->header('Access-Control-Allow-Origin',  '*');
         $r->header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+        $r->header('Access-Control-Expose-Headers', 'X-WP-Total, X-WP-TotalPages');
         $r->header('Cache-Control',                'public, max-age=300');
         return $r;
     }
