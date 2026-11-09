@@ -107,12 +107,14 @@ class MP3P_Cascade_Delete {
     private static function is_used_elsewhere( $att_id, $exclude_ids ) {
         $exclude_ids = array_values( array_filter( array_map( 'intval', (array) $exclude_ids ) ) );
         $types       = array_values( array_diff( get_post_types(), [ 'revision', 'attachment', 'nav_menu_item', 'customize_changeset', 'oembed_cache', 'user_request' ] ) );
+        // Todos los estados, también la papelera: 'any' excluye las entradas de la papelera, que se pueden restaurar
+        $statuses    = array_values( get_post_stati() );
 
         // 1) Otra canción usa el mismo audio · 2) Imagen destacada de otra entrada
         // phpcs:disable WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in, WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- comprobación puntual al borrar; la lista de exclusión es pequeña.
         $meta_use = new WP_Query( [
             'post_type'              => $types,
-            'post_status'            => 'any',
+            'post_status'            => $statuses,
             'posts_per_page'         => 1,
             'fields'                 => 'ids',
             'no_found_rows'          => true,
@@ -136,7 +138,7 @@ class MP3P_Cascade_Delete {
         foreach ( $needles as $needle ) {
             $content_use = new WP_Query( [
                 'post_type'              => $types,
-                'post_status'            => 'any',
+                'post_status'            => $statuses,
                 'posts_per_page'         => 1,
                 'fields'                 => 'ids',
                 'no_found_rows'          => true,

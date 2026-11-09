@@ -1,0 +1,30 @@
+Canvis d'XTEC sobre Spindle MP3 Player
+======================================
+
+Canvis fets per XTEC (Àgora) sobre les versions publicades pel desenvolupador. El registre de canvis del
+desenvolupador és al fitxer readme.txt.
+
+
+1.8.0.1 (sobre la 1.8.0)
+------------------------
+
+Seguretat
+- Reproductor (public/js/mp3player.js): _rerender() valida els atributs accent, bg i radius igual que
+  _init() (safeColor, safeBg, safeRadius). _rerender() s'executa quan canvia un atribut (variant, id, api,
+  tracklist o lyrics) d'un reproductor ja carregat, i un accent no validat arribava a l'atribut style de la
+  pista activa de les variants Vertical, Horizontal i Mini, on podia injectar HTML i executar codi (XSS).
+- Reproductor: el color de la pista activa de les variants Vertical, Horizontal i Mini (markColor) torna a
+  passar per safeColor(), com a la 1.7.1.
+- Reproductor: nova funció safeId(). L'atribut id només s'accepta si és un enter positiu, tant a _init() com
+  a _rerender(). Abans s'afegia sense validar a l'URL de la petició a l'API (per exemple, /disco/1/../..).
+
+Esborrament de fitxers
+- Esborrament en cascada (includes/class-cascade-delete.php): en comprovar si un fitxer es fa servir en un
+  altre lloc (com a imatge destacada o inserit al contingut), es tenen en compte les entrades en tots els
+  estats, també les de la paperera. Abans es feia servir 'any', que exclou la paperera, i es podia esborrar
+  un fitxer que feia servir una entrada que encara es pot restaurar.
+
+Riscos coneguts (no corregits)
+- La font JetBrains Mono es registra amb el handle genèric jetbrains-mono i, si un altre connector o tema
+  ja l'ha registrat, el connector fa servir aquell registre. Si aquell estil carrega la font des de Google
+  Fonts, el connector tornaria a connectar-se a un servei extern. S'assumeix el risc.

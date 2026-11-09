@@ -1,5 +1,5 @@
 /*!
- * Spindle MP3 Player — Web Component v1.8.0
+ * Spindle MP3 Player — Web Component v1.8.0.1
  * Diseño Dieter Rams · Shadow DOM · Dark/Light/Auto · Full/Compact/Wide · Vertical/Horizontal/Mini
  * Requiere: howler.min.js
  */
@@ -69,6 +69,12 @@ function safeUrl(u) {
   if (/^\/\//.test(u)) return u;                     // protocol-relative (CDN): hereda http(s)
   if (/^[a-z][a-z0-9+.\-]*:/i.test(u)) return '';    // cualquier otro esquema
   return u;                                          // relativa
+}
+
+// ID de disco, canción o playlist: entero positivo, o '' (el player muestra el error de atributos)
+function safeId(id) {
+  id = String(id == null ? '' : id).trim();
+  return /^[1-9]\d{0,18}$/.test(id) ? id : '';
 }
 
 // Normaliza los datos recibidos de la API (URLs de portada y audio)
@@ -784,15 +790,16 @@ class MP3PBase extends HTMLElement {
   _rerender() {
     if (this._initialized) return;
     this._initialized = true;
-    const theme  = resolveTheme(this.getAttribute('theme'), this.getAttribute('bg') || '');
-    const accent = this.getAttribute('accent') || '#e8520a';
+    // Mismas validaciones que en _init(): se ejecuta cuando cambia un atributo después del primer render
+    const theme  = resolveTheme(this.getAttribute('theme'), safeBg(this.getAttribute('bg')));
+    const accent = safeColor(this.getAttribute('accent'), '#e8520a');
     const forcedTheme = this.getAttribute('theme');
-    const rawBg  = this.getAttribute('bg') || '';
+    const rawBg  = safeBg(this.getAttribute('bg'));
     const bg     = (forcedTheme === 'dark' || forcedTheme === 'light') ? '' : rawBg;
-    const radius = this.getAttribute('radius') || '4';
+    const radius = safeRadius(this.getAttribute('radius'), '4');
     const show   = getShow(this);
     const api    = this.getAttribute('api');
-    const id     = this.getAttribute('id');
+    const id     = safeId(this.getAttribute('id'));
     if (!api || !id) { this._err('Faltan atributos id y/o api.', theme, accent, bg, radius); return; }
     this._load(api, id, theme, accent, show, bg, radius);
   }
@@ -819,7 +826,7 @@ class MP3PBase extends HTMLElement {
     const theme = resolveTheme(forcedTheme, bg);
     this._setContent('<style>' + buildCSS(accent, bg, radius) + '</style><div class="mp ' + theme + '"><div class="loading">' + esc(T.loading) + '</div></div>');
     const api = this.getAttribute('api');
-    const id  = this.getAttribute('id');
+    const id  = safeId(this.getAttribute('id'));
     if (!api || !id) { this._err('Faltan atributos id y/o api.', theme, accent, bg, radius); return; }
     this._load(api, id, theme, accent, show, bg, radius);
   }
@@ -1131,7 +1138,7 @@ function hwPlaylist(tracks, current, accent, show, open, mode) {
   show = show || {};
   var items = tracks.map(function(t, i) {
     var active = i === current;
-    var markColor = active ? accent : '#999';
+    var markColor = active ? safeColor(accent, '#e8520a') : '#999';
     var hasLyr = show.letra !== false && t.letra;
     var lyr = show.letra === false ? ''
       : hasLyr ? '<button class="hw-pl-dl hw-lyr-btn" data-index="'+i+'" title="'+esc(T.lyrics)+'" aria-label="'+esc(T.lyrics)+'" aria-expanded="false">'+hwLyrIcon()+'<span>'+esc(T.lyricsBtn)+'</span></button>'
